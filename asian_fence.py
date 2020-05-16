@@ -59,7 +59,21 @@ def perform(level, box, options):
             utilityFunctions.setBlock(level, (67,0), x-1, box.miny+6, z+i)#stairs
 
     def corner(x,z):
-
+        for i in range(3):
+            utilityFunctions.setBlock(level, (67,0), x-2, box.miny+5, z-i)#stairs
+        for i in range(2):
+            utilityFunctions.setBlock(level, (67,0), x-1, box.miny+6, z-i)#stairs
+            utilityFunctions.setBlock(level, (5,4), x-1 , box.miny+5, z-i)#red
+        utilityFunctions.setBlock(level, (67,0), x-1, box.miny+5, z-2)#stairs
+    """
+    def corner2(x,z):
+        for i in range(3):
+            utilityFunctions.setBlock(level, (67,0), x-i, box.miny+5, z-2)#stairs
+        for i in range(2):
+            utilityFunctions.setBlock(level, (67,0), x-i, box.miny+6, z-1)#stairs
+            utilityFunctions.setBlock(level, (5,4), x-i, box.miny+5, z-1)#red
+        utilityFunctions.setBlock(level, (67,0), x-2, box.miny+5, z-1)#stairs
+    """
 
     for a in range(size_x):
         x = box.minx + a*6
@@ -72,5 +86,5 @@ def perform(level, box, options):
         z = box.minz + a*6
         wall2(box.minx, z)
         wall2(box.minx + size_x*6, z)
-        corner2(box.minx, z)
-        corner2(box.minx + size_x*6, z)
+        corner(box.minx, z)
+        corner(box.minx + size_x*6, z)
