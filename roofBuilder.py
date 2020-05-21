@@ -23,7 +23,7 @@ class RoofBuilder:
         s = self.surface
         w = self.width
         d = self.depth
-        if self.roof_type is 0:    # room's roof
+        if self.roof_type is 0:  # room's roof
             if self.direction is 0:
                 for i in range(1, w / 2):
                     for j in range(i):
@@ -33,7 +33,7 @@ class RoofBuilder:
                         setBlock(lv, x + w - i - 1, s + j, z + d - 1, 43, 9)
                 for i in range(3):
                     setBlock(lv, x + w / 2, s + i, z, 17, 1)
-                    setBlock(lv, x + w / 2, s + i, z + d - 1, 17, 1)         # Triangles on both sides
+                    setBlock(lv, x + w / 2, s + i, z + d - 1, 17, 1)  # Triangles on both sides
                 for i in range(0, d + 2):
                     setBlock(lv, x - 1, s - 2, z - 1 + i, 53, 4)
                     setBlock(lv, x + w, s - 2, z - 1 + i, 53, 4)  # Wooden Stairs (Oak)
@@ -67,7 +67,7 @@ class RoofBuilder:
                         setBlock(lv, x + d - 1, s + j, z + w - i - 1, 43, 9)
                 for i in range(3):
                     setBlock(lv, x, s + i, z + w / 2, 17, 1)
-                    setBlock(lv, x + d - 1, s + i, z + w / 2, 17, 1)         # Triangles on both sides
+                    setBlock(lv, x + d - 1, s + i, z + w / 2, 17, 1)  # Triangles on both sides
                 for i in range(0, d + 2):
                     setBlock(lv, x - 1 + i, s - 2, z - 1, 53, 4)
                     setBlock(lv, x - 1 + i, s - 2, z + w, 53, 4)  # Wooden Stairs (Oak)
@@ -92,20 +92,25 @@ class RoofBuilder:
                 setBlock(lv, x - 1, s - 2, z + w, 126, 8)
                 setBlock(lv, x + d, s - 2, z - 1, 126, 8)
                 setBlock(lv, x + d, s - 2, z + w, 126, 8)  # Oak-Wood Slabs at four corners
-        else:        # tower's roof
+        else:  # tower's roof
             pass
 
-'''
-def perform(level, box, options):
-    (width, height, depth) = getBoxSize(box)
-    width = 9
-    surface = box.miny
-    start_x = box.minx
-    start_z = box.minz
-    print 'width(x) = %d, depth(z) = %d' % (width, depth)
-    print 'start_x = %d, start_z = %d' % (start_x, start_z)
-    print 'surface = %d' % surface
-
-    roof_builder = RoofBuilder(level, start_x, start_z, depth, surface, 1, 0)
-    roof_builder.run()
-'''
+# def perform(level, box, options):
+#     (width, height, depth) = getBoxSize(box)
+#     width = 9
+#     surface = box.miny
+#     start_x = box.minx
+#     start_z = box.minz
+#     print 'width(x) = %d, depth(z) = %d' % (width, depth)
+#     print 'start_x = %d, start_z = %d' % (start_x, start_z)
+#     print 'surface = %d' % surface
+#
+#     roof_builder = RoofBuilder(level, start_x, start_z, depth, surface, 0, 0)
+#     roof_builder.run()
+#
+#     for i in range(box.minx, box.maxx):
+#         for j in range(box.minz, box.maxz):
+#             id = level.blockAt(i, surface, j)
+#             data = level.blockDataAt(i, surface, j)
+#             print "id = %d   data=%d " % (id, data)
+#             setBlock(level, box.minx-1, surface, j, id, data)
