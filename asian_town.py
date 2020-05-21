@@ -3,6 +3,7 @@ import utilityFunctions as utilityFunctions
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
 from roofBuilder import *
+from fifth_wall import *
 
 displayName = "Asian Town"
 
@@ -141,11 +142,20 @@ def perform(level, box, options):
         roof_builder.run()
         z+=4
     
-
-
     #field create
     y = box.miny
     field(x,box.minz,9,17)
+
+    #tower create
+    x = box.minx + 60
+    z = box.minz + 50
+    for i in range(5):
+        d =[20, 15, 10, 5, 3]   #depth size
+        y_height = [0, 5, 10, 15, 20]  #height 
+        tower_wall = TowerWall(level, x + (d[0]/2-d[i]/2), box.miny+y_height[i],  z + (d[0]/2-d[i]/2), d[i])
+        tower_wall.run()
+        roof_builder = RoofBuilder(level, x, z, d[i], y_height[i], 0, 1)
+        roof_builder.run()
 
     
 

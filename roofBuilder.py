@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 from functions import *
 
+# displayName = "roof"
+
 
 class RoofBuilder:
     """two directions 0&1  two types(room & tower) width must be 9"""
@@ -92,12 +94,51 @@ class RoofBuilder:
                 setBlock(lv, x - 1, s - 2, z + w, 126, 8)
                 setBlock(lv, x + d, s - 2, z - 1, 126, 8)
                 setBlock(lv, x + d, s - 2, z + w, 126, 8)  # Oak-Wood Slabs at four corners
-        else:  # tower's roof
-            pass
+        elif self.roof_type is 1:  # tower's roof
+            for i in range(0, 4):
+                for j in range(x-4+i, x + d + 4-i):    # left
+                    if i is 0:
+                        setBlock(lv, j, s-1, z - 4 + i, 44, 13)
+                    elif i is 1:
+                        setBlock(lv, j, s, z - 4 + i, 44, 5)
+                    elif i is 2:
+                        setBlock(lv, j, s, z - 4 + i, 43, 5)
+                    else:
+                        setBlock(lv, j, s, z - 4 + i, 44, 13)
+            for i in range(0, 4):
+                for j in range(x-4+i, x + d + 4-i):  # right
+                    if i is 0:
+                        setBlock(lv, j, s-1, z + d + 3 - i, 44, 13)
+                    elif i is 1:
+                        setBlock(lv, j, s, z + d + 3 - i, 44, 5)
+                    elif i is 2:
+                        setBlock(lv, j, s, z + d + 3 - i, 43, 5)
+                    else:
+                        setBlock(lv, j, s, z + d + 3 - i, 44, 13)
+            for i in range(0, 4):
+                for j in range(z-4+i, z + d + 3 - i):  # under
+                    if i is 0:
+                        setBlock(lv, x - 4 + i, s - 1, j, 44, 13)
+                    elif i is 1:
+                        setBlock(lv, x - 4 + i, s, j, 44, 5)
+                    elif i is 2:
+                        setBlock(lv, x - 4 + i, s, j, 43, 5)
+                    else:
+                        setBlock(lv, x - 4 + i, s, j, 44, 13)
+            for i in range(0, 4):
+                for j in range(z-4+i, z + d + 3 - i):  # under
+                    if i is 0:
+                        setBlock(lv, x + d + 3 - i, s - 1, j, 44, 13)
+                    elif i is 1:
+                        setBlock(lv, x + d + 3 - i, s, j, 44, 5)
+                    elif i is 2:
+                        setBlock(lv, x + d + 3 - i, s, j, 43, 5)
+                    else:
+                        setBlock(lv, x + d + 3 - i, s, j, 44, 13)
+
 
 # def perform(level, box, options):
 #     (width, height, depth) = getBoxSize(box)
-#     width = 9
 #     surface = box.miny
 #     start_x = box.minx
 #     start_z = box.minz
@@ -105,7 +146,7 @@ class RoofBuilder:
 #     print 'start_x = %d, start_z = %d' % (start_x, start_z)
 #     print 'surface = %d' % surface
 #
-#     roof_builder = RoofBuilder(level, start_x, start_z, depth, surface, 0, 0)
+#     roof_builder = RoofBuilder(level, start_x, start_z, depth, box.maxy, 0, 1)
 #     roof_builder.run()
 #
 #     for i in range(box.minx, box.maxx):
