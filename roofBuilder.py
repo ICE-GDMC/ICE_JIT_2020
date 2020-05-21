@@ -97,7 +97,7 @@ class RoofBuilder:
         else:        # tower's roof
             pass
 
-
+'''
 def perform(level, box, options):
     (width, height, depth) = getBoxSize(box)
     width = 9
@@ -110,3 +110,4 @@ def perform(level, box, options):
 
     roof_builder = RoofBuilder(level, start_x, start_z, depth, surface, 1, 0)
     roof_builder.run()
+'''
