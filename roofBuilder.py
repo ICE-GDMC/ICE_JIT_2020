@@ -2,8 +2,6 @@
 # -*- coding: UTF-8 -*-
 from functions import *
 
-displayName = "Roof Builder"
-
 
 class RoofBuilder:
     """two directions 0&1  two types(room & tower) width must be 9"""

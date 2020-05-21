@@ -2,7 +2,9 @@ from numpy import *
 import utilityFunctions as utilityFunctions
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
-#from roofBuilder import *
+from roofBuilder import *
+
+displayName = "Asian Town"
 
 inputs =(("Circular Houce", "label"),("Material", alphaMaterials.StoneBricks))
 
@@ -123,8 +125,8 @@ def perform(level, box, options):
         wall2(x,z+i*9,1) #x,z,door
         wall2(x+8,z+i*9,0) #x,z,door
         floor(x,z+i*9)
-        #roof_builder = RoofBuilder(level, x, z+i*9, 10, 5, 0, 0)
-        #roof_builder.run()
+        roof_builder = RoofBuilder(level, x, z+i*9, 10, y+5, 0, 0)
+        roof_builder.run()
         z+=4
     
     x = center_x - 17 #river - x
@@ -135,6 +137,8 @@ def perform(level, box, options):
         wall2(x,z+i*9,0) #x,z,door
         wall2(x+8,z+i*9,1) #x,z,door
         floor(x,z+i*9)
+        roof_builder = RoofBuilder(level, x, z+i*9, 10, y+5, 0, 0)
+        roof_builder.run()
         z+=4
     
 
