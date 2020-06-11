@@ -16,7 +16,7 @@ class TowerWall:
         self.z = z
         self.depth = depth
 
-    def run(self):
+    def build(self):
         lv = self.level
         x = self.x
         y = self.y

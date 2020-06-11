@@ -18,7 +18,7 @@ class RoofBuilder:
         self.roof_type = roof_type
         self.width = 9
 
-    def run(self):
+    def build(self):
         lv = self.level
         x = self.start_x
         z = self.start_z

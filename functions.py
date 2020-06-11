@@ -11,12 +11,6 @@ def get_block(level, x, y, z):
     data = level.blockDataAt(x, y, z)
     return block_id, data
 
-def get_ground_y(level,maxy,x,z,h):
-    for i in range(h):
-        ID = level.blockAt(x,maxy-i,z)
-        if ID == 2:
-            return maxy-i
-
 
 def setBlock(level, x, y, z, block_id, data=0):
     level.setBlockAt(x, y, z, block_id)
