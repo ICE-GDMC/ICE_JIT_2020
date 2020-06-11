@@ -52,3 +52,7 @@ class HouseWallX_Builder:
                             setBlock(lv,x,y+k,z+j,17,1)#black
                         else:
                             setBlock(lv,x,y+k,z+j,12,0)#white
+         #floor
+        for i in range(1,8):
+            for j in range(1,9):
+                setBlock(lv, x+i, y, z+j, 5, 0)#floor

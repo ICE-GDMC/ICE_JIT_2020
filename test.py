@@ -71,10 +71,14 @@ class Test:
         y = self.start_y
         z = self.start_z
         h = self.height
-
-        for i in range(h):
-            ID = lv.blockAt(x, y-i, z)
-            if ID == 2:
-                return y-i
-            else:
-                print '--------------------'
+        
+        ID = 0
+        while(ID != 2):
+            for i in range(h):
+                ID = lv.blockAt(x, y-i, z)
+                if ID == 2: 
+                    break
+            z += 1
+        
+        return y-i
+            

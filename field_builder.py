@@ -1,0 +1,37 @@
+from numpy import *
+import utilityFunctions as utilityFunctions
+from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
+from mcplatform import *
+from functions import *
+from test import *
+
+
+
+class field:
+
+    def __init__(self, level, start_x, start_y, start_z, size_x, size_z):
+            self.level = level
+            self.start_x = start_x
+            self.start_y = start_y
+            self.start_z = start_z
+            self.size_x = size_x
+            self.size_z = size_z
+
+    def build(self):
+        lv = self.level
+        x = self.start_x
+        y = self.start_y
+        z = self.start_z
+        s_x = self.size_x
+        s_z = self.size_z
+
+        for i in range(s_x):
+                for j in range(s_z):
+                    setBlock(lv, x+i, y, z+j, 2, 0)
+                   setBlock(lv, x+i, y+1, z+j, 85, 0)
+                for i in range(1, s_x-1):
+                    for j in range(1, s_z-1):
+                        setBlock(level, (3,0), x+i, y, z+j)
+                        #your favorite plants
+                        setBlock(level, (31,2), x+i, y+1, z+j) 
+                setBlock(level, (0,0), x+s_x/2, y+1, z-1)

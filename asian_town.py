@@ -4,8 +4,10 @@ from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
 from roofBuilder import *
 from fifth_wall import *
+from road_builder import *
 from house_wallX import *
 from house_wallZ import *
+from field_builder import *
 from test import *
 
 displayName = "Asian Town"
@@ -19,38 +21,10 @@ def perform(level, box, options):
     
 
     """
-    def floor(x,z):
-        for i in range(1,8):
-            for j in range(1,9):
-                utilityFunctions.setBlock(level, (5,0), x+i, y, z+j)#floor
-
-    def field(x,z,s_x,s_z):
-        for i in range(s_x):
-                for j in range(s_z):
-                    utilityFunctions.setBlock(level, (2,0), x+i, y, z+j)
-                    utilityFunctions.setBlock(level, (85,0), x+i, y+1, z+j)
-                for i in range(1, s_x-1):
-                    for j in range(1, s_z-1):
-                        utilityFunctions.setBlock(level, (3,0), x+i, y, z+j)
-                        #your favorite plants
-                        utilityFunctions.setBlock(level, (31,2), x+i, y+1, z+j) 
-                utilityFunctions.setBlock(level, (0,0), x+s_x/2, y+1, z-1)
-
-
-
-
     center_x = width/2 + box.minx
     x = center_x-15
     y = box.miny
     z = box.minz
-
-    #clean
-    for i in range(30):
-        for j in range(depth):
-            for k in range(1,10):
-                utilityFunctions.setBlock(level, (0,0), x+i, y+k, z+j)
-            utilityFunctions.setBlock(level, (2,0), x+i, y, z+j)
-
     
     x = center_x + 8 #river + x
     y = box.miny+1
@@ -99,30 +73,7 @@ def perform(level, box, options):
     x = center_x - 8
     z = box.minz
 
-    for i in range(depth):
-        gety = Test(level, x, box.maxy, z+i, height)
-        y = gety.build()
-        #sand
-        for j in range(4): #0~4
-            utilityFunctions.setBlock(level, (12,0), x+j, y, z+i)
-            utilityFunctions.setBlock(level, (2,0), x+j, y-1, z+i)
-            for k in range(y+1, box.maxy):
-                utilityFunctions.setBlock(level, (0,0), x+j, k, z+i)
-        for j in range(12,16): #12~15
-            utilityFunctions.setBlock(level, (12,0), x+j, y, z+i)
-            utilityFunctions.setBlock(level, (2,0), x+j, y-1, z+i)
-            for k in range(y+1, box.maxy):
-                utilityFunctions.setBlock(level, (0,0), x+j, k, z+i)
-        #stone
-        for j in range(4,12): #4~11
-            if (j==4 or j==11):
-                for k in range(4):
-                    utilityFunctions.setBlock(level, (1,0), x+j, y-k, z+i)
-            else:
-                utilityFunctions.setBlock(level, (0,0), x+j, y, z+i)  
-                for k in range(2):
-                    utilityFunctions.setBlock(level, (9,0), x+j, y-1-k, z+i)        
-                utilityFunctions.setBlock(level, (1,0), x+j, y-3, z+i)
-            for k in range(y+1, box.maxy):
-                utilityFunctions.setBlock(level, (0,0), x+j, k, z+i)
+    road = Road_Builder(level, x, box.maxy, z, depth, height, width, 0, 0)
+    road.build()
+
 
