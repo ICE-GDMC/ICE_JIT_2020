@@ -4,6 +4,8 @@ from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
 from roofBuilder import *
 from fifth_wall import *
+from functions import *
+from ground_height import *
 
 displayName = "Asian Town"
 
@@ -63,7 +65,7 @@ def perform(level, box, options):
     def floor(x,z):
         for i in range(1,8):
             for j in range(1,9):
-                utilityFunctions.setBlock(level, (5,0), x+i, y, z+j)#floor
+                utilityFunctions.setBlock(level, (5,0), x+i, y-1, z+j)#floor
 
     def field(x,z,s_x,s_z):
         for i in range(s_x):
@@ -78,30 +80,39 @@ def perform(level, box, options):
                 utilityFunctions.setBlock(level, (0,0), x+s_x/2, y+1, z-1)
 
 
-
-
-
-
     center_x = width/2 + box.minx
     x = center_x-15
     y = box.miny
     z = box.minz
-
+    
     #clean
     for i in range(30):
         for j in range(depth):
-            for k in range(1,10):
+            for k in range(height):
                 utilityFunctions.setBlock(level, (0,0), x+i, y+k, z+j)
             utilityFunctions.setBlock(level, (2,0), x+i, y, z+j)
+    
 
-    #create road
+    #create road x
+    if(depth > 35):
+        d = depth - 9
+        h_plus_r = (depth-15)/14 -1
+        h_mi_r = (depth-15-17)/14 -1
+    else:
+        d = depth
+        h_plus_r = d/14 -1
+        h_mi_r = (depth-17)/14 -1
     x = center_x - 8
-    for i in range(depth):
+    for i in range(d):
+        #GY = GroundY(level, x, box.maxy, z, height)
+        #y = GY.run()
         #sand
         for j in range(4): #0~4
             utilityFunctions.setBlock(level, (12,0), x+j, y, z+i)
+            utilityFunctions.setBlock(level, (2,0), x+j, y-1, z+i)
         for j in range(12,16): #12~15
             utilityFunctions.setBlock(level, (12,0), x+j, y, z+i)
+            utilityFunctions.setBlock(level, (2,0), x+j, y-1, z+i)
         #stone
         for j in range(4,12): #4~11
             if (j==4 or j==11):
@@ -112,13 +123,46 @@ def perform(level, box, options):
                 for k in range(2):
                     utilityFunctions.setBlock(level, (9,0), x+j, y-1-k, z+i)        
                 utilityFunctions.setBlock(level, (1,0), x+j, y-3, z+i)
-
-
-
+    
+    #create road z
+    if(depth > 35):
+        x = box.minx
+        z = box.maxz - 24
+        for i in range(width):
+            #y = gety(x+i,z)
+            #sand
+            for j in range(4): #0~4
+                utilityFunctions.setBlock(level, (12,0), x+i, y, z+j)
+                utilityFunctions.setBlock(level, (2,0), x+i, y-1, z+j)
+            for j in range(12,16): #12~15
+                utilityFunctions.setBlock(level, (12,0), x+i, y, z+j)
+                utilityFunctions.setBlock(level, (2,0), x+i, y-1, z+j)
+            #stone
+            for j in range(4,12): #4~11
+                if (j==4 or j==11):
+                    for k in range(4):
+                        utilityFunctions.setBlock(level, (1,0), x+i, y-k, z+j)
+                else:
+                    utilityFunctions.setBlock(level, (0,0), x+i, y, z+j)  
+                    for k in range(2):
+                        utilityFunctions.setBlock(level, (9,0), x+i, y-1-k, z+j)        
+                    utilityFunctions.setBlock(level, (1,0), x+i, y-3, z+j)
+        x = center_x - 8
+        for i in range(5):
+            for j in range(4,12): #4~11
+                if (j==4 or j==11):
+                    for k in range(4):
+                        utilityFunctions.setBlock(level, (1,0), x+j, y-k, z+i)
+                else:
+                    utilityFunctions.setBlock(level, (0,0), x+j, y, z+i)  
+                    for k in range(2):
+                        utilityFunctions.setBlock(level, (9,0), x+j, y-1-k, z+i)        
+                    utilityFunctions.setBlock(level, (1,0), x+j, y-3, z+i)
 
 
     x = center_x + 8 #river + x
     y = box.miny+1
+    z = box.minz
     #house create
     for i in range(5):
         wall(x,z+i*9) #x,z
@@ -131,6 +175,7 @@ def perform(level, box, options):
         z+=4
     
     x = center_x - 17 #river - x
+    z = box.minz + 10 +2 
     #house create
     for i in range(4):
         wall(x,z+i*9) #x,z
@@ -144,11 +189,11 @@ def perform(level, box, options):
     
     #field create
     y = box.miny
-    field(x,box.minz,9,17)
+    field(x,box.minz,9,10)
 
     #tower create
-    x = box.minx + 55
-    z = box.minz + 20
+    x = box.minx + 60
+    z = box.minz + 15
     for i in range(5):
         d =[20, 15, 10, 5, 3]   #depth size
         y_height = [0, 4, 8, 12, 16]  #height 
@@ -156,6 +201,7 @@ def perform(level, box, options):
         tower_wall.run()
         roof_builder = RoofBuilder(level, x + (d[0]/2-d[i]/2), z + (d[0]/2-d[i]/2), d[i], y+y_height[i]+4-1, 0, 1)
         roof_builder.run()
+
 
     
 
