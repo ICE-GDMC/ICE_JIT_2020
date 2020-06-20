@@ -6,11 +6,13 @@ from roofBuilder import *
 from fifth_wall import *
 from road_builder import *
 from river_builder import *
-from house_wallX import *
-from house_wallZ import *
+#from house_wallX import *
+#from house_wallZ import *
 #from field_builder import *
 from test import *
 from house import *
+from MaterialChecker import *
+from store import *
 
 displayName = "Asian Town"
 
@@ -79,9 +81,12 @@ def perform(level, box, options):
     river.build()
     """
 
-    #house = House_Builder(level,box.minx,70,box.minz,0,0,0)
-    house = House_Builder(level,box.minx,70,box.minz,0,0,1)
-    house.build()
+    t_ID,t_data,w_ID,w_data = Material_Checker(level,box.minx,box.miny,box.minz,box.maxx,box.maxy,box.maxz)
 
+    #house = House_Builder(level,box.minx,70,box.minz,0,30,0,0,t_ID,t_data,w_ID,w_data)
+    #house.build()
+    
+    store = Store_Builder(level,box.minx,70,box.minz,0,0,0,t_ID,t_data,w_ID,w_data)
+    store.build()
 
 

@@ -6,17 +6,16 @@ from mcplatform import *
 from functions import *
 
 
-class House_Builder:
+class Store_Builder:
 
     #door is 0->front 1->back
 
-    def __init__(self, level, start_x, start_y, start_z, door, width, direction, wall_type,tree_ID,tree_data,wood_ID,wood_data):
+    def __init__(self, level, start_x, start_y, start_z, door, direction, wall_type,tree_ID,tree_data,wood_ID,wood_data):
         self.level = level
         self.start_x = start_x
         self.start_y = start_y
         self.start_z = start_z
         self.door = door
-        self.width = width
         self.direction = direction
         self.wall_type = wall_type
         self.tree_ID = tree_ID
@@ -30,47 +29,50 @@ class House_Builder:
         y = self.start_y
         z = self.start_z
         door = self.door
-        width = self.width
         t_ID =self.tree_ID
         t_data =self.tree_data
         w_ID = self.wood_ID
         w_data = self.wood_data
+        d = 10
         w = 9
-        size = (width-1)/9
-        d = size*8+1
-        
 
 
         def wallX(lv,x,y,z,door):
             if self.wall_type is 0:
-                for j in range(9): #line_W
+                for j in range(10): #line_W
                     setBlock(lv, x, y, z + j, 4, 0)#stone
-                    if(j==0 or j==3 or j==5 or j==8):
-                        for k in range(1,5): #line_H
+                    if(j==0 or j==3 or j==6 or j==9):
+                        for k in range(1,6): #line_H
                             setBlock(lv,x,y+k,z+j,17,1)#black
                     else:
                         if(door==1):
-                            if(j==4):
+                            if(j==1 or j==4 or j==7):
                                 setBlock(lv,x,y,z+j,196,0)#door
                                 setBlock(lv,x,y+1,z+j,196,0)#door
+                            elif(j==2 or j==5 or j==8):
+                                setBlock(lv,x,y,z+j,196,7)#door
+                                setBlock(lv,x,y+1,z+j,196,7)#door
                             else:
-                                for k in range(1,5): #line_H
+                                for k in range(1,6): #line_H
                                     if k==3:
                                         setBlock(lv,x,y+k,z+j,17,1)#black
                                     else:
                                         setBlock(lv,x,y+k,z+j,12,0)#white
-                            for k in range(2,5): #line_H
-                                if k==2:
+                            for k in range(2,6): #line_H
+                                if k==3:
                                     setBlock(lv,x,y+k,z+j,17,1)#black
                                 else:
                                     setBlock(lv,x,y+k,z+j,12,0)#white
+                            
+                            """
                             setBlock(lv, x, y+1, z+1, 85, 0)
                             setBlock(lv, x, y+1, z+2, 85, 0)
-                            setBlock(lv, x, y+1, z+6, 85, 0)
                             setBlock(lv, x, y+1, z+7, 85, 0)
+                            setBlock(lv, x, y+1, z+8, 85, 0)
+                            """
                         else:
-                            for k in range(1,5): #line_H
-                                if k==2:
+                            for k in range(1,6): #line_H
+                                if k==3:
                                     setBlock(lv,x,y+k,z+j,17,1)#black
                                 else:
                                     setBlock(lv,x,y+k,z+j,12,0)#white
@@ -82,44 +84,46 @@ class House_Builder:
                             setBlock(lv,x,y+k,z+j,t_ID,t_data)#black
                     else:
                         if(door==1):
-                            if(j==4):
+                            if(j==1 or j==4 or j==7):
                                 setBlock(lv,x,y,z+j,196,0)#door
                                 setBlock(lv,x,y+1,z+j,196,0)#door
-                            elif(j==5):
+                            if(j==2 or j==5 or j==8):
                                 setBlock(lv,x,y,z+j,196,7)#door
                                 setBlock(lv,x,y+1,z+j,196,7)#door
                             else:
-                                for k in range(1,5): #line_H
-                                    if k==2:
+                                for k in range(1,6): #line_H
+                                    if k==3:
                                         setBlock(lv,x,y+k,z+j,t_ID,t_data)#black
                                     else:
                                         setBlock(lv,x,y+k,z+j,w_ID,w_data)#red
-                            for k in range(2,5): #line_H
-                                if k==2:
+                            for k in range(2,6): #line_H
+                                if k==3:
                                     setBlock(lv,x,y+k,z+j,t_ID,t_data)#black
                                 else:
                                     setBlock(lv,x,y+k,z+j,w_ID,w_data)#red
+                            """
                             setBlock(lv, x, y+1, z+1, 85, 0)
                             setBlock(lv, x, y+1, z+2, 85, 0)
                             setBlock(lv, x, y+1, z+7, 85, 0)
                             setBlock(lv, x, y+1, z+8, 85, 0)
+                            """
                         else:
-                            for k in range(1,5): #line_H
+                            for k in range(1,6): #line_H
                                 if k==2:
                                     setBlock(lv,x,y+k,z+j,t_ID,t_data)#black
                                 else:
                                     setBlock(lv,x,y+k,z+j,w_ID,w_data)#red
-            
+        
         def wallZ(lv,x,y,z):
             if self.wall_type is 0:
-                for j in range(8): #line_W
+                for j in range(9): #line_W
                     setBlock(lv, x + j, y, z, 4, 0)#rstone
                     if(j==0 or j==4 or j==8):
-                        for k in range(1,5): #line_H
+                        for k in range(1,6): #line_H
                             setBlock(lv, x + j, y + k, z, 17,1)#black
                     else:
-                        for k in range(1,5): #line_H
-                            if k==2:
+                        for k in range(1,6): #line_H
+                            if k==3:
                                 setBlock(lv, x + j, y + k, z, 17,1)#black
                             else:
                                 setBlock(lv, x + j, y + k, z, 12,0)#white
@@ -132,7 +136,7 @@ class House_Builder:
                             setBlock(lv, x + j, y + k, z, t_ID, t_data)#black
                     else:
                         for k in range(1,5): #line_H
-                            if k==2:
+                            if k==3:
                                 setBlock(lv, x + j, y + k, z, t_ID, t_data)#black
                             else:
                                 setBlock(lv, x + j, y + k, z, w_ID,w_data)#white
@@ -206,34 +210,24 @@ class House_Builder:
                 setBlock(lv, x - 1, s - 2, z + w, 126, 8)
                 setBlock(lv, x + d, s - 2, z - 1, 126, 8)
                 setBlock(lv, x + d, s - 2, z + w, 126, 8)  # Oak-Wood Slabs at four corners
-
-        def floor(lv,x,y,z):
-            for j in range(1,7):
-                for i in range(1,3):
-                    setBlock(lv, x+i, y, z+j, 4, 0)
-                for i in range(4):
-                    setBlock(lv, x+i, y, z+j, 126, 0)
-                for i in range(5,7):
-                    setBlock(lv, x+i, y+1, z+j, 5, 0)
-            setBlock(lv, x+7, y+2, z+1, 146, 0)
-            setBlock(lv, x+7, y+2, z+2, 146, 0)
-            setBlock(lv, x+7, y+2, z+7, 50, 0)
-            setBlock(lv, x+1, y+1, z+1, 50, 0)
-            setBlock(lv, x+1, y+1, z+7, 50, 0)
-            setBlock(lv, x+3, y+1, z+7, 61, 0)
-
+           
         wallZ(lv,x,y,z) #x,z
-        for q in range(size):
-            wallZ(lv,x,y,z+q*8+8) #x,z
+        wallZ(lv,x,y,z+9) #x,z
 
-            if door==0:
-                wallX(lv,x,y,z+q*8,1) #x,z,door
-                wallX(lv,x+8,y,z+q*8,0) #x,z,door
-            elif door==1:
-                wallX(lv,x,y,z+q*8,0) #x,z,door
-                wallX(lv,x+8,y,z+q*8,1) #x,z,door
-            #floor(lv,x,y,z+q*8)
-
-            
+        if door==0:
+            wallX(lv,x,y,z,1) #x,z,door
+            wallX(lv,x+8,y,z,0) #x,z,door
+        elif door==1:
+            wallX(lv,x,y,z,0) #x,z,door
+            wallX(lv,x+8,y,z,1) #x,z,door
         
-        roof(lv,x,y+5,z)
+        roof(lv,x,y+6,z)
+
+        #floor
+        for i in range(0,8):
+            for j in range(1,9):
+                if i==0:
+                    setBlock(lv, x+i, y-1, z+j, 5, 0)#floor
+                else:
+                    setBlock(lv, x+i, y, z+j, 5, 0)#floor
+        
