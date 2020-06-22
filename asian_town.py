@@ -6,13 +6,12 @@ from roofBuilder import *
 from fifth_wall import *
 from road_builder import *
 from river_builder import *
-#from house_wallX import *
-#from house_wallZ import *
-#from field_builder import *
 from test import *
 from house import *
 from MaterialChecker import *
 from store import *
+from Shrine import *
+from Cityscape import *
 
 displayName = "Asian Town"
 
@@ -86,7 +85,6 @@ def perform(level, box, options):
     #house = House_Builder(level,box.minx,70,box.minz,0,30,0,0,t_ID,t_data,w_ID,w_data)
     #house.build()
     
-    store = Store_Builder(level,box.minx,70,box.minz,0,0,0,t_ID,t_data,w_ID,w_data)
-    store.build()
-
+    shrine = Shrine_Builder(level,box.minx,70,box.minz,0,0,0,t_ID,t_data,w_ID,w_data)
+    shrine.build()
 
