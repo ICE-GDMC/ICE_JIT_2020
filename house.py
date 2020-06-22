@@ -208,19 +208,20 @@ class House_Builder:
                 setBlock(lv, x + d, s - 2, z + w, 126, 8)  # Oak-Wood Slabs at four corners
 
         def floor(lv,x,y,z):
-            for j in range(1,7):
-                for i in range(1,3):
-                    setBlock(lv, x+i, y, z+j, 4, 0)
-                for i in range(4):
-                    setBlock(lv, x+i, y, z+j, 126, 0)
-                for i in range(5,7):
-                    setBlock(lv, x+i, y+1, z+j, 5, 0)
-            setBlock(lv, x+7, y+2, z+1, 146, 0)
-            setBlock(lv, x+7, y+2, z+2, 146, 0)
-            setBlock(lv, x+7, y+2, z+7, 50, 0)
-            setBlock(lv, x+1, y+1, z+1, 50, 0)
-            setBlock(lv, x+1, y+1, z+7, 50, 0)
-            setBlock(lv, x+3, y+1, z+7, 61, 0)
+            for j in range(0,7):
+                for i in range(1,4):
+                    setBlock(lv, x+i, y-1, z+j+1, 4, 0)
+                setBlock(lv, x+4, y, z+j+1, 126, 0)
+                for i in range(5,8):
+                    setBlock(lv, x+i, y, z+j+1, 5, 0)
+                    print("______")
+                    print(i)
+            setBlock(lv, x+7, y+1, z+1, 54, 4)
+            setBlock(lv, x+7, y+1, z+2, 54, 4)
+            setBlock(lv, x+7, y+1, z+7, 50, 5)
+            setBlock(lv, x+1, y, z+1, 50, 5)
+            setBlock(lv, x+1, y, z+7, 50, 5)
+            setBlock(lv, x+3, y, z+7, 61, 2)
 
         wallZ(lv,x,y,z) #x,z
         for q in range(size):
@@ -232,8 +233,8 @@ class House_Builder:
             elif door==1:
                 wallX(lv,x,y,z+q*8,0) #x,z,door
                 wallX(lv,x+8,y,z+q*8,1) #x,z,door
-            #floor(lv,x,y,z+q*8)
+            floor(lv,x,y,z+q*8)
 
             
         
-        roof(lv,x,y+5,z)
+        #roof(lv,x,y+5,z)
