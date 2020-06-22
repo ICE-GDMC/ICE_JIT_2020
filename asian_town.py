@@ -82,10 +82,11 @@ def perform(level, box, options):
 
     t_ID,t_data,w_ID,w_data = Material_Checker(level,box.minx,box.miny,box.minz,box.maxx,box.maxy,box.maxz)
 
-    house = House_Builder(level,box.minx,70,box.minz,0,10,0,0,t_ID,t_data,w_ID,w_data)
-    house.build()
+    #house = House_Builder(level,box.minx,70,box.minz,0,30,0,0,t_ID,t_data,w_ID,w_data)
+    #house.build()
     
-    #shrine = Shrine_Builder(level,box.minx,70,box.minz,0,0,0,t_ID,t_data,w_ID,w_data)
-    #shrine.build()
-
-    
+    #store = Store_Builder(level,box.minx,70,box.minz,0,0,0,t_ID,t_data,w_ID,w_data)
+    #store.build()
+    for i in range(5):
+        city = Cityspace(level,50,box.minx+i*20,70,box.minz,0,t_ID,t_data,w_ID,w_data)
+        city.build()
