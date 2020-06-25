@@ -103,17 +103,17 @@ def perform(level, box, options):
         city.build()
         city = Cityspace(level,50,box.minx+i*34+24-i,box.miny,box.minz,1,t_ID,t_data,w_ID,w_data,roof_ID)
         city.build()
+    
     """
-    """
-    s = Shrine_Builder(level,box.minx,70,box.minz,0,0,1,t_ID,t_data,w_ID,w_data, 109)
-    s.build()
 
-    st = Store_Builder(level,box.minx,70,box.minz+15,0,0,1,t_ID,t_data,w_ID,w_data, 109)
+    s = Shrine_Builder(level,box.minx,66,box.minz,0,0,1,t_ID,t_data,w_ID,w_data, 109)
+    s.build()
+    st = Store_Builder(level,box.minx,66,box.minz+15,0,0,1,t_ID,t_data,w_ID,w_data, 109)
     st.build()
 
-    h = House_Builder(level,box.minx,70,box.minz+30,0,20,0,1,t_ID,t_data,w_ID,w_data, 109)
+    h = House_Builder(level,box.minx,66,box.minz+30,0,20,0,1,t_ID,t_data,w_ID,w_data, 109)
     h.build()
-    """
+    
 
-    pagoda = Pagoda_builder(level,box.minx,70,box.minz,t_ID,t_data,w_ID,w_data,109)
-    pagoda.build()
+    #pagoda = Pagoda_builder(level,box.minx,70,box.minz,t_ID,t_data,w_ID,w_data,109)
+    #pagoda.build()

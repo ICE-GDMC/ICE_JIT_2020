@@ -61,7 +61,7 @@ class Shrine_Builder:
                                 setBlock(lv,x,y+k,z+j,96,s)
                             if(j==3 or j==8 or j==13):
                                 setBlock(lv,x,y+2,z+j,196,0)#door
-                                setBlock(lv,x,y+3,z+j,196,0)#door
+                                setBlock(lv,x,y+3,z+j,196,8)#door
                         else:
                             for k in range(1,5): #line_H
                                 if k==5:
@@ -90,7 +90,7 @@ class Shrine_Builder:
                                 setBlock(lv,x,y+k,z+j,96,s)
                             if(j==3 or j==8 or j==13):
                                 setBlock(lv,x,y+2,z+j,196,0)#door
-                                setBlock(lv,x,y+3,z+j,196,0)#door
+                                setBlock(lv,x,y+3,z+j,196,8)#door
                         else:
                             for k in range(1,5): #line_H
                                 if k==5:
