@@ -9,6 +9,7 @@ from functions import *
 class Shrine_Builder:
 
     #door is 0->front 1->back
+    
 
     def __init__(self, level, start_x, start_y, start_z, door, direction, wall_type,tree_ID,tree_data,wood_ID,wood_data):
         self.level = level
