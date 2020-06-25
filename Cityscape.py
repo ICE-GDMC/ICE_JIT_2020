@@ -56,9 +56,6 @@ class Cityspace:
                 city.append(2)
 
         random.shuffle(city)
-        print "-----------------------"
-        print city
-        print "-----------------------"
         city.append(4)
 
         for i in range(len(city)-1):
@@ -79,7 +76,7 @@ class Cityspace:
                 else:
                     z += hw+3
             elif city[i] == 2:
-                f = field(lv,x,y,z,9,fw)
+                f = field(lv,x,y-1,z,9,fw)
                 f.build()
                 z += fw+1
 

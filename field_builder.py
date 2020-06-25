@@ -5,7 +5,11 @@ from mcplatform import *
 from functions import *
 from test import *
 
-
+#
+#
+#error
+#
+#
 
 class field:
 
@@ -26,12 +30,14 @@ class field:
         s_z = self.size_z
 
         for i in range(s_x):
-                for j in range(s_z):
-                    setBlock(lv, x+i, y, z+j, 2, 0)
-                   setBlock(lv, x+i, y+1, z+j, 85, 0)
-                for i in range(1, s_x-1):
-                    for j in range(1, s_z-1):
-                        setBlock(level, (3,0), x+i, y, z+j)
-                        #your favorite plants
-                        setBlock(level, (31,2), x+i, y+1, z+j) 
-                setBlock(level, (0,0), x+s_x/2, y+1, z-1)
+            for j in range(s_z):
+                setBlock(lv, x+i, y, z+j, 2, 0)
+                setBlock(lv, x+i, y+1, z+j, 85, 0)
+        
+        for i in range(1, s_x-1):
+            for j in range(1, s_z-1):
+                setBlock(lv, x+i, y, z+j, 3, 0)
+                #your favorite plants
+                setBlock(lv, x+i, y+1, z+j, 31, 2) 
+            setBlock(lv, x+s_x/2, y+1, z-1, 0, 0)
+        

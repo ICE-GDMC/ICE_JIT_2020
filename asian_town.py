@@ -2,15 +2,11 @@ from numpy import *
 import utilityFunctions as utilityFunctions
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
-from roofBuilder import *
 from fifth_wall import *
 from road_builder import *
 from river_builder import *
-from test import *
-from house import *
 from MaterialChecker import *
-from store import *
-from Shrine import *
+from shrine import *
 from Cityscape import *
 
 displayName = "Asian Town"
@@ -65,7 +61,7 @@ def perform(level, box, options):
     for i in range(5):
         d =[20, 15, 10, 5, 3]   #depth size
         y_height = [0, 4, 8, 12, 16]  #height 
-        tower_wall = TowerWall(level, x + (d[0]/2-d[i]/2), box.miny+y_height[i],  z + (d[0]/2-d[i]/2), d[i])
+        tower_wall  TowerWall(level, x + (d[0]/2-d[i]/2), box.miny+y_height[i],  z + (d[0]/2-d[i]/2), d[i])
         tower_wall.build()
         roof_builder = RoofBuilder(level, x + (d[0]/2-d[i]/2), z + (d[0]/2-d[i]/2), d[i], y+y_height[i]+4-1, 0, 1)
         roof_builder.build()
@@ -87,6 +83,23 @@ def perform(level, box, options):
     
     #store = Store_Builder(level,box.minx,70,box.minz,0,0,0,t_ID,t_data,w_ID,w_data)
     #store.build()
-    for i in range(5):
-        city = Cityspace(level,50,box.minx+i*20,70,box.minz,0,t_ID,t_data,w_ID,w_data)
+
+    """ 
+    #clean
+    for i in range(-10,120):
+        for k in range(height):
+            for j in range(-10,60):
+                setBlock(level,box.minx+i, box.miny+k, box.minz+j, 0, 0)
+
+    #town
+    for i in range(3):
+        road = Road_Builder(level,box.minx+i*34-i,box.miny-1,box.minz,50,1,10,0,0)
+        road.build()
+        city = Cityspace(level,50,box.minx+i*34+10-i,box.miny,box.minz,0,t_ID,t_data,w_ID,w_data)
         city.build()
+        city = Cityspace(level,50,box.minx+i*34+24-i,box.miny,box.minz,1,t_ID,t_data,w_ID,w_data)
+        city.build()
+    """
+
+    s = Shrine_Builder(level,box.minx,70,box.minz,0,0,0,t_ID,t_data,w_ID,w_data)
+    s.build()

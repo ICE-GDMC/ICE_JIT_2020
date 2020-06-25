@@ -42,28 +42,32 @@ class Shrine_Builder:
             if self.wall_type is 0:
                 for j in range(1,16): #line_W
                     if(j==1 or j==5 or j==11 or j==15):
-                        for k in range(1,9): #line_H
+                        for k in range(1,12): #line_H
                             setBlock(lv,x,y+k,z+j,17,1)#black
                     else:
                         if(door==1):
-                            for k in range(1,9): #line_H
+                            for k in range(1,12): #line_H
                                 if k==5:
                                     setBlock(lv,x,y+k,z+j,17,1)#black
                                 else:
                                     setBlock(lv,x,y+k,z+j,96,s)
                             for k in range(6,9): 
                                 setBlock(lv,x,y+k,z+j,12,0)#white
+                            for k in range(10,12):
+                                setBlock(lv,x,y+k,z+j,96,s)
                             if(j==3 or j==8 or j==13):
                                 setBlock(lv,x,y+2,z+j,196,0)#door
                                 setBlock(lv,x,y+3,z+j,196,0)#door
                         else:
                             for k in range(1,5): #line_H
-                                k==5:
+                                if k==5:
                                     setBlock(lv,x,y+k,z+j,17,1)#black
                                 else:
                                     setBlock(lv,x,y+k,z+j,96,s)
                             for k in range(6,9): 
                                 setBlock(lv,x,y+k,z+j,12,0)#white
+                            for k in range(10,12):
+                                setBlock(lv,x,y+k,z+j,96,s)
             if self.wall_type is 1:
                 for j in range(10): #line_W
                     setBlock(lv, x, y, z + j, 4, 0)#stone
@@ -104,17 +108,20 @@ class Shrine_Builder:
             if self.wall_type is 0:
                 for j in range(0,8): #line_W
                     setBlock(lv, x + j, y+1, z, 17, 1)#black
+                    setBlock(lv, x+j, y+13, z, 17, 1)#black
                     if(j==0 or j==4 or j==8):
-                        for k in range(1,9): #line_H
+                        for k in range(1,13): #line_H
                             setBlock(lv, x + j, y + k, z, 17,1)#black
                     else:
-                        for k in range(2,9): #line_H
+                        for k in range(2,12): #line_H
                             if k==5:
                                 setBlock(lv, x + j, y + k, z, 17,1)#black
                             else:
                                 setBlock(lv,x+j,y+k,z,96,s)
                         for k in range(6,9): 
                             setBlock(lv,x+j,y+k,z,12,0)#white
+                        for k in range(10,12):
+                            setBlock(lv,x+j,y+k,z,96,s)
             
             if self.wall_type is 1:
                 for j in range(9): #line_W
@@ -129,8 +136,8 @@ class Shrine_Builder:
                             else:
                                 setBlock(lv, x + j, y + k, z, w_ID,w_data)#white
 
-        def roof(lv,x,s,z):
-            if self.direction is 0:
+        def roof(lv,x,s,z,t):
+            if t==0:
                 for i in range(1, w / 2):
                     for j in range(i):
                         setBlock(lv, x + i, s + j, z, 43, 9)
@@ -164,41 +171,47 @@ class Shrine_Builder:
                 setBlock(lv, x + w, s - 2, z - 1, 126, 8)
                 setBlock(lv, x - 1, s - 2, z + d, 126, 8)
                 setBlock(lv, x + w, s - 2, z + d, 126, 8)  # Oak-Wood Slabs at four corners
-            else:
-                for i in range(1, w / 2):
-                    for j in range(i):
-                        setBlock(lv, x, s + j, z + i, 43, 9)
-                        setBlock(lv, x, s + j, z + w - i - 1, 43, 9)
-                        setBlock(lv, x + d - 1, s + j, z + i, 43, 9)
-                        setBlock(lv, x + d - 1, s + j, z + w - i - 1, 43, 9)
-                for i in range(3):
-                    setBlock(lv, x, s + i, z + w / 2, 17, 1)
-                    setBlock(lv, x + d - 1, s + i, z + w / 2, 17, 1)  # Triangles on both sides
-                for i in range(0, d + 2):
-                    setBlock(lv, x - 1 + i, s - 2, z - 1, 53, 4)
-                    setBlock(lv, x - 1 + i, s - 2, z + w, 53, 4)  # Wooden Stairs (Oak)
-
-                    setBlock(lv, x - 1 + i, s - 2, z - 2, 44, 13)
-                    setBlock(lv, x - 1 + i, s - 2, z + w + 1, 44, 13)  # Stone Brick Slab
-                    setBlock(lv, x - 1 + i, s + 3, z + w - 4, 44, 5)
-                    setBlock(lv, x - 1 + i, s + 3, z + 3, 44, 5)  # Stone Brick Slab Top
-
-                    setBlock(lv, x - 1 + i, s + 3, z + 4, 43, 5)  # Stone Brick Slab (Double)
-                    setBlock(lv, x - 1 + i, s + 4, z + 4, 139, 0)  # Cobblestone Wall
-
-                    setBlock(lv, x - 1 + i, s + 2, z + w - 3, 109, 3)
-                    setBlock(lv, x - 1 + i, s + 1, z + w - 2, 109, 3)
-                    setBlock(lv, x - 1 + i, s, z + w - 1, 109, 3)
-                    setBlock(lv, x - 1 + i, s + 2, z + 2, 109, 2)
-                    setBlock(lv, x - 1 + i, s + 1, z + 1, 109, 2)
-                    setBlock(lv, x - 1 + i, s, z, 109, 2)
-                    setBlock(lv, x - 1 + i, s - 1, z - 1, 109, 2)
-                    setBlock(lv, x - 1 + i, s - 1, z + w, 109, 3)  # Stone Brick Stairs
-                setBlock(lv, x - 1, s - 2, z - 1, 126, 8)
-                setBlock(lv, x - 1, s - 2, z + w, 126, 8)
-                setBlock(lv, x + d, s - 2, z - 1, 126, 8)
-                setBlock(lv, x + d, s - 2, z + w, 126, 8)  # Oak-Wood Slabs at four corners
-           
+            elif t==1:  # tower's roof
+                for i in range(0, 4):
+                    for j in range(x-4+i, x + 9 + 4-i):    # left
+                        if i is 0:
+                            setBlock(lv, j, s-1, z - 4 + i, 44, 13)
+                        elif i is 1:
+                            setBlock(lv, j, s, z - 4 + i, 44, 5)
+                        elif i is 2:
+                            setBlock(lv, j, s, z - 4 + i, 43, 5)
+                        else:
+                            setBlock(lv, j, s, z - 4 + i, 44, 13)
+                for i in range(0, 4):
+                    for j in range(x-4+i, x + 9 + 4-i):  # right
+                        if i is 0:
+                            setBlock(lv, j, s-1, z + d + 3 - i, 44, 13)
+                        elif i is 1:
+                            setBlock(lv, j, s, z + d + 3 - i, 44, 5)
+                        elif i is 2:
+                            setBlock(lv, j, s, z + d + 3 - i, 43, 5)
+                        else:
+                            setBlock(lv, j, s, z + d + 3 - i, 44, 13)
+                for i in range(0, 4):
+                    for j in range(z-4+i, z + d + 3 - i):  # under
+                        if i is 0:
+                            setBlock(lv, x - 4 + i, s - 1, j, 44, 13)
+                        elif i is 1:
+                            setBlock(lv, x - 4 + i, s, j, 44, 5)
+                        elif i is 2:
+                            setBlock(lv, x - 4 + i, s, j, 43, 5)
+                        else:
+                            setBlock(lv, x - 4 + i, s, j, 44, 13)
+                for i in range(0, 4):
+                    for j in range(z-4+i, z + d + 3 - i):  # under
+                        if i is 0:
+                            setBlock(lv, x + d + 3 - i-6, s - 1, j, 44, 13)
+                        elif i is 1:
+                            setBlock(lv, x + d + 3 - i-6, s, j, 44, 5)
+                        elif i is 2:
+                            setBlock(lv, x + d + 3 - i-6, s, j, 43, 5)
+                        else:
+                            setBlock(lv, x + d + 3 - i-6, s, j, 44, 13)
 
         def floor(lv,x,y,z):
             for j in range(17):
@@ -216,9 +229,16 @@ class Shrine_Builder:
             for i in range(4,12):
                 setBlock(lv,x+i,y+1,z+15,17,1)
                 setBlock(lv,x+i,y+1,z+1,17,1)
-            setBlock(lv,x,y,z+7,53,0)
+            setBlock(lv,x,y,z+7,53,0)#stears
             setBlock(lv,x,y,z+8,53,0)
             setBlock(lv,x,y,z+9,53,0)
+            setBlock(lv,x+2,y+1,z+7,17,1)#saisen box
+            setBlock(lv,x+2,y+1,z+8,17,1)
+            setBlock(lv,x+2,y+1,z+9,17,1)
+            setBlock(lv,x+2,y+2,z+7,96,0)
+            setBlock(lv,x+2,y+2,z+8,96,0)
+            setBlock(lv,x+2,y+2,z+9,96,0)
+
             
             
 
@@ -232,4 +252,5 @@ class Shrine_Builder:
             wallX(lv,x+4,y,z,0,7) #x,z,door
             wallX(lv,x+12,y,z,1,8) #x,z,door
         floor(lv,x,y,z)
-        roof(lv,x+4,y+8,z+1)
+        roof(lv,x+4,y+13,z+1,0)
+        roof(lv,x+4,y+8,z+1,1)
