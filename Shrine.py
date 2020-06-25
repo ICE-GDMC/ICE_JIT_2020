@@ -221,6 +221,15 @@ class Shrine_Builder:
             wallX(lv,x+12,y,z,1,8) #x,z,door
         floor(lv,x,y,z)
 
+        setBlock(lv,x+5,y+2,z+2,89,0)#glowStone
+        setBlock(lv,x+11,y+2,z+2,89,0)#glowStone
+        setBlock(lv,x+5,y+2,z+14,89,0)#glowStone
+        setBlock(lv,x+11,y+2,z+14,89,0)#glowStone
+        setBlock(lv,x+5,y+10,z+2,89,0)#glowStone
+        setBlock(lv,x+11,y+10,z+2,89,0)#glowStone
+        setBlock(lv,x+5,y+10,z+14,89,0)#glowStone
+        setBlock(lv,x+11,y+10,z+14,89,0)#glowStone
+
         r = RoofBuilder(lv, x+4, z+1, d, y+13, di, 0, t_ID,t_data,w_ID,w_data,r_ID)
         r.build()
         roof(lv,x+4,y+8,z+1,1)

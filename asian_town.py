@@ -108,12 +108,13 @@ def perform(level, box, options):
 
     s = Shrine_Builder(level,box.minx,66,box.minz,0,0,1,t_ID,t_data,w_ID,w_data, 109)
     s.build()
+    """
     st = Store_Builder(level,box.minx,66,box.minz+15,0,0,1,t_ID,t_data,w_ID,w_data, 109)
     st.build()
 
     h = House_Builder(level,box.minx,66,box.minz+30,0,20,0,1,t_ID,t_data,w_ID,w_data, 109)
     h.build()
-    
+    """
 
     #pagoda = Pagoda_builder(level,box.minx,70,box.minz,t_ID,t_data,w_ID,w_data,109)
     #pagoda.build()
