@@ -10,7 +10,7 @@ from MaterialChecker import *
 
 class Cityspace:
 
-    def __init__(self, level, road_width, start_x, start_y, start_z, door, tree_ID, tree_data, wood_ID, wood_data):
+    def __init__(self, level, road_width, start_x, start_y, start_z, door, tree_ID, tree_data, wood_ID, wood_data,roof_ID):
         self.level = level
         self.road_width = road_width
         self.start_x = start_x
@@ -21,6 +21,7 @@ class Cityspace:
         self.tree_data = tree_data
         self.wood_ID = wood_ID
         self.wood_data = wood_data
+        self.roof_ID = roof_ID
             
 
     def build(self):
@@ -34,6 +35,7 @@ class Cityspace:
         t_data = self.tree_data
         w_ID = self.wood_ID
         w_data = self.wood_data
+        r_ID = self.roof_ID
         sw = 10
         sc = 0
         city = []
@@ -62,21 +64,21 @@ class Cityspace:
             print "Z="
             print z
             if city[i] == 0:
-                store = Store_Builder(lv,x,y,z,d,0,0,t_ID,t_data,w_ID,w_data)
+                store = Store_Builder(lv,x,y,z,d,0,0,t_ID,t_data,w_ID,w_data,r_ID)
                 store.build()
                 if city[i+1] == 2:
                     z += sw+1
                 else:
                     z += sw+3
             elif city[i] == 1:
-                house = House_Builder(lv,x,y,z,d,hw,0,0,t_ID,t_data,w_ID,w_data)
+                house = House_Builder(lv,x,y,z,d,hw,0,0,t_ID,t_data,w_ID,w_data,r_ID)
                 house.build()
                 if city[i+1] == 2:
                     z += hw+1
                 else:
                     z += hw+3
             elif city[i] == 2:
-                f = field(lv,x,y-1,z,9,fw)
+                f = field(lv,x,y-1,z,9,fw,0)
                 f.build()
                 z += fw+1
 
