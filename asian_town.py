@@ -9,9 +9,9 @@ from river_builder import *
 from MaterialChecker import *
 from shrine import *
 from store import *
+from house import *
 from Cityscape import *
 from pagoda import *
-from house import *
 
 displayName = "Asian Town"
 
@@ -106,13 +106,27 @@ def perform(level, box, options):
     
     """
 
-    s = Shrine_Builder(level,box.minx,66,box.minz,0,0,1,t_ID,t_data,w_ID,w_data, 109)
+    s = Shrine_Builder(level,box.minx,66,box.minz,0,1,t_ID,t_data,w_ID,w_data, 109)
     s.build()
-    """
-    st = Store_Builder(level,box.minx,66,box.minz+15,0,0,1,t_ID,t_data,w_ID,w_data, 109)
-    st.build()
+    s = Shrine_Builder(level,box.minx,66,box.minz+30,1,1,t_ID,t_data,w_ID,w_data, 109)
+    s.build()
 
-    h = House_Builder(level,box.minx,66,box.minz+30,0,20,0,1,t_ID,t_data,w_ID,w_data, 109)
+    """
+    st = Store_Builder(level,box.minx,80,box.minz,0,0,1,t_ID,t_data,w_ID,w_data, 109)
+    st.build()
+    st = Store_Builder(level,box.minx,80,box.minz+15,0,1,1,t_ID,t_data,w_ID,w_data, 109)
+    st.build()
+    st = Store_Builder(level,box.minx,80,box.minz+30,1,0,1,t_ID,t_data,w_ID,w_data, 109)
+    st.build()
+    st = Store_Builder(level,box.minx,80,box.minz+45,1,1,1,t_ID,t_data,w_ID,w_data, 109)
+    st.build()
+    h = House_Builder(level,box.minx+30,80,box.minz,0,10,0,1,t_ID,t_data,w_ID,w_data, 109)
+    h.build()
+    h = House_Builder(level,box.minx+30,80,box.minz+15,0,10,1,1,t_ID,t_data,w_ID,w_data, 109)
+    h.build()
+    h = House_Builder(level,box.minx+30,80,box.minz+30,1,10,0,1,t_ID,t_data,w_ID,w_data, 109)
+    h.build()
+    h = House_Builder(level,box.minx+30,80,box.minz+45,1,10,1,1,t_ID,t_data,w_ID,w_data, 109)
     h.build()
     """
 
