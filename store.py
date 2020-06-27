@@ -120,11 +120,11 @@ class Store_Builder:
                         else:
                             if(door==1):
                                 if(j==1 or j==4 or j==7):
-                                    setBlock(lv,x+j,y,z,196,0)#door
-                                    setBlock(lv,x+j,y+1,z,196,8)#door
+                                    setBlock(lv,x+j,y,z,196,1)#door
+                                    setBlock(lv,x+j,y+1,z,196,9)#door
                                 elif(j==2 or j==5 or j==8):
-                                    setBlock(lv,x+j,y,z,196,0)#door
-                                    setBlock(lv,x+j,y+1,z,196,7)#door
+                                    setBlock(lv,x+j,y,z,196,4)#door
+                                    setBlock(lv,x+j,y+1,z,196,12)#door
                                 else:
                                     for k in range(1,6): #line_H
                                         if k==3:
@@ -151,11 +151,11 @@ class Store_Builder:
                         else:
                             if(door==1):
                                 if(j==1 or j==4 or j==7):
-                                    setBlock(lv,x+j,y,z,196,0)#door
-                                    setBlock(lv,x+j,y+1,z,196,8)#door
+                                    setBlock(lv,x+j,y,z,196,1)#door
+                                    setBlock(lv,x+j,y+1,z,196,9)#door
                                 if(j==2 or j==5 or j==8):
-                                    setBlock(lv,x+j,y,z,196,7)#door
-                                    setBlock(lv,x+j,y+1,z,196,10)#door
+                                    setBlock(lv,x+j,y,z,196,4)#door
+                                    setBlock(lv,x+j,y+1,z,196,12)#door
                                 else:
                                     for k in range(2,6): #line_H
                                         if k==3:
@@ -245,23 +245,62 @@ class Store_Builder:
                 if door==0:
                     for i in range(0,8):
                         for j in range(1,9):
-                            if i==0:
-                                setBlock(lv, x+i, y-1, z+j, 5, 0)#floor
+                            if i==0 or i==1:
+                                setBlock(lv, x+i, y-1, z+j, 1, 0)#floor
+                            elif i==2:
+                                setBlock(lv, x+i, y, z+j, 126, 0)
+                            elif i==7:
+                                setBlock(lv, x+i, y+1, z+j, 47, 0)
+                                setBlock(lv, x+i, y+2, z+j, 47, 0)
+                                setBlock(lv, x+i, y+3, z+j, 54, 0)
+                                setBlock(lv, x+i, y+4, z+j, 54, 0)
                             else:
                                 setBlock(lv, x+i, y, z+j, 5, 0)#floor
                 elif door==1:
-                    print "door1"
+                    for i in range(0,8):
+                        for j in range(1,9):
+                            if i==8 or i==7:
+                                setBlock(lv, x+i, y-1, z+j, 1, 0)#floor
+                            elif i==6:
+                                setBlock(lv, x+i, y, z+j, 126, 0)
+                            elif i==1:
+                                setBlock(lv, x+i, y+1, z+j, 47, 0)
+                                setBlock(lv, x+i, y+2, z+j, 47, 0)
+                                setBlock(lv, x+i, y+3, z+j, 54, 0)
+                                setBlock(lv, x+i, y+4, z+j, 54, 0)
+                            else:
+                                setBlock(lv, x+i, y, z+j, 5, 0)#floor
             elif di==1:
                 if door==0:
                     for i in range(0,8):
                         for j in range(1,9):
-                            if i==0:
-                                setBlock(lv, x+j, y-1, z+i, 5, 0)#floor
+                            if i==0 or i==1:
+                                setBlock(lv, x+j, y-1, z+i, 1, 0)#floor
+                            elif i==2:
+                                setBlock(lv, x+j, y, z+i, 126, 0)#floor
+                            elif i==7:
+                                setBlock(lv, x+j, y+1, z+i, 47, 0)
+                                setBlock(lv, x+j, y+2, z+i, 47, 0)
+                                setBlock(lv, x+j, y+3, z+i, 54, 0)
+                                setBlock(lv, x+j, y+4, z+i, 54, 0)
                             else:
                                 setBlock(lv, x+j, y, z+i, 5, 0)#floor
                 elif door==1:
-                    print "OK"
+                    for i in range(0,8): 
+                        for j in range(1,9):
+                            if i==8 or i==7:
+                                setBlock(lv, x+j, y-1, z+i, 1, 0)#floor
+                            elif i==6:
+                                setBlock(lv, x+j, y, z+i, 126, 0)
+                            elif i==1:
+                                setBlock(lv, x+j, y+1, z+i, 47, 0)
+                                setBlock(lv, x+j, y+2, z+i, 47, 0)
+                                setBlock(lv, x+j, y+3, z+i, 54, 0)
+                                setBlock(lv, x+j, y+4, z+i, 54, 0)
+                            else:
+                                setBlock(lv, x+j, y, z+i, 5, 0)#floor
 
+        
         if di==0:
             wallZ(x,y,z) #x,z
             wallZ(x,y,z+9) #x,z
@@ -280,8 +319,8 @@ class Store_Builder:
             elif door==1:
                 wallX(x,y,z,0) #x,z,door
                 wallX(x,y,z+8,1) #x,z,door
-        
-        roof = RoofBuilder(lv, x, z, d, y+6, di, 0, t_ID,t_data,w_ID,w_data,r_ID)
-        roof.build()
-        floor(x,y,z,d)
+        floor(x,y,z,door)
+
+        #roof = RoofBuilder(lv, x, z, d, y+6, di, 0, t_ID,t_data,w_ID,w_data,r_ID)
+        #roof.build()
         

@@ -119,8 +119,8 @@ class House_Builder:
                         else:
                             if(door==1):
                                 if(j==4):
-                                    setBlock(lv,x+j,y,z,196,0)#door
-                                    setBlock(lv,x+j,y+1,z,196,7)#door
+                                    setBlock(lv,x+j,y,z,196,1)#door
+                                    setBlock(lv,x+j,y+1,z,196,9)#door
                                 else:
                                     for k in range(1,5): #line_H
                                         if k==3:
@@ -151,8 +151,8 @@ class House_Builder:
                         else:
                             if(door==1):
                                 if(j==4):
-                                    setBlock(lv,x+j,y,z,196,0)#door
-                                    setBlock(lv,x+j,y+1,z,196,8)#door
+                                    setBlock(lv,x+j,y,z,196,1)#door
+                                    setBlock(lv,x+j,y+1,z,196,9)#door
                                 else:
                                     for k in range(1,5): #line_H
                                         if k==3:
@@ -252,7 +252,18 @@ class House_Builder:
                     setBlock(lv, x+1, y, z+7, 50, 5)
                     setBlock(lv, x+3, y, z+7, 61, 2)
                 if door==1:
-                    print "OK"
+                    for j in range(0,7):
+                        for i in range(5,8):
+                            setBlock(lv, x+i, y-1, z+j+1, 4, 0)
+                        setBlock(lv, x+4, y, z+j+1, 126, 0)
+                        for i in range(1,4):
+                            setBlock(lv, x+i, y, z+j+1, 5, 0)
+                    setBlock(lv, x+1, y+1, z+1, 54, 4)
+                    setBlock(lv, x+1, y+1, z+2, 54, 4)
+                    setBlock(lv, x+1, y+1, z+7, 50, 5)
+                    setBlock(lv, x+7, y, z+1, 50, 5)
+                    setBlock(lv, x+7, y, z+7, 50, 5)
+                    setBlock(lv, x+5, y, z+7, 61, 4)
             elif di==1:
                 if door==0:
                     for j in range(0,7):
@@ -268,7 +279,18 @@ class House_Builder:
                     setBlock(lv, x+7, y, z+1, 50, 5)
                     setBlock(lv, x+7, y, z+3, 61, 2)
                 if door==1:
-                    print "OK"
+                    for j in range(0,7):
+                        for i in range(5,8):
+                            setBlock(lv, x+j+1, y-1, z+i, 4, 0)
+                        setBlock(lv, x+j+1, y, z+4, 126, 0)
+                        for i in range(1,4):
+                            setBlock(lv, x+j+1, y, z+i, 5, 0)
+                    setBlock(lv, x+1, y+1, z+1, 54, 4)
+                    setBlock(lv, x+2, y+1, z+1, 54, 4)
+                    setBlock(lv, x+7, y+1, z+1, 50, 5)
+                    setBlock(lv, x+1, y, z+7, 50, 5)
+                    setBlock(lv, x+7, y, z+7, 50, 5)
+                    setBlock(lv, x+7, y, z+5, 61, 4)
 
 
         if di==0:
@@ -294,5 +316,5 @@ class House_Builder:
                     wallX(x+q*8,y,z,0) #x,z,door
                     wallX(x+q*8,y,z+8,1) #x,z,door
                 floor(x+q*8,y,z,door)
-        roof = RoofBuilder(lv, x, z, d, y+5, di, 0, t_ID,t_data,w_ID,w_data, r_ID)
-        roof.build()
+        #roof = RoofBuilder(lv, x, z, d, y+5, di, 0, t_ID,t_data,w_ID,w_data, r_ID)
+        #roof.build()

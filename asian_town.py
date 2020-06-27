@@ -12,6 +12,7 @@ from store import *
 from house import *
 from Cityscape import *
 from pagoda import *
+from functions import *
 
 displayName = "Asian Town"
 
@@ -104,31 +105,29 @@ def perform(level, box, options):
         city = Cityspace(level,50,box.minx+i*34+24-i,box.miny,box.minz,1,t_ID,t_data,w_ID,w_data,roof_ID)
         city.build()
     
-    """
+    
 
     s = Shrine_Builder(level,box.minx,66,box.minz,0,1,t_ID,t_data,w_ID,w_data, 109)
     s.build()
     s = Shrine_Builder(level,box.minx,66,box.minz+30,1,1,t_ID,t_data,w_ID,w_data, 109)
     s.build()
-
     """
-    st = Store_Builder(level,box.minx,80,box.minz,0,0,1,t_ID,t_data,w_ID,w_data, 109)
+    st = Store_Builder(level,box.minx,box.miny+1,box.minz,0,0,1,t_ID,t_data,w_ID,w_data, 109)
     st.build()
-    st = Store_Builder(level,box.minx,80,box.minz+15,0,1,1,t_ID,t_data,w_ID,w_data, 109)
+    st = Store_Builder(level,box.minx,box.miny+1,box.minz+15,1,0,1,t_ID,t_data,w_ID,w_data, 109)
     st.build()
-    st = Store_Builder(level,box.minx,80,box.minz+30,1,0,1,t_ID,t_data,w_ID,w_data, 109)
+    st = Store_Builder(level,box.minx,box.miny+1,box.minz+30,0,1,1,t_ID,t_data,w_ID,w_data, 109)
     st.build()
-    st = Store_Builder(level,box.minx,80,box.minz+45,1,1,1,t_ID,t_data,w_ID,w_data, 109)
+    st = Store_Builder(level,box.minx,box.miny+1,box.minz+45,1,1,1,t_ID,t_data,w_ID,w_data, 109)
     st.build()
-    h = House_Builder(level,box.minx+30,80,box.minz,0,10,0,1,t_ID,t_data,w_ID,w_data, 109)
+    h = House_Builder(level,box.minx+20,box.miny+1,box.minz,0,10,0,1,t_ID,t_data,w_ID,w_data, 109)
     h.build()
-    h = House_Builder(level,box.minx+30,80,box.minz+15,0,10,1,1,t_ID,t_data,w_ID,w_data, 109)
+    h = House_Builder(level,box.minx+20,box.miny+1,box.minz+15,0,10,1,1,t_ID,t_data,w_ID,w_data, 109)
     h.build()
-    h = House_Builder(level,box.minx+30,80,box.minz+30,1,10,0,1,t_ID,t_data,w_ID,w_data, 109)
+    h = House_Builder(level,box.minx+20,box.miny+1,box.minz+30,1,10,0,1,t_ID,t_data,w_ID,w_data, 109)
     h.build()
-    h = House_Builder(level,box.minx+30,80,box.minz+45,1,10,1,1,t_ID,t_data,w_ID,w_data, 109)
+    h = House_Builder(level,box.minx+20,box.miny+1,box.minz+45,1,10,1,1,t_ID,t_data,w_ID,w_data, 109)
     h.build()
-    """
 
     #pagoda = Pagoda_builder(level,box.minx,70,box.minz,t_ID,t_data,w_ID,w_data,109)
     #pagoda.build()
