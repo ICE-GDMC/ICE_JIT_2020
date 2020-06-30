@@ -61,5 +61,7 @@ def perform(level, box, options):
         f.build()
     """
 
-    pagoda = Pagoda_builder(level,box.minx,70,box.minz,t_ID,t_data,w_ID,w_data,109)
+    pagoda = Pagoda_builder(level,box.minx,70,box.minz,0,t_ID,t_data,w_ID,w_data,109)
+    pagoda.build()
+    pagoda = Pagoda_builder(level,box.minx,70,box.minz+25,1,t_ID,t_data,w_ID,w_data,109)
     pagoda.build()
