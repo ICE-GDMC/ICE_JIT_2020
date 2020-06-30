@@ -27,13 +27,13 @@ class Pagoda_builder:
         w_ID = self.wood_ID
         w_data = self.wood_data
         r_ID = self.roof_ID
-        d =[19, 16, 13, 10, 7, 4]   #depth size
-        y_height = [0, 4, 8, 12, 16]  #height 
+        d =[15, 13, 11, 9, 7, 5, 5]   #depth size
+        y_height = [0, 4, 7, 11, 15, 19]  #height 
 
-        def wall1st(lv,x,y,z,d):
+        def wall1st(x,y,z,d):
             for i in range(d):
-                for j in range(5):
-                    if (i%3==0):
+                for j in range(4):
+                    if (i==0 or i==4 or i==d-5 or i==d-1):
                         setBlock(lv, x, y+j, z+i, t_ID,t_data)
                         setBlock(lv, x+d-1, y+j, z+i, t_ID,t_data)
                         setBlock(lv, x+i, y+j, z, t_ID,t_data)
@@ -48,18 +48,17 @@ class Pagoda_builder:
                         setBlock(lv, x+d-1, y+j, z+i, t_ID,t_data)
                         setBlock(lv, x+i, y+j, z, t_ID,t_data)
                         setBlock(lv, x+i, y+j, z+d-1, t_ID,t_data)
-            for i in range(7,12):
-                for j in range(5):
+            for i in range(5,10):
+                for j in range(4):
                     setBlock(lv, x, y+j, z+i, 0, 0)
                     setBlock(lv, x+d-1, y+j, z+i, 0, 0)
                     setBlock(lv, x+i, y+j, z, 0, 0)
                     setBlock(lv, x+i, y+j, z+d-1, 0, 0)
 
-
-        def wall(lv,x,y,z,d):
+        def wall2nd(x,y,z,d):
             for i in range(d):
-                for j in range(5):
-                    if (i%3==0):
+                for j in range(3):
+                    if (i==0 or i==3 or i==d-4 or i==d-1):
                         setBlock(lv, x, y+j, z+i, t_ID,t_data)
                         setBlock(lv, x+d-1, y+j, z+i, t_ID,t_data)
                         setBlock(lv, x+i, y+j, z, t_ID,t_data)
@@ -69,38 +68,85 @@ class Pagoda_builder:
                         setBlock(lv, x+d-1, y+j, z+i, w_ID,w_data)
                         setBlock(lv, x+i, y+j, z, w_ID,w_data)
                         setBlock(lv, x+i, y+j, z+d-1, w_ID,w_data)
-            for i in range(-1,d+1):
-                setBlock(lv, x-1, y+1, z+i, 191, 0)
-                setBlock(lv, x+d, y+1, z+i, 191, 0)
-                setBlock(lv, x+i, y+1, z-1, 191, 0)
-                setBlock(lv, x+i, y+1, z+d, 191, 0)
-                setBlock(lv, x-1, y, z+i, 164, 8)
-                setBlock(lv, x+d, y, z+i, 164, 5)
-                setBlock(lv, x+i, y, z-1, 164, 6)
-                setBlock(lv, x+i, y, z+d, 164, 7)
-            
-        
+            for i in range(d):
+                setBlock(lv, x, y+4, z+i, 191, 0)
+                setBlock(lv, x+d-1, y+4, z+i, 191, 0)
+                setBlock(lv, x+i, y+4, z, 191, 0)
+                setBlock(lv, x+i, y+4, z+d-1, 191, 0)
+                setBlock(lv, x, y+3, z+i, 164, 6)
+                setBlock(lv, x+d-1, y+3, z+i, 164, 7)
+                setBlock(lv, x+i, y+3, z, 164, 4)
+                setBlock(lv, x+i, y+3, z+d-1, 164, 5)
+
+        def wallend(x,y,z,d):
+            for i in range(d):
+                for j in range(4):
+                    if (i==0 or i==3 or i==d-4 or i==d-1):
+                        setBlock(lv, x, y+j, z+i, t_ID,t_data)
+                        setBlock(lv, x+d-1, y+j, z+i, t_ID,t_data)
+                        setBlock(lv, x+i, y+j, z, t_ID,t_data)
+                        setBlock(lv, x+i, y+j, z+d-1, t_ID,t_data)
+                    else:
+                        setBlock(lv, x, y+j, z+i, w_ID,w_data)
+                        setBlock(lv, x+d-1, y+j, z+i, w_ID,w_data)
+                        setBlock(lv, x+i, y+j, z, w_ID,w_data)
+                        setBlock(lv, x+i, y+j, z+d-1, w_ID,w_data)
+
+        def wall(x,y,z,d):
+            for i in range(d):
+                for j in range(4):
+                    if (i==0 or i==3 or i==d-4 or i==d-1):
+                        setBlock(lv, x, y+j, z+i, t_ID,t_data)
+                        setBlock(lv, x+d-1, y+j, z+i, t_ID,t_data)
+                        setBlock(lv, x+i, y+j, z, t_ID,t_data)
+                        setBlock(lv, x+i, y+j, z+d-1, t_ID,t_data)
+                    else:
+                        setBlock(lv, x, y+j, z+i, w_ID,w_data)
+                        setBlock(lv, x+d-1, y+j, z+i, w_ID,w_data)
+                        setBlock(lv, x+i, y+j, z, w_ID,w_data)
+                        setBlock(lv, x+i, y+j, z+d-1, w_ID,w_data)
+            for i in range(d):
+                setBlock(lv, x, y+5, z+i, 191, 0)
+                setBlock(lv, x+d-1, y+5, z+i, 191, 0)
+                setBlock(lv, x+i, y+5, z, 191, 0)
+                setBlock(lv, x+i, y+5, z+d-1, 191, 0)
+                setBlock(lv, x, y+4, z+i, 164, 6)
+                setBlock(lv, x+d-1, y+4, z+i, 164, 7)
+                setBlock(lv, x+i, y+4, z, 164, 4)
+                setBlock(lv, x+i, y+4, z+d-1, 164, 5)
+
         def floor(lv,x,y,z,d):
             for i in range(1,d+3):
                 for j in range(1,d+3):
                     setBlock(lv, x+i, y, z+j, 98, 0)#rstone
             for k in range(0,5):
-                setBlock(lv, x+d/2+k, y, z, 109, 0)
-                setBlock(lv, x+d/2+k, y, z+d+3, 109, 0)
+                setBlock(lv, x+d/2+k, y, z, 109, 2)
+                setBlock(lv, x+d/2+k, y, z+d+3, 109, 3)
                 setBlock(lv, x, y, z+d/2+k, 109, 0)
-                setBlock(lv, x+d+3, y, z+d/2+k, 109, 0)
+                setBlock(lv, x+d+3, y, z+d/2+k, 109, 1)
         
         floor(lv,x,y,z,d[0])
 
-        x+=2
+
+        x+=3
         y+=1
-        z+=2
-        for i in range(5):
+        z+=3
+        for i in range(0,6):
             if i==0:
-                wall1st(lv, x + (d[0]/2-d[i]/2), y+y_height[i],  z + (d[0]/2-d[i]/2), d[i])
-                roof_builder = RoofBuilder(lv, x + (d[0]/2-d[i+1]/2), z + (d[0]/2-d[i+1]/2), d[i+1], y+y_height[i]+5-1, 0, 1, t_ID,t_data,w_ID,w_data, r_ID)
+                wall1st(x + (d[0]/2-d[i]/2-1), y+y_height[i],  z + (d[0]/2-d[i]/2)-1, d[i])
+                roof_builder = RoofBuilder(lv, x + (d[0]/2-d[i+1]/2-1), z + (d[0]/2-d[i+1]/2)-1, d[i], y+y_height[i]+4-1, 0, 1, t_ID,t_data,w_ID,w_data, r_ID)
+                roof_builder.build()
+            elif i==1:
+                wall2nd(x + (d[0]/2-d[i]/2)-1, y+y_height[i],  z + (d[0]/2-d[i]/2)-1, d[i])
+                roof_builder = RoofBuilder(lv, x + (d[0]/2-d[i+1]/2)-1, z + (d[0]/2-d[i+1]/2)-1, d[i], y+y_height[i]+3-1, 0, 1, t_ID,t_data,w_ID,w_data, r_ID)
+                roof_builder.build()
+            elif i==5:
+                wallend(x + (d[0]/2-d[i]/2)-1, y+y_height[i],  z + (d[0]/2-d[i]/2)-1, d[i])
+                roof_builder = RoofBuilder(lv, x + (d[0]/2-d[i+1]/2), z + (d[0]/2-d[i+1]/2), d[i], y+y_height[i]+4-1, 0, 1, t_ID,t_data,w_ID,w_data, r_ID)
                 roof_builder.build()
             else:
-                wall(lv, x + (d[0]/2-d[i]/2), y+y_height[i],  z + (d[0]/2-d[i]/2), d[i])
-                roof_builder = RoofBuilder(lv, x + (d[0]/2-d[i+1]/2), z + (d[0]/2-d[i+1]/2), d[i+1], y+y_height[i]+5-1, 0, 1, t_ID,t_data,w_ID,w_data, r_ID)
+                wall(x + (d[0]/2-d[i]/2)-1, y+y_height[i],  z + (d[0]/2-d[i]/2)-1, d[i])
+                roof_builder = RoofBuilder(lv, x + (d[0]/2-d[i+1]/2)-1, z + (d[0]/2-d[i+1]/2)-1, d[i], y+y_height[i]+4-1, 0, 1, t_ID,t_data,w_ID,w_data, r_ID)
                 roof_builder.build()
+
+    
