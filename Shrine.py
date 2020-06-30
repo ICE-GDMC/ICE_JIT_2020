@@ -78,7 +78,6 @@ class Shrine_Builder:
                             if(j==3 or j==8 or j==13):
                                 setBlock(lv,x,y+2,z+j,196,0)#door
                                 setBlock(lv,x,y+3,z+j,196,8)#door
-                setBlock(lv,x,y+2,z+2,89,0)#glowStone
             if di==1:
                 if self.wall_type is 0:
                     for j in range(1,16): #line_W
@@ -115,9 +114,7 @@ class Shrine_Builder:
                                 setBlock(lv,x+j,y+k,z,96,s)
                             if(j==3 or j==8 or j==13):
                                 setBlock(lv,x+j,y+2,z,196,0)#door
-                                setBlock(lv,x+j,y+3,z,196,8)#door
-                setBlock(lv,x+2,y+2,z,89,0)#glowStone
-                
+                                setBlock(lv,x+j,y+3,z,196,8)#door              
             
         def wallZ(x,y,z,s):
             if di==0:
@@ -331,7 +328,14 @@ class Shrine_Builder:
                     setBlock(lv,x+k,y+2,z+2,96,0)
                     setBlock(lv,x+k,y+1,z+14,t_ID,t_data)#saisen box
                     setBlock(lv,x+k,y+2,z+14,96,0)
-
+            setBlock(lv,x+5,y+2,z+2,89,0)#glowStone
+            setBlock(lv,x+11,y+2,z+2,89,0)#glowStone
+            setBlock(lv,x+5,y+2,z+14,89,0)#glowStone
+            setBlock(lv,x+11,y+2,z+14,89,0)#glowStone
+            setBlock(lv,x+4,y+12,z+2,89,0)#glowStone
+            setBlock(lv,x+11,y+12,z+2,89,0)#glowStone
+            setBlock(lv,x+4,y+12,z+14,89,0)#glowStone
+            setBlock(lv,x+11,y+12,z+14,89,0)#glowStone
 
             
             
