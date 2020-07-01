@@ -30,12 +30,12 @@ class Pagoda_builder:
         w_data = self.wood_data
         r_ID = self.roof_ID
         d =[15, 13, 11, 9, 7, 5, 5]   #depth size
-        y_height = [0, 4, 7, 11, 15, 19]  #height 
+        y_height = [0, 5, 9, 14, 19, 24]  #height 
 
         def wall1st(x,y,z,d):
             if self.pagoda_type is 0:
                 for i in range(d):
-                    for j in range(4):
+                    for j in range(5):
                         if (i==0 or i==4 or i==d-5 or i==d-1):
                             setBlock(lv, x, y+j, z+i, 17,1)
                             setBlock(lv, x+d-1, y+j, z+i, 17,1)
@@ -52,14 +52,14 @@ class Pagoda_builder:
                             setBlock(lv, x+i, y+j, z, 17,1)
                             setBlock(lv, x+i, y+j, z+d-1, 17,1)
                 for i in range(5,10):
-                    for j in range(4):
+                    for j in range(5):
                         setBlock(lv, x, y+j, z+i, 0, 0)
                         setBlock(lv, x+d-1, y+j, z+i, 0, 0)
                         setBlock(lv, x+i, y+j, z, 0, 0)
                         setBlock(lv, x+i, y+j, z+d-1, 0, 0)
             elif self.pagoda_type is 1:
                 for i in range(d):
-                    for j in range(4):
+                    for j in range(5):
                         if (i==0 or i==4 or i==d-5 or i==d-1):
                             setBlock(lv, x, y+j, z+i, t_ID,t_data)
                             setBlock(lv, x+d-1, y+j, z+i, t_ID,t_data)
@@ -76,7 +76,7 @@ class Pagoda_builder:
                             setBlock(lv, x+i, y+j, z, t_ID,t_data)
                             setBlock(lv, x+i, y+j, z+d-1, t_ID,t_data)
                 for i in range(5,10):
-                    for j in range(4):
+                    for j in range(5):
                         setBlock(lv, x, y+j, z+i, 0, 0)
                         setBlock(lv, x+d-1, y+j, z+i, 0, 0)
                         setBlock(lv, x+i, y+j, z, 0, 0)
@@ -131,7 +131,7 @@ class Pagoda_builder:
         def wallend(x,y,z,d):
             if self.pagoda_type is 0:
                 for i in range(d):
-                    for j in range(4):
+                    for j in range(5):
                         if (i==0 or i==2 or i==d-1):
                             setBlock(lv, x, y+j, z+i, 17,1)
                             setBlock(lv, x+d-1, y+j, z+i, 17,1)
@@ -144,7 +144,7 @@ class Pagoda_builder:
                             setBlock(lv, x+i, y+j, z+d-1, 155,0)
             elif self.pagoda_type is 1:    
                 for i in range(d):
-                    for j in range(4):
+                    for j in range(5):
                         if (i==0 or i==2 or i==d-1):
                             setBlock(lv, x, y+j, z+i, t_ID,t_data)
                             setBlock(lv, x+d-1, y+j, z+i, t_ID,t_data)
@@ -159,7 +159,7 @@ class Pagoda_builder:
         def wall(x,y,z,d):
             if self.pagoda_type is 0:
                 for i in range(d):
-                    for j in range(4):
+                    for j in range(5):
                         if (i==0 or i==3 or i==d-4 or i==d-1):
                             setBlock(lv, x, y+j, z+i, 17,1)
                             setBlock(lv, x+d-1, y+j, z+i, 17,1)
@@ -181,7 +181,7 @@ class Pagoda_builder:
                     setBlock(lv, x+i, y+4, z+d-1, 164, 5)
             elif self.pagoda_type is 1: 
                 for i in range(d):
-                    for j in range(4):
+                    for j in range(5):
                         if (i==0 or i==3 or i==d-4 or i==d-1):
                             setBlock(lv, x, y+j, z+i, t_ID,t_data)
                             setBlock(lv, x+d-1, y+j, z+i, t_ID,t_data)
@@ -221,7 +221,7 @@ class Pagoda_builder:
         for i in range(0,6):
             if i==0:
                 wall1st(x + (d[0]/2-d[i]/2-1), y+y_height[i],  z + (d[0]/2-d[i]/2)-1, d[i])
-                roof_builder = RoofBuilder(lv, x + (d[0]/2-d[i+1]/2-1), z + (d[0]/2-d[i+1]/2)-1, d[i], y+y_height[i]+4-1, 0, 1, t_ID,t_data,w_ID,w_data, r_ID)
+                roof_builder = RoofBuilder(lv, x + (d[0]/2-d[i+1]/2-1), z + (d[0]/2-d[i+1]/2)-1, d[i], y+y_height[i]+4, 0, 1, t_ID,t_data,w_ID,w_data, r_ID)
                 roof_builder.build()
             elif i==1:
                 wall2nd(x + (d[0]/2-d[i]/2)-1, y+y_height[i],  z + (d[0]/2-d[i]/2)-1, d[i])
