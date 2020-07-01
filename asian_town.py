@@ -25,10 +25,10 @@ def perform(level, box, options):
 
     t_ID,t_data,w_ID,w_data = Material_Checker(level,box.minx,box.miny,box.minz,box.maxx,box.maxy,box.maxz)
 
-    #house = House_Builder(level,box.minx,70,box.minz,0,30,0,0,t_ID,t_data,w_ID,w_data)
+    #house = House_Builder(level,box.minx,70,box.minz,0,30,0,t_ID,t_data,w_ID,w_data,109)
     #house.build()
     
-    #store = Store_Builder(level,box.minx,70,box.minz,0,0,0,t_ID,t_data,w_ID,w_data)
+    #store = Store_Builder(level,box.minx,70,box.minz,0,0,t_ID,t_data,w_ID,w_data,109)
     #store.build()
 
     """ 
@@ -61,7 +61,7 @@ def perform(level, box, options):
         f.build()
     """
 
-    pagoda = Pagoda_builder(level,box.minx,70,box.minz,0,t_ID,t_data,w_ID,w_data,109)
-    pagoda.build()
-    pagoda = Pagoda_builder(level,box.minx,70,box.minz+25,1,t_ID,t_data,w_ID,w_data,109)
-    pagoda.build()
+    s = Shrine_Builder(level,box.minx,70,box.minz,0,t_ID,t_data,w_ID,w_data, 109)
+    s.build()
+    s = Shrine_Builder(level,box.minx,70,box.minz+30,1,t_ID,t_data,w_ID,w_data, 109)
+    s.build()
