@@ -31,10 +31,10 @@ class field:
         s_x = self.size_x
         s_z = self.size_z
 
-        l = random.randint(0,5)
-        r = random.randint(0,5)
+        l = random.randint(0,8)
+        r = random.randint(0,8)
         while r==l:
-            r = random.randint(0,5)
+            r = random.randint(0,8)
 
         if self.field_type is 0:
             for i in range(s_x):
@@ -45,7 +45,7 @@ class field:
                 for j in range(1, s_z-1):
                     setBlock(lv, x+i, y, z+j, 3, 0)
                     #your favorite plants
-                    setBlock(lv, x+i, y+1, z+j, 175, l) 
+                    setBlock(lv, x+i, y+1, z+j, 38, l) 
                 setBlock(lv, x+s_x/2, y+1, z-1, 0, 0)
 
         elif self.field_type is 1:#I
@@ -58,9 +58,9 @@ class field:
                 for j in range(7):
                     setBlock(lv, x+i+1, y, z+j+1, 3, 0)
                     if letter[i][j]==0:
-                        setBlock(lv, x+i+1, y+1, z+j+1, 175, l) 
+                        setBlock(lv, x+i+1, y+1, z+j+1, 38, l) 
                     elif letter[i][j]==1:
-                        setBlock(lv, x+i+1, y+1, z+j+1, 175, r)
+                        setBlock(lv, x+i+1, y+1, z+j+1, 38, r)
                 setBlock(lv, x+9/2, y+1, z-1, 0, 0)
         elif self.field_type is 2:#C
             letter = [[0,0,0,0,0,0,0],[0,0,1,1,1,0,0],[0,1,0,0,0,1,0],[0,1,0,0,0,0,0],[0,1,0,0,0,1,0],[0,0,1,1,1,0,0],[0,0,0,0,0,0,0]]
@@ -72,9 +72,9 @@ class field:
                 for j in range(7):
                     setBlock(lv, x+i+1, y, z+j+1, 3, 0)
                     if letter[i][j]==0:
-                        setBlock(lv, x+i+1, y+1, z+j+1, 175, l) 
+                        setBlock(lv, x+i+1, y+1, z+j+1, 38, l) 
                     elif letter[i][j]==1:
-                        setBlock(lv, x+i+1, y+1, z+j+1, 175, r)
+                        setBlock(lv, x+i+1, y+1, z+j+1, 38, r)
                 setBlock(lv, x+9/2, y+1, z-1, 0, 0)
         elif self.field_type is 3:#E
             letter = [[0,0,0,0,0,0,0],[0,1,1,1,1,1,0],[0,1,0,0,0,0,0],[0,1,1,1,1,1,0],[0,1,0,0,0,0,0],[0,1,1,1,1,1,0],[0,0,0,0,0,0,0]]
@@ -86,8 +86,7 @@ class field:
                 for j in range(7):
                     setBlock(lv, x+i+1, y, z+j+1, 3, 0)
                     if letter[i][j]==0:
-                        setBlock(lv, x+i+1, y+1, z+j+1, 175, l) 
+                        setBlock(lv, x+i+1, y+1, z+j+1, 38, l) 
                     elif letter[i][j]==1:
-                        setBlock(lv, x+i+1, y+1, z+j+1, 175, r)
+                        setBlock(lv, x+i+1, y+1, z+j+1, 38, r)
                 setBlock(lv, x+9/2, y+1, z-1, 0, 0)
-        

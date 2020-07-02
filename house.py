@@ -181,10 +181,6 @@ class House_Builder:
 
         def wallZ(x,y,z):
             if di==0:
-                for i in range(w):
-                    for j in range(6):
-                        for k in range(d):
-                            setBlock(lv,x+i,y+j,z+k,0,0)
                 """
                 if self.wall_type is 0:
                     for j in range(8): #line_W
@@ -212,10 +208,6 @@ class House_Builder:
                             else:
                                 setBlock(lv, x + j, y + k, z, w_ID,w_data)#white
             if di==1:  
-                for i in range(w):
-                    for j in range(6):
-                        for k in range(d):
-                            setBlock(lv,x+k,y+j,z+i,0,0)  
                 """ 
                 if self.wall_type is 0:
                     for j in range(8): #line_W
@@ -302,6 +294,10 @@ class House_Builder:
 
 
         if di==0:
+            for i in range(w):
+                    for j in range(6):
+                        for k in range(d):
+                            setBlock(lv,x+i,y+j,z+k,0,0)
             wallZ(x,y,z) #x,z
             for q in range(size):
                 wallZ(x,y,z+q*8+8) #x,z
@@ -313,6 +309,10 @@ class House_Builder:
                     wallX(x+8,y,z+q*8,1) #x,z,door
                 floor(x,y,z+q*8,door)
         elif di==1:
+            for i in range(w):
+                    for j in range(6):
+                        for k in range(d):
+                            setBlock(lv,x+k,y+j,z+i,0,0)  
             wallZ(x,y,z) #x,z
             for q in range(size):
                 wallZ(x+q*8+8,y,z) #x,z
