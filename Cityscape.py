@@ -38,6 +38,7 @@ class Cityspace:
         r_ID = self.roof_ID
         sw = 10
         sc = 0
+        ice_f=0
         city = []
         gap = []
 
@@ -52,18 +53,34 @@ class Cityspace:
         
         print "SC"
         print sc
-        hw = (w-sc*10-sum(gap)-1)/8*8+1
-        print "HW"
-        print hw
+
+        #house
+        if 17<= w-sc*10-sum(gap):
+            hw = random.randint(1,int((w-sc*10-sum(gap)-1)/8))*8+1
+            print "HW"
+            print hw
+        elif 9<= w-sc*10-sum(gap):
+            hw = 9
+            print "HW"
+            print hw
         if hw>=9:
             city.append(1)
             gap.append(random.randint(3,5))
-        if w> sc*10+hw+sum(gap)+2:
-            fw = w-sc*10-hw-sum(gap)
+
+        #field
+        if 9<= w-(sc*10+hw+sum(gap)):
+            ice_f += 9
+            city.append(3)
+            gap.append(random.randint(3,5))
+
+        if w> sc*10+hw+ice_f+sum(gap)+2:
+            fw = w-sc*10-hw-ice_f-sum(gap)
             print "FW"
             print fw
             city.append(2)
             gap.append(random.randint(3,5))
+
+
 
         print "gap"
         print gap
@@ -98,6 +115,11 @@ class Cityspace:
                 f.build()
                 z += fw+gap[i]
                 #z += fw+1
+
+            elif city[i] == 3:
+                f = field(lv,x,y-1,z,9,ice_f,random.randint(1,3))
+                f.build()
+                z += ice_f+gap[i]
     
         print "---------------"
 
