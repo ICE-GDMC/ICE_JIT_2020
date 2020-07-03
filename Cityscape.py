@@ -39,24 +39,34 @@ class Cityspace:
         sw = 10
         sc = 0
         city = []
-
+        gap = []
 
         for i in range(w/(sw+3)):
             if 0.5 <= random.random():
                 city.append(0)
                 sc += 1
+                gap.append(0)
 
-        hw = (w-sc*(10+3))/9*8+1
+        for i in range(len(gap)):
+            gap[i]=random.randint(2,5)
+        
+        print "SC"
+        print sc
+        hw = (w-sc*10-sum(gap)-1)/8*8+1
         print "HW"
         print hw
         if hw>=9:
             city.append(1)
-        if w> sc*(10+3)+hw+2:
-                fw = w-sc*(10+3)-hw
-                print "FW"
-                print fw
-                city.append(2)
+            gap.append(random.randint(3,5))
+        if w> sc*10+hw+sum(gap)+2:
+            fw = w-sc*10-hw-sum(gap)
+            print "FW"
+            print fw
+            city.append(2)
+            gap.append(random.randint(3,5))
 
+        print "gap"
+        print gap
         random.shuffle(city)
         city.append(4)
 
@@ -64,22 +74,31 @@ class Cityspace:
             print "Z="
             print z
             if city[i] == 0:
-                store = Store_Builder(lv,x,y,z,d,0,0,t_ID,t_data,w_ID,w_data,r_ID)
+                store = Store_Builder(lv,x,y,z,d,0,t_ID,t_data,w_ID,w_data,r_ID)
                 store.build()
+                z += sw+gap[i]
+                """
                 if city[i+1] == 2:
                     z += sw+1
                 else:
                     z += sw+3
+                """
             elif city[i] == 1:
-                house = House_Builder(lv,x,y,z,d,hw,0,0,t_ID,t_data,w_ID,w_data,r_ID)
+                house = House_Builder(lv,x,y,z,d,hw,0,t_ID,t_data,w_ID,w_data,r_ID)
                 house.build()
+                z += hw+gap[i]
+                """
                 if city[i+1] == 2:
                     z += hw+1
                 else:
                     z += hw+3
+                """
             elif city[i] == 2:
                 f = field(lv,x,y-1,z,9,fw,0)
                 f.build()
-                z += fw+1
+                z += fw+gap[i]
+                #z += fw+1
+    
+        print "---------------"
 
 

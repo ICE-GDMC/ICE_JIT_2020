@@ -26,6 +26,7 @@ class Road_Builder:
         w = self.width
         h = self.height
         d = self.depth
+        y= y-1
         maxy = y
         
         if self.road_type is 0: #sand only

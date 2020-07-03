@@ -39,7 +39,7 @@ class House_Builder:
         w_data = self.wood_data
         r_ID = self.roof_ID
         w = 9
-        size = (width-1)/9 
+        size = int((width-1)/8)
         d = size*8+1
 
 
