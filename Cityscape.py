@@ -37,9 +37,11 @@ class Cityspace:
         w_data = self.wood_data
         r_ID = self.roof_ID
         sw = 10
-        hw = 0
-        fw = 0
+        hw = [0,0]
+        fw = [0,0]
         sc = 0
+        hc = 0
+        fc = 0
         ice_f=0
         city = []
         gap = []
@@ -56,32 +58,34 @@ class Cityspace:
         print "SC"
         print sc
 
-        #house
-        if 17<= w-sc*10-sum(gap):
-            hw = random.randint(1,int((w-sc*10-sum(gap)-1)/8))*8+1
-            print "HW"
-            print hw
-        elif 9<= w-sc*10-sum(gap):
-            hw = 9
-            print "HW"
-            print hw
-        if hw>=9:
-            city.append(1)
-            gap.append(random.randint(3,5))
-
-        #field
-        if 9<= w-(sc*10+hw+sum(gap)):
-            ice_f += 9
-            city.append(3)
-            gap.append(random.randint(3,5))
-
-        if w> sc*10+hw+ice_f+sum(gap)+2:
-            fw = w-sc*10-hw-ice_f-sum(gap)
-            print "FW"
-            print fw
-            city.append(2)
-            gap.append(random.randint(3,5))
-
+        for i in range(2):
+            #house
+            if w >= sc*10+sum(fw)+sum(hw)+ice_f+sum(gap) + 17:
+                hw[i] = random.randint(1,int((w-sc*10-sum(fw)-sum(hw)-ice_f-sum(gap)-1)/8))*8+1
+                print "HW"
+                print hw[i]
+            elif w >= sc*10+sum(fw)+sum(hw)+ice_f+sum(gap) + 9:
+                hw[i] = 9
+                print "HW"
+                print hw
+            if hw>=9:
+                city.append(1)
+                gap.append(random.randint(3,5))
+            #field
+            """
+            if 9<= w-(sc*10+hw+sum(gap)):
+                ice_f += 9
+                city.append(3)
+                gap.append(random.randint(3,5))
+            """
+            if w> sc*10+sum(fw)+sum(hw)+ice_f+sum(gap)+2:
+                fw[i] = w-sc*10-sum(hw)-sum(fw)-ice_f-sum(gap)
+                if fw[i] > 18:
+                    fw[i] = 18
+                print "FW"
+                print fw[i]
+                city.append(2)
+                gap.append(random.randint(3,5))
 
 
         print "gap"
@@ -90,8 +94,6 @@ class Cityspace:
         city.append(4)
 
         for i in range(len(city)-1):
-            print "Z="
-            print z
             if city[i] == 0:
                 store = Store_Builder(lv,x,y,z,d,0,t_ID,t_data,w_ID,w_data,r_ID)
                 store.build()
@@ -102,27 +104,29 @@ class Cityspace:
                 else:
                     z += sw+3
                 """
-            elif city[i] == 1:
-                house = House_Builder(lv,x,y,z,d,hw,0,t_ID,t_data,w_ID,w_data,r_ID)
+            elif city[i] == 1 and hw[hc]>0:
+                house = House_Builder(lv,x,y,z,d,hw[hc],0,t_ID,t_data,w_ID,w_data,r_ID)
                 house.build()
-                z += hw+gap[i]
+                z += hw[hc]+gap[i]
+                hc += 1
                 """
                 if city[i+1] == 2:
                     z += hw+1
                 else:
                     z += hw+3
                 """
-            elif city[i] == 2:
-                f = field(lv,x,y-1,z,9,fw,0)
+            elif city[i] == 2 and fw[fc]>0:
+                f = field(lv,x,y-1,z,9,fw[fc],0)
                 f.build()
-                z += fw+gap[i]
+                z += fw[fc]+gap[i]
+                fc += 1
                 #z += fw+1
-
+            """
             elif city[i] == 3:
                 f = field(lv,x,y-1,z,9,ice_f,random.randint(1,3))
                 f.build()
                 z += ice_f+gap[i]
-    
+            """
         print "---------------"
 
 
