@@ -37,6 +37,8 @@ class Cityspace:
         w_data = self.wood_data
         r_ID = self.roof_ID
         sw = 10
+        hw = 0
+        fw = 0
         sc = 0
         ice_f=0
         city = []
