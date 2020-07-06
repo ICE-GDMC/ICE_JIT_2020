@@ -278,6 +278,12 @@ class Store_Builder:
                                 setBlock(lv, x+i, y+4, z+j, 54, 0)
                             else:
                                 setBlock(lv, x+i, y, z+j, 5, 0)#floor
+                setBlock(lv,x+1,y+5,z+1,89,0)#glowStone
+                setBlock(lv,x+1,y+2,z+1,89,0)#glowStone
+                setBlock(lv,x+7,y+5,z+1,89,0)#glowStone
+                setBlock(lv,x+1,y+5,z+8,89,0)#glowStone
+                setBlock(lv,x+1,y+2,z+8,89,0)#glowStone
+                setBlock(lv,x+7,y+5,z+8,89,0)#glowStone
             elif di==1:
                 if door==0:
                     for i in range(0,8):
@@ -307,7 +313,12 @@ class Store_Builder:
                                 setBlock(lv, x+j, y+4, z+i, 54, 0)
                             else:
                                 setBlock(lv, x+j, y, z+i, 5, 0)#floor
-
+                setBlock(lv,x+1,y+5,z+1,89,0)#glowStone
+                setBlock(lv,x+1,y+2,z+1,89,0)#glowStone
+                setBlock(lv,x+1,y+5,z+7,89,0)#glowStone
+                setBlock(lv,x+8,y+5,z+1,89,0)#glowStone
+                setBlock(lv,x+8,y+2,z+1,89,0)#glowStone
+                setBlock(lv,x+8,y+5,z+7,89,0)#glowStone
         
         if di==0:
             wallZ(x,y,z) #x,z
