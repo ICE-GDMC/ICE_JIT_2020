@@ -52,8 +52,8 @@ class Road_Builder:
         elif self.road_type is 1: #sand + river
             if self.direction is 0:
                 for i in range(w):
-                    gety = Test(lv, x, y, z+i, h)
-                    y = gety.build()
+                    #gety = Test(lv, x, y, z+i, h)
+                    #y = gety.build()
                     #sand
                     for j in range(4): #0~3
                         setBlock(lv, x+j, y, z+i, 12, 0)
@@ -80,8 +80,8 @@ class Road_Builder:
                     
             if self.direction is 1:
                 for i in range(w):
-                    gety = Test(lv, x, y, z+i, h)
-                    y = gety.build()
+                    #gety = Test(lv, x, y, z+i, h)
+                    #y = gety.build()
                     #sand
                     for j in range(4): #0~3
                         setBlock(lv, x+i, y, z+j, 12, 0)
