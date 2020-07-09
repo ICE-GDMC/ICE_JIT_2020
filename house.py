@@ -245,8 +245,8 @@ class House_Builder:
                         setBlock(lv, x+4, y, z+j+1, 126, 0)
                         for i in range(5,8):
                             setBlock(lv, x+i, y, z+j+1, 5, 0)
-                    setBlock(lv, x+7, y+1, z+1, 54, 4)
-                    setBlock(lv, x+7, y+1, z+2, 54, 4)
+                    setBlock(lv, x+7, y+1, z+1, 58, 0)
+                    setBlock(lv, x+7, y+1, z+2, 58, 0)
                     setBlock(lv, x+7, y+1, z+7, 50, 5)
                     setBlock(lv, x+1, y, z+1, 50, 5)
                     setBlock(lv, x+1, y, z+7, 50, 5)
@@ -258,8 +258,8 @@ class House_Builder:
                         setBlock(lv, x+4, y, z+j+1, 126, 0)
                         for i in range(1,4):
                             setBlock(lv, x+i, y, z+j+1, 5, 0)
-                    setBlock(lv, x+1, y+1, z+1, 54, 4)
-                    setBlock(lv, x+1, y+1, z+2, 54, 4)
+                    setBlock(lv, x+1, y+1, z+1, 58, 0)
+                    setBlock(lv, x+1, y+1, z+2, 58, 0)
                     setBlock(lv, x+1, y+1, z+7, 50, 5)
                     setBlock(lv, x+7, y, z+1, 50, 5)
                     setBlock(lv, x+7, y, z+7, 50, 5)
@@ -272,8 +272,8 @@ class House_Builder:
                         setBlock(lv, x+j+1, y, z+4, 126, 0)
                         for i in range(5,8):
                             setBlock(lv, x+j+1, y, z+i, 5, 0)
-                    setBlock(lv, x+1, y+1, z+7, 54, 4)
-                    setBlock(lv, x+2, y+1, z+7, 54, 4)
+                    setBlock(lv, x+1, y+1, z+7, 58, 0)
+                    setBlock(lv, x+2, y+1, z+7, 58, 0)
                     setBlock(lv, x+7, y+1, z+7, 50, 5)
                     setBlock(lv, x+1, y, z+1, 50, 5)
                     setBlock(lv, x+7, y, z+1, 50, 5)
@@ -285,8 +285,8 @@ class House_Builder:
                         setBlock(lv, x+j+1, y, z+4, 126, 0)
                         for i in range(1,4):
                             setBlock(lv, x+j+1, y, z+i, 5, 0)
-                    setBlock(lv, x+1, y+1, z+1, 54, 4)
-                    setBlock(lv, x+2, y+1, z+1, 54, 4)
+                    setBlock(lv, x+1, y+1, z+1, 58, 0)
+                    setBlock(lv, x+2, y+1, z+1, 58, 0)
                     setBlock(lv, x+7, y+1, z+1, 50, 5)
                     setBlock(lv, x+1, y, z+7, 50, 5)
                     setBlock(lv, x+7, y, z+7, 50, 5)
