@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 from functions import *
-from test import *
 
 
 class Road_Builder:
@@ -32,8 +31,6 @@ class Road_Builder:
         if self.road_type is 0: #sand only
             if self.direction is 0:
                 for i in range(w):
-                    #gety = Test(lv, x, y, z+i, h)
-                    #y = gety.build()
                     for j in range(d): 
                         setBlock(lv, x+j, y, z+i, 12, 0)
                         setBlock(lv, x+j, y-1, z+i, 17, 1)
@@ -41,8 +38,6 @@ class Road_Builder:
                             setBlock(lv, x+j, k, z+i, 0, 0)
             if self.direction is 1:
                 for i in range(w):
-                    #gety = Test(lv, x, y, z+i, h)
-                    #y = gety.build()
                     for j in range(d): 
                         setBlock(lv, x+i, y, z+j, 12, 0)
                         setBlock(lv, x+i, y-1, z+j, 17, 1)
@@ -52,8 +47,6 @@ class Road_Builder:
         elif self.road_type is 1: #sand + river
             if self.direction is 0:
                 for i in range(w):
-                    #gety = Test(lv, x, y, z+i, h)
-                    #y = gety.build()
                     #sand
                     for j in range(4): #0~3
                         setBlock(lv, x+j, y, z+i, 12, 0)
@@ -80,8 +73,6 @@ class Road_Builder:
                     
             if self.direction is 1:
                 for i in range(w):
-                    #gety = Test(lv, x, y, z+i, h)
-                    #y = gety.build()
                     #sand
                     for j in range(4): #0~3
                         setBlock(lv, x+i, y, z+j, 12, 0)

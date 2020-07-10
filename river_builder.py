@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 from functions import *
-from test import *
 
 class River_Builder:
     # if road_type is 1(sand&river), depth is only 16
@@ -28,8 +27,6 @@ class River_Builder:
 
         if self.direction is 0:
             for i in range(w): 
-                gety = Test(lv, x, y, z+i, h)
-                y = gety.build()
                 for j in range(d): 
                     if (j==0 or j==d):
                         for k in range(4):
@@ -43,8 +40,6 @@ class River_Builder:
                         setBlock(lv, x+j, s, z+i, 0, 0)
         if self.direction is 1:
             for i in range(w):
-                gety = Test(lv, x, y, z+i, h)
-                y = gety.build()
                 for j in range(d): 
                     if (j==0 or j==d):
                         for k in range(4):
