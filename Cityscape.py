@@ -116,7 +116,7 @@ class Cityspace:
                     z += hw+3
                 """
             elif city[i] == 2 and fw[fc]>0:
-                f = field(lv,x,y-1,z,9,fw[fc],0)
+                f = field(lv,x,y-1,z,9,fw[fc],0,0)
                 f.build()
                 z += fw[fc]+gap[i]
                 fc += 1
