@@ -4,17 +4,10 @@ import utilityFunctions as utilityFunctions
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
 from functions import *
-from test import *
-
-#
-#
-#error
-#
-#
 
 class field:
 
-    def __init__(self, level, start_x, start_y, start_z, size_x, size_z, field_type):
+    def __init__(self, level, start_x, start_y, start_z, size_x, size_z, field_type, letter_type):
             self.level = level
             self.start_x = start_x
             self.start_y = start_y
@@ -22,6 +15,7 @@ class field:
             self.size_x = size_x
             self.size_z = size_z
             self.field_type = field_type
+            self.letter_type = letter_type
 
     def build(self):
         lv = self.level
@@ -30,14 +24,12 @@ class field:
         z = self.start_z
         s_x = self.size_x
         s_z = self.size_z
+        l_type = self.letter_type
 
         plant = [141,142,59]
-
-        l = random.randint(0,8)
+        l_ID = [91,95,9]
+        l_data = [1,11,0]
         r = random.randint(0,8)
-        while r==l:
-            r = random.randint(0,8)
-        
         s = random.randint(0,2)
 
         if self.field_type is 0:
@@ -70,9 +62,15 @@ class field:
                 for j in range(7):
                     setBlock(lv, x+i+1, y, z+j+1, 60, 7)
                     if letter[i][j]==0:
-                        setBlock(lv, x+i+1, y+1, z+j+1, 38, l) 
-                    elif letter[i][j]==1:
                         setBlock(lv, x+i+1, y+1, z+j+1, 38, r)
+                    elif letter[i][j]==1:
+                        if l_type==2:
+                            setBlock(lv, x+i+1, y-1, z+j+1, 89, 0) #glowstone
+                            setBlock(lv, x+i+1, y, z+j+1, l_ID[l_type], l_data[l_type]) #letter
+                            setBlock(lv, x+i+1, y+1, z+j+1, 0, 0) #air
+                        else:
+                            setBlock(lv, x+i+1, y, z+j+1, 89, 0) #glowstone
+                            setBlock(lv, x+i+1, y+1, z+j+1, l_ID[l_type], l_data[l_type]) #letter
                 setBlock(lv, x+9/2, y+1, z-1, 0, 0)
             setBlock(lv, x+1, y, z+1, 9, 0)#water
             setBlock(lv, x+1, y, z+7, 9, 0)
@@ -92,9 +90,15 @@ class field:
                 for j in range(7):
                     setBlock(lv, x+i+1, y, z+j+1, 60, 7)
                     if letter[i][j]==0:
-                        setBlock(lv, x+i+1, y+1, z+j+1, 38, l) 
-                    elif letter[i][j]==1:
                         setBlock(lv, x+i+1, y+1, z+j+1, 38, r)
+                    elif letter[i][j]==1:
+                        if l_type==2:
+                            setBlock(lv, x+i+1, y-1, z+j+1, 89, 0) #glowstone
+                            setBlock(lv, x+i+1, y, z+j+1, l_ID[l_type], l_data[l_type]) #letter
+                            setBlock(lv, x+i+1, y+1, z+j+1, 0, 0) #air
+                        else:
+                            setBlock(lv, x+i+1, y, z+j+1, 89, 0) #glowstone
+                            setBlock(lv, x+i+1, y+1, z+j+1, l_ID[l_type], l_data[l_type]) #letter
                 setBlock(lv, x+9/2, y+1, z-1, 0, 0)
             setBlock(lv, x+1, y, z+1, 9, 0)#water
             setBlock(lv, x+1, y, z+7, 9, 0)
@@ -114,9 +118,15 @@ class field:
                 for j in range(7):
                     setBlock(lv, x+i+1, y, z+j+1, 60, 7)
                     if letter[i][j]==0:
-                        setBlock(lv, x+i+1, y+1, z+j+1, 38, l) 
-                    elif letter[i][j]==1:
                         setBlock(lv, x+i+1, y+1, z+j+1, 38, r)
+                    elif letter[i][j]==1:
+                        if l_type==2:
+                            setBlock(lv, x+i+1, y-1, z+j+1, 89, 0) #glowstone
+                            setBlock(lv, x+i+1, y, z+j+1, l_ID[l_type], l_data[l_type]) #letter
+                            setBlock(lv, x+i+1, y+1, z+j+1, 0, 0) #air
+                        else:
+                            setBlock(lv, x+i+1, y, z+j+1, 89, 0) #glowstone
+                            setBlock(lv, x+i+1, y+1, z+j+1, l_ID[l_type], l_data[l_type]) #letter
                 setBlock(lv, x+9/2, y+1, z-1, 0, 0)
             setBlock(lv, x+1, y, z+1, 9, 0)#water
             setBlock(lv, x+1, y, z+7, 9, 0)
