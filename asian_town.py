@@ -2,7 +2,7 @@ from numpy import *
 import utilityFunctions as utilityFunctions
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
-from fifth_wall import *
+
 from roofBuilder import *
 from road_builder import *
 from river_builder import *

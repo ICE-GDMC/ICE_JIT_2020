@@ -1,13 +1,14 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 from functions import *
-from test import *
+
 
 
 class Road_Builder:
     # if road_type is 1(sand&river), depth is only 16
 
     def __init__(self, level, start_x, start_y, start_z, width, height, depth, direction, road_type):
+
         self.level = level
         self.start_x = start_x
         self.start_y = start_y
@@ -15,6 +16,7 @@ class Road_Builder:
         self.width = width
         self.height = height
         self.depth = depth
+
         self.direction = direction
         self.road_type = road_type
 
@@ -28,12 +30,11 @@ class Road_Builder:
         d = self.depth
         y= y-1
         maxy = y
+
         
         if self.road_type is 0: #sand only
             if self.direction is 0:
                 for i in range(w):
-                    #gety = Test(lv, x, y, z+i, h)
-                    #y = gety.build()
                     for j in range(d): 
                         setBlock(lv, x+j, y, z+i, 12, 0)
                         setBlock(lv, x+j, y-1, z+i, 17, 1)
@@ -52,8 +53,6 @@ class Road_Builder:
         elif self.road_type is 1: #sand + river
             if self.direction is 0:
                 for i in range(w):
-                    #gety = Test(lv, x, y, z+i, h)
-                    #y = gety.build()
                     #sand
                     for j in range(4): #0~3
                         setBlock(lv, x+j, y, z+i, 12, 0)
@@ -80,8 +79,6 @@ class Road_Builder:
                     
             if self.direction is 1:
                 for i in range(w):
-                    #gety = Test(lv, x, y, z+i, h)
-                    #y = gety.build()
                     #sand
                     for j in range(4): #0~3
                         setBlock(lv, x+i, y, z+j, 12, 0)
