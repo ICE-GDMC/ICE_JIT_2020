@@ -61,9 +61,9 @@ class field:
             for i in range(7):
                 for j in range(7):
                     setBlock(lv, x+i+1, y, z+j+1, 60, 7)
-                    if letter[i][j]==0:
+                    if letter[j][i]==0:
                         setBlock(lv, x+i+1, y+1, z+j+1, 38, r)
-                    elif letter[i][j]==1:
+                    elif letter[j][i]==1:
                         if l_type==2:
                             setBlock(lv, x+i+1, y-1, z+j+1, 89, 0) #glowstone
                             setBlock(lv, x+i+1, y, z+j+1, l_ID[l_type], l_data[l_type]) #letter
@@ -89,9 +89,9 @@ class field:
             for i in range(7):
                 for j in range(7):
                     setBlock(lv, x+i+1, y, z+j+1, 60, 7)
-                    if letter[i][j]==0:
+                    if letter[j][i]==0:
                         setBlock(lv, x+i+1, y+1, z+j+1, 38, r)
-                    elif letter[i][j]==1:
+                    elif letter[j][i]==1:
                         if l_type==2:
                             setBlock(lv, x+i+1, y-1, z+j+1, 89, 0) #glowstone
                             setBlock(lv, x+i+1, y, z+j+1, l_ID[l_type], l_data[l_type]) #letter
@@ -117,9 +117,9 @@ class field:
             for i in range(7):
                 for j in range(7):
                     setBlock(lv, x+i+1, y, z+j+1, 60, 7)
-                    if letter[i][j]==0:
+                    if letter[j][i]==0:
                         setBlock(lv, x+i+1, y+1, z+j+1, 38, r)
-                    elif letter[i][j]==1:
+                    elif letter[j][i]==1:
                         if l_type==2:
                             setBlock(lv, x+i+1, y-1, z+j+1, 89, 0) #glowstone
                             setBlock(lv, x+i+1, y, z+j+1, l_ID[l_type], l_data[l_type]) #letter
