@@ -3,6 +3,7 @@ import utilityFunctions as utilityFunctions
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
 from house import *
+from little_house import *
 from store import *
 from field_builder import *
 from MaterialChecker import *
@@ -36,11 +37,14 @@ class Cityspace:
         w_ID = self.wood_ID
         w_data = self.wood_data
         r_ID = self.roof_ID
-        sw = 10
+        sw = 10  #house width
+        lw = 5 #little house width
         hw = [0,0]
         fw = [0,0]
         sc = 0
+        lc = 0
         hc = 0
+        hlc = 0
         fc = 0
         ice_f=0
         city = []
@@ -53,24 +57,26 @@ class Cityspace:
                 gap.append(0)
 
         for i in range(len(gap)):
-            gap[i]=random.randint(2,5)
+            gap[i]=random.randint(3,5)
         
-        print "SC"
-        print sc
 
         for i in range(2):
             #house
             if w >= sc*10+sum(fw)+sum(hw)+ice_f+sum(gap) + 17:
-                hw[i] = random.randint(1,int((w-sc*10-sum(fw)-sum(hw)-ice_f-sum(gap)-1)/8))*8+1
-                print "HW"
-                print hw[i]
-            elif w >= sc*10+sum(fw)+sum(hw)+ice_f+sum(gap) + 9:
+                for j in range(int((w-sc*10-lc*5-sum(fw)-sum(hw)-ice_f-sum(gap)-1)/8)):
+                    if random.random() < 0.4:
+                        hc += 1
+                    elif 0.4 <= random.random() and random.random() < 0.5:
+                        lc += 1
+                        city.append(5)
+                        gap.append(random.randint(3,5))
+                hw[i] = hc*8+1
+            elif w >= sc*10+lc*5+sum(fw)+sum(hw)+ice_f+sum(gap) + 9:
                 hw[i] = 9
-                print "HW"
-                print hw
-            if hw>=9:
+            if hw[i]>=9:
                 city.append(1)
                 gap.append(random.randint(3,5))
+
             #field
             """
             if 9<= w-(sc*10+hw+sum(gap)):
@@ -79,19 +85,29 @@ class Cityspace:
                 gap.append(random.randint(3,5))
             """
             if w> sc*10+sum(fw)+sum(hw)+ice_f+sum(gap)+2:
-                fw[i] = w-sc*10-sum(hw)-sum(fw)-ice_f-sum(gap)
-                if fw[i] > 18:
-                    fw[i] = 18
-                print "FW"
-                print fw[i]
-                city.append(2)
-                gap.append(random.randint(3,5))
+                fw[i] = w-sc*10-lc*5-sum(hw)-sum(fw)-ice_f-sum(gap)
+                if i==0:
+                    if fw[i] >= 3:
+                        if fw[i] > 18:
+                            fw[i] = 18
+                        city.append(2)
+                    else:
+                        city.append(4)
+                    gap.append(random.randint(3,5))
+                else:
+                    if fw[i] > 18:
+                        fw[i] = 18
+                    city.append(4)
+                    gap.append(random.randint(3,5))
 
 
         print "gap"
         print gap
         random.shuffle(city)
-        city.append(4)
+        city.append(6)
+
+        print "city"
+        print city
 
         for i in range(len(city)-1):
             if city[i] == 0:
@@ -104,23 +120,40 @@ class Cityspace:
                 else:
                     z += sw+3
                 """
-            elif city[i] == 1 and hw[hc]>0:
-                house = House_Builder(lv,x,y,z,d,hw[hc],0,t_ID,t_data,w_ID,w_data,r_ID)
+            elif city[i] == 1 and hw[hlc]>0:
+                house = House_Builder(lv,x,y,z,d,hw[hlc],0,t_ID,t_data,w_ID,w_data,r_ID)
                 house.build()
-                z += hw[hc]+gap[i]
-                hc += 1
+                z += hw[hlc]+gap[i]
+                hlc += 1
                 """
                 if city[i+1] == 2:
                     z += hw+1
                 else:
                     z += hw+3
                 """
-            elif city[i] == 2 and fw[fc]>0:
+            elif city[i] == 2: #and fw[fc]>0:
                 f = field(lv,x,y-1,z,9,fw[fc],0,0)
                 f.build()
                 z += fw[fc]+gap[i]
                 fc += 1
                 #z += fw+1
+            elif city[i] == 4: #and fw[fc]>0:
+                f = field(lv,x,y,z,9,fw[fc],4,0)
+                f.build()
+                z += fw[fc]+gap[i]
+                fc += 1
+            elif city[i] == 5:
+                if d==0:
+                    sh = Little_House_Builder(lv,x,y,z,d,0,t_ID,t_data,w_ID,w_data,r_ID)
+                    sh.build()
+                    f = field(lv,x+4,y-1,z,5,lw,4,0)
+                    f.build()
+                else:
+                    sh = Little_House_Builder(lv,x+5,y,z,d,0,t_ID,t_data,w_ID,w_data,r_ID)
+                    sh.build()
+                    f = field(lv,x,y-1,z,5,lw,4,0)
+                    f.build()
+                z += lw+gap[i]
             """
             elif city[i] == 3:
                 f = field(lv,x,y-1,z,9,ice_f,random.randint(1,3))
