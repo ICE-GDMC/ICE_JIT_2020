@@ -136,3 +136,19 @@ class field:
             setBlock(lv, x+1, y+1, z+7, 0, 0)
             setBlock(lv, x+7, y+1, z+1, 0, 0)
             setBlock(lv, x+7, y+1, z+7, 0, 0)
+    
+        elif self.field_type is 4:#suger
+            for i in range(s_x):
+                for j in range(s_z):
+                    if i%2==0:
+                        #your favorite plants
+                        setBlock(lv, x+i, y+1, z+j, 83, 0) 
+                        setBlock(lv, x+i, y+2, z+j, 83, 0) 
+                        setBlock(lv, x+i, y+3, z+j, 83, 0) 
+                    else:
+                        setBlock(lv, x+i, y, z+j, 9, 0)
+                        setBlock(lv, x+i, y+1, z+j, 0, 0)
+                setBlock(lv, x+s_x/2, y+3, z-1, 0, 0)
+            for j in range(1, s_z-1):
+                setBlock(lv, x+1, y+1, z+j, 0, 0)
+                setBlock(lv, x+s_x-2, y+1, z+j, 0, 0)
