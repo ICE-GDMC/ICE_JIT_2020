@@ -35,6 +35,7 @@ class RoofBuilder:
         w_ID = self.wood_ID
         w_data = self.wood_data
         r_ID = self.roof_ID
+        lw = 4
         if self.roof_type is 0:  # room's roof
             if self.direction is 0:
                 for i in range(1, w / 2):
@@ -231,6 +232,36 @@ class RoofBuilder:
                 setBlock(lv, x + 1, s + 19, z + 1, 113)
                 setBlock(lv, x + 1, s + 20, z + 1, 139)
                 setBlock(lv, x + 1, s + 21, z + 1, 113)
+        elif self.roof_type is 2:  # little house roof
+            if self.direction is 0:
+                for i in range(1, lw / 2):
+                    for j in range(i):
+                        setBlock(lv, x + i, s + j, z, w_ID,w_data)
+                        setBlock(lv, x + lw - i - 1, s + j, z, w_ID,w_data)
+                        setBlock(lv, x + i, s + j, z + d - 1, w_ID,w_data)
+                        setBlock(lv, x + lw - i - 1, s + j, z + d - 1, w_ID,w_data)
+                for i in range(0, d + 2):
+                    setBlock(lv, x + lw - 2, s + 1, z - 1 + i, r_ID, 1)
+                    setBlock(lv, x + lw - 1, s, z - 1 + i, r_ID, 1)
+                    setBlock(lv, x + 1, s + 1, z - 1 + i, r_ID, 0)
+                    setBlock(lv, x, s, z - 1 + i, r_ID, 0)
+                    setBlock(lv, x - 1, s - 1, z - 1 + i, r_ID, 0)
+                    setBlock(lv, x + lw, s - 1, z - 1 + i, r_ID, 1)  # Stone Brick Stairs
+            else:
+                for i in range(1, lw / 2):
+                    for j in range(i):
+                        setBlock(lv, x, s + j, z + i, w_ID,w_data)
+                        setBlock(lv, x, s + j, z + lw - i - 1, w_ID,w_data)
+                        setBlock(lv, x + d - 1, s + j, z + i, w_ID,w_data)
+                        setBlock(lv, x + d - 1, s + j, z + lw - i - 1, w_ID,w_data)
+                for i in range(0, d + 2):
+                    setBlock(lv, x - 1 + i, s + 1, z + lw - 2, r_ID, 3)
+                    setBlock(lv, x - 1 + i, s, z + lw - 1, r_ID, 3)
+                    setBlock(lv, x - 1 + i, s + 1, z + 1, r_ID, 2)
+                    setBlock(lv, x - 1 + i, s, z, r_ID, 2)
+                    setBlock(lv, x - 1 + i, s - 1, z - 1, r_ID, 2)
+                    setBlock(lv, x - 1 + i, s - 1, z + lw, r_ID, 3)  # Stone Brick Stairs
+
 # def perform(level, box, options):
 #     (width, height, depth) = getBoxSize(box)
 #     surface = box.miny
