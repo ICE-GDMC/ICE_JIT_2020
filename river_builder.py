@@ -6,7 +6,6 @@ class River_Builder:
     # if road_type is 1(sand&river), depth is only 16
 
     def __init__(self, level, start_x, start_y, start_z, width, height, depth, direction):
-
         self.level = level
         self.start_x = start_x
         self.start_y = start_y
@@ -14,7 +13,6 @@ class River_Builder:
         self.width = width
         self.height = height
         self.depth = depth
-
         self.direction = direction
 
     def build(self):
@@ -29,8 +27,6 @@ class River_Builder:
 
         if self.direction is 0:
             for i in range(w): 
-                gety = Test(lv, x, y, z+i, h)
-                y = gety.build()
                 for j in range(d): 
                     if (j==0 or j==d):
                         for k in range(4):
@@ -44,8 +40,6 @@ class River_Builder:
                         setBlock(lv, x+j, s, z+i, 0, 0)
         if self.direction is 1:
             for i in range(w):
-                gety = Test(lv, x, y, z+i, h)
-                y = gety.build()
                 for j in range(d): 
                     if (j==0 or j==d):
                         for k in range(4):

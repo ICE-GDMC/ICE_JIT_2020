@@ -130,5 +130,5 @@ class Little_House_Builder:
                 wallX(x,z,0) #x,z,door
                 wallX(x,z+3,1) #x,z,door
         floor(x,z,door)
-        #roof = RoofBuilder(lv, x, z, 5, y+3, di, 0, t_ID,t_data,w_ID,w_data, r_ID)
-        #roof.build()
+        roof = RoofBuilder(lv, x, z, 5, y+3, di, 2, t_ID,t_data,w_ID,w_data, r_ID)
+        roof.build()

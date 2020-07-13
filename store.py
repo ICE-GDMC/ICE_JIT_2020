@@ -186,10 +186,6 @@ class Store_Builder:
 
         def wallZ(x,y,z):
             if di==0:
-                for i in range(w):
-                    for j in range(6):
-                        for k in range(d):
-                            setBlock(lv,x+i,y+j,z+k,0,0)
                 """
                 if self.wall_type is 0:
                     for j in range(9): #line_W
@@ -216,11 +212,7 @@ class Store_Builder:
                                 setBlock(lv, x + j, y + k, z, t_ID, t_data)#black
                             else:
                                 setBlock(lv, x + j, y + k, z, w_ID,w_data)#white
-            elif di==1: 
-                for i in range(w):
-                    for j in range(6):
-                        for k in range(d):
-                            setBlock(lv,x+k,y+j,z+i,0,0)   
+            elif di==1:   
                 """
                 if self.wall_type is 0:
                     for j in range(9): #line_W
@@ -321,6 +313,10 @@ class Store_Builder:
                 setBlock(lv,x+8,y+5,z+7,89,0)#glowStone
         
         if di==0:
+            for i in range(w):
+                for j in range(6):
+                    for k in range(d):
+                        setBlock(lv,x+i,y+j,z+k,0,0)
             wallZ(x,y,z) #x,z
             wallZ(x,y,z+9) #x,z
             if door==0:
@@ -330,6 +326,10 @@ class Store_Builder:
                 wallX(x,y,z,0) #x,z,door
                 wallX(x+8,y,z,1) #x,z,door
         elif di==1:
+            for i in range(w):
+                for j in range(6):
+                    for k in range(d):
+                        setBlock(lv,x+k,y+j,z+i,0,0) 
             wallZ(x,y,z) #x,z
             wallZ(x+9,y,z) #x,z
             if door==0:
