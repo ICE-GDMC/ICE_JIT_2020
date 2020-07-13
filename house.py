@@ -1,10 +1,12 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import utilityFunctions as utilityFunctions
+import random
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
 from functions import *
 from roofBuilder import *
+
 
 class House_Builder:
 
@@ -246,7 +248,7 @@ class House_Builder:
                         for i in range(5,8):
                             setBlock(lv, x+i, y, z+j+1, 5, 0)
                     setBlock(lv, x+7, y+1, z+1, 58, 0)
-                    setBlock(lv, x+7, y+1, z+2, 54, 4)
+                    setBlock(lv, x+7, y+1, z+random.randint(2,6), 54, 4)
                     setBlock(lv, x+7, y+1, z+7, 50, 5)
                     setBlock(lv, x+1, y, z+1, 50, 5)
                     setBlock(lv, x+1, y, z+7, 50, 5)
@@ -259,7 +261,7 @@ class House_Builder:
                         for i in range(1,4):
                             setBlock(lv, x+i, y, z+j+1, 5, 0)
                     setBlock(lv, x+1, y+1, z+1, 58, 0)
-                    setBlock(lv, x+1, y+1, z+2, 54, 4)
+                    setBlock(lv, x+1, y+1, z+random.randint(2,6), 54, 4)
                     setBlock(lv, x+1, y+1, z+7, 50, 5)
                     setBlock(lv, x+7, y, z+1, 50, 5)
                     setBlock(lv, x+7, y, z+7, 50, 5)
@@ -273,7 +275,7 @@ class House_Builder:
                         for i in range(5,8):
                             setBlock(lv, x+j+1, y, z+i, 5, 0)
                     setBlock(lv, x+1, y+1, z+7, 58, 0)
-                    setBlock(lv, x+2, y+1, z+7, 54, 4)
+                    setBlock(lv, x+random.randint(2,6), y+1, z+7, 54, 4)
                     setBlock(lv, x+7, y+1, z+7, 50, 5)
                     setBlock(lv, x+1, y, z+1, 50, 5)
                     setBlock(lv, x+7, y, z+1, 50, 5)
@@ -286,7 +288,7 @@ class House_Builder:
                         for i in range(1,4):
                             setBlock(lv, x+j+1, y, z+i, 5, 0)
                     setBlock(lv, x+1, y+1, z+1, 58, 0)
-                    setBlock(lv, x+2, y+1, z+1, 54, 4)
+                    setBlock(lv, x+random.randint(2,6), y+1, z+1, 54, 4)
                     setBlock(lv, x+7, y+1, z+1, 50, 5)
                     setBlock(lv, x+1, y, z+7, 50, 5)
                     setBlock(lv, x+7, y, z+7, 50, 5)
