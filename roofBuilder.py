@@ -205,7 +205,7 @@ class RoofBuilder:
                     else:
                         setBlock(lv, x + d + 3 - i, s, j, 44, 13)
             if d <= 5:
-                print "d<=5"
+                #print "d<=5"
                 for i in range(d+1):
                     for j in range(d+1):
                         setBlock(lv, x+3-i, s+1, z-1+j, 44, 5)

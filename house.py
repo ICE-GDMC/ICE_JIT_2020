@@ -20,7 +20,6 @@ class House_Builder:
         self.door = door
         self.width = width
         self.direction = direction
-        #self.wall_type = wall_type
         self.tree_ID = tree_ID
         self.tree_data = tree_data
         self.wood_ID = wood_ID
