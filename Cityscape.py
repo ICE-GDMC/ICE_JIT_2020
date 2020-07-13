@@ -85,7 +85,7 @@ class Cityspace:
                 gap.append(random.randint(3,5))
             """
             if w> sc*10+sum(fw)+sum(hw)+ice_f+sum(gap)+2:
-                fw[i] = w-sc*10-lc*5-sum(hw)-sum(fw)-ice_f-sum(gap)
+                fw[i] = int(w-sc*10-lc*5-sum(hw)-sum(fw)-ice_f-sum(gap))
                 if i==0:
                     if fw[i] >= 3:
                         if fw[i] > 18:
@@ -146,12 +146,12 @@ class Cityspace:
                 if d==0:
                     sh = Little_House_Builder(lv,x,y,z,d,0,t_ID,t_data,w_ID,w_data,r_ID)
                     sh.build()
-                    f = field(lv,x+4,y-1,z,5,lw,4,0)
+                    f = field(lv,x+5,y-1,z,4,lw,4,0)
                     f.build()
                 else:
                     sh = Little_House_Builder(lv,x+5,y,z,d,0,t_ID,t_data,w_ID,w_data,r_ID)
                     sh.build()
-                    f = field(lv,x,y-1,z,5,lw,4,0)
+                    f = field(lv,x,y-1,z,4,lw,4,0)
                     f.build()
                 z += lw+gap[i]
             """
