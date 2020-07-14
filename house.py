@@ -309,6 +309,14 @@ class House_Builder:
                     wallX(x,y,z+q*8,0) #x,z,door
                     wallX(x+8,y,z+q*8,1) #x,z,door
                 floor(x,y,z+q*8,door)
+                setBlock(lv,x-1,y+1,z+q*8,50,2)
+                setBlock(lv,x-1,y+1,z+q*8+3,50,2)
+                setBlock(lv,x-1,y+1,z+q*8+5,50,2)
+                setBlock(lv,x-1,y+1,z+q*8+8,50,2)
+                setBlock(lv,x+9,y+1,z+q*8,50,1)
+                setBlock(lv,x+9,y+1,z+q*8+3,50,1)
+                setBlock(lv,x+9,y+1,z+q*8+5,50,1)
+                setBlock(lv,x+9,y+1,z+q*8+8,50,1)
         elif di==1:
             for i in range(w):
                     for j in range(6):
@@ -325,5 +333,14 @@ class House_Builder:
                     wallX(x+q*8,y,z,0) #x,z,door
                     wallX(x+q*8,y,z+8,1) #x,z,door
                 floor(x+q*8,y,z,door)
+                setBlock(lv,x+q*8,y+1,z-1,50,4)
+                setBlock(lv,x+q*8+3,y+1,z-1,50,4)
+                setBlock(lv,x+q*8+5,y+1,z-1,50,4)
+                setBlock(lv,x+q*8+8,y+1,z-1,50,4)
+                setBlock(lv,x+q*8,y+1,z+9,50,3)
+                setBlock(lv,x+q*8+3,y+1,z+9,50,3)
+                setBlock(lv,x+q*8+5,y+1,z+9,50,3)
+                setBlock(lv,x+q*8+8,y+1,z+9,50,3)
+
         roof = RoofBuilder(lv, x, z, d, y+5, di, 0, t_ID,t_data,w_ID,w_data, r_ID)
         roof.build()
