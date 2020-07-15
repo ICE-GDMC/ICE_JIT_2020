@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-import utilityFunctions as utilityFunctions
 import random
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
