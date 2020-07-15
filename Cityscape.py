@@ -5,7 +5,6 @@ from house import *
 from little_house import *
 from store import *
 from field_builder import *
-from MaterialChecker import *
 
 
 class Cityspace:
@@ -38,12 +37,12 @@ class Cityspace:
         r_ID = self.roof_ID
         sw = 10  #house width
         lw = 5 #little house width
-        hw = [0,0]
-        fw = [0,0]
-        sc = 0
-        lc = 0
-        hc = 0
-        hlc = 0
+        hw = [0,0] #house width
+        fw = [0,0] #field width
+        sc = 0 #store counter
+        lc = 0 #little house counter
+        hc = 0 #house counter
+        hlc = 0 
         fc = 0
         ice_f=0
         city = []
@@ -61,7 +60,7 @@ class Cityspace:
 
         for i in range(2):
             #house
-            if w >= sc*10+sum(fw)+sum(hw)+ice_f+sum(gap) + 17:
+            if w >= sc*10+lc*5+sum(fw)+sum(hw)+ice_f+sum(gap) + 17:
                 for j in range(int((w-sc*10-lc*5-sum(fw)-sum(hw)-ice_f-sum(gap)-1)/8)):
                     if random.random() < 0.4:
                         hc += 1
@@ -77,7 +76,7 @@ class Cityspace:
                 gap.append(random.randint(3,5))
 
             #field
-            if w> sc*10+sum(fw)+sum(hw)+ice_f+sum(gap)+2:
+            if w> sc*10+lc*5+sum(fw)+sum(hw)+ice_f+sum(gap)+2:
                 fw[i] = int(w-sc*10-lc*5-sum(hw)-sum(fw)-ice_f-sum(gap))
                 if i==0:
                     if fw[i] >= 3:
@@ -134,10 +133,3 @@ class Cityspace:
                     f = field(lv,x,y,z,4,lw,4,0)
                     f.build()
                 z += lw+gap[i]
-            
-        print "---------------"
-        print "ito" 
-        if len(gap)>0:
-            gap.pop()
-        print w-sc*10-lc*5-sum(hw)-sum(fw)-ice_f-sum(gap)
-        print "---------------" 

@@ -16,7 +16,6 @@ class Store_Builder:
         self.start_z = start_z
         self.door = door
         self.direction = direction
-        #self.wall_type = wall_type
         self.tree_ID = tree_ID
         self.tree_data = tree_data
         self.wood_ID = wood_ID
@@ -41,40 +40,6 @@ class Store_Builder:
 
         def wallX(x,y,z,door):
             if di==0:
-                """
-                if self.wall_type is 0:
-                    for j in range(10): #line_W
-                        setBlock(lv, x, y, z + j, 4, 0)#stone
-                        if(j==0 or j==3 or j==6 or j==9):
-                            for k in range(1,6): #line_H
-                                setBlock(lv,x,y+k,z+j,17,1)#black
-                        else:
-                            if(door==1):
-                                if(j==1 or j==4 or j==7):
-                                    setBlock(lv,x,y,z+j,196,0)#door
-                                    setBlock(lv,x,y+1,z+j,196,8)#door
-                                elif(j==2 or j==5 or j==8):
-                                    setBlock(lv,x,y,z+j,196,0)#door
-                                    setBlock(lv,x,y+1,z+j,196,7)#door
-                                else:
-                                    for k in range(1,6): #line_H
-                                        if k==3:
-                                            setBlock(lv,x,y+k,z+j,17,1)#black
-                                        else:
-                                            setBlock(lv,x,y+k,z+j,12,0)#white
-                                for k in range(2,6): #line_H
-                                    if k==3:
-                                        setBlock(lv,x,y+k,z+j,17,1)#black
-                                    else:
-                                        setBlock(lv,x,y+k,z+j,12,0)#white
-                            else:
-                                for k in range(1,6): #line_H
-                                    if k==3:
-                                        setBlock(lv,x,y+k,z+j,17,1)#black
-                                    else:
-                                        setBlock(lv,x,y+k,z+j,12,0)#white
-                if self.wall_type is 1:
-                """
                 for j in range(10): #line_W
                     setBlock(lv, x, y, z + j, 4, 0)#stone
                     if(j==0 or j==3 or j==6 or j==9):
@@ -99,12 +64,6 @@ class Store_Builder:
                                     setBlock(lv,x,y+k,z+j,t_ID,t_data)#black
                                 else:
                                     setBlock(lv,x,y+k,z+j,w_ID,w_data)#red
-                            """
-                            setBlock(lv, x, y+1, z+1, 85, 0)
-                            setBlock(lv, x, y+1, z+2, 85, 0)
-                            setBlock(lv, x, y+1, z+7, 85, 0)
-                            setBlock(lv, x, y+1, z+8, 85, 0)
-                            """
                         else:
                             for k in range(1,6): #line_H
                                 if k==2:
@@ -112,40 +71,6 @@ class Store_Builder:
                                 else:
                                     setBlock(lv,x,y+k,z+j,w_ID,w_data)#red
             elif di==1:
-                """
-                if self.wall_type is 0:
-                    for j in range(10): #line_W
-                        setBlock(lv, x+j, y, z, 4, 0)#stone
-                        if(j==0 or j==3 or j==6 or j==9):
-                            for k in range(1,6): #line_H
-                                setBlock(lv,x+j,y+k,z,17,1)#black
-                        else:
-                            if(door==1):
-                                if(j==1 or j==4 or j==7):
-                                    setBlock(lv,x+j,y,z,196,1)#door
-                                    setBlock(lv,x+j,y+1,z,196,9)#door
-                                elif(j==2 or j==5 or j==8):
-                                    setBlock(lv,x+j,y,z,196,4)#door
-                                    setBlock(lv,x+j,y+1,z,196,12)#door
-                                else:
-                                    for k in range(1,6): #line_H
-                                        if k==3:
-                                            setBlock(lv,x+j,y+k,z,17,1)#black
-                                        else:
-                                            setBlock(lv,x+j,y+k,z,12,0)#white
-                                for k in range(2,6): #line_H
-                                    if k==3:
-                                        setBlock(lv,x+j,y+k,z,17,1)#black
-                                    else:
-                                        setBlock(lv,x+j,y+k,z,12,0)#white
-                            else:
-                                for k in range(1,6): #line_H
-                                    if k==3:
-                                        setBlock(lv,x+j,y+k,z,17,1)#black
-                                    else:
-                                        setBlock(lv,x+j,y+k,z,12,0)#white
-                if self.wall_type is 1:
-                """
                 for j in range(10): #line_W
                     setBlock(lv, x+j, y, z, 4, 0)#stone
                     if(j==0 or j==3 or j==6 or j==9):
@@ -170,12 +95,6 @@ class Store_Builder:
                                     setBlock(lv,x+j,y+k,z,t_ID,t_data)#black
                                 else:
                                     setBlock(lv,x+j,y+k,z,w_ID,w_data)#red
-                            """
-                            setBlock(lv, x, y+1, z+1, 85, 0)
-                            setBlock(lv, x, y+1, z+2, 85, 0)
-                            setBlock(lv, x, y+1, z+7, 85, 0)
-                            setBlock(lv, x, y+1, z+8, 85, 0)
-                            """
                         else:
                             for k in range(1,6): #line_H
                                 if k==2:
@@ -185,21 +104,6 @@ class Store_Builder:
 
         def wallZ(x,y,z):
             if di==0:
-                """
-                if self.wall_type is 0:
-                    for j in range(9): #line_W
-                        setBlock(lv, x + j, y, z, 4, 0)#rstone
-                        if(j==0 or j==4 or j==8):
-                            for k in range(1,6): #line_H
-                                setBlock(lv, x + j, y + k, z, 17,1)#black
-                        else:
-                            for k in range(1,6): #line_H
-                                if k==3:
-                                    setBlock(lv, x + j, y + k, z, 17,1)#black
-                                else:
-                                    setBlock(lv, x + j, y + k, z, 12,0)#white    
-                if self.wall_type is 1:
-                """
                 for j in range(9): #line_W
                     setBlock(lv, x + j, y, z, 4, 0)#rstone
                     if(j==0 or j==4 or j==8):
@@ -212,21 +116,6 @@ class Store_Builder:
                             else:
                                 setBlock(lv, x + j, y + k, z, w_ID,w_data)#white
             elif di==1:   
-                """
-                if self.wall_type is 0:
-                    for j in range(9): #line_W
-                        setBlock(lv, x, y, z+j, 4, 0)#rstone
-                        if(j==0 or j==4 or j==8):
-                            for k in range(1,6): #line_H
-                                setBlock(lv, x, y + k, z+j, 17,1)#black
-                        else:
-                            for k in range(1,6): #line_H
-                                if k==3:
-                                    setBlock(lv, x, y + k, z+j, 17,1)#black
-                                else:
-                                    setBlock(lv, x, y + k, z+j, 12,0)#white    
-                if self.wall_type is 1:
-                """
                 for j in range(9): #line_W
                     setBlock(lv, x, y, z+j, 4, 0)#rstone
                     if(j==0 or j==4 or j==8):
