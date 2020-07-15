@@ -48,6 +48,7 @@ class Pioneer:
         self.area_with_border = np.copy(area_with_border)
         self.mergeArea_meanHeight = mergeArea_meanHeight
         self.give_to_next_area_with_border = np.copy(area_with_border)
+        self.height_for_bridge = np.copy(height_map.height_map)
         self.shape = self.area_with_border.shape
         self.mean_height = 0
         # print self.area_with_border
@@ -157,6 +158,7 @@ class Pioneer:
         for x in range(self.x1, self.x2 + 1):
             for z in range(self.z1, self.z2 + 1):
                 if self.area_with_border[x, z] == 3 or self.area_with_border[x, z] == 13:
+                    self.height_for_bridge[x, z] = self.mean_height
                     self.give_to_next_area_with_border[x, z] = -2
                 else:
                     self.give_to_next_area_with_border[x, z] = -1
@@ -263,12 +265,12 @@ class Pioneer:
         road_continue_flag = False
         road_start_len = (0, 0)
         for z in range(self.z1, self.z2 + d):
-            river_flag = True
+            river_flag = False
             flag = True
             for i in range(width):
                 v = self.getValueFromArea(r_x + i, z)
-                if v != 5:
-                    river_flag = False
+                if v == 5:
+                    river_flag = True
                 if v not in right_list:
                     flag = False
                     break
@@ -292,7 +294,7 @@ class Pioneer:
         road_width = 12
         field_flag = False
         if self.material_dict["is_desert"]:
-            print "need river"
+            # print "need river"
             river = 1
             road_width = 16
         for r_x in range(0, self.height / 2 - 23):
@@ -325,7 +327,7 @@ class Pioneer:
                         field_flag = True
                 # under the road
                 if r_x_1 - self.x1 > 0:
-                    road_length = self.get_road_len(r_x_1 - 8, 9, [3], river_check=1)
+                    road_length = self.get_road_len(r_x_1 - 8, 9, [3])
                     for one_len in road_length:
                         # print one_len
                         Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
@@ -338,12 +340,12 @@ class Pioneer:
                                       self.material_dict["wood_ID"][0], self.material_dict["wood_ID"][1],
                                       self.material_dict["roof_ID"])
                         c.build()
-                        for j in range(0, one_len[1]-2):
+                        for j in range(0, one_len[1]-3):
                             if j % 10 == 0:
                                 L.LanternBuilder(self.level, r_x_1 + self.s_x + 1, p_z + one_len[0] + 1 + j,
                                                  self.mean_height, 0)
                 # above the road
-                road_length = self.get_road_len(r_x_1 + 7, 9, [3], river_check=1)
+                road_length = self.get_road_len(r_x_1 + 7, 9, [3])
                 num_a = 0
                 for one_len in road_length:
                     # print one_len
@@ -362,7 +364,7 @@ class Pioneer:
                                       self.material_dict["wood_ID"][0], self.material_dict["wood_ID"][1],
                                       self.material_dict["roof_ID"])
                         c.build()
-                        for j in range(0, one_len[1]-2):
+                        for j in range(0, one_len[1]-3):
                             if j % 10 == 0:
                                 L.LanternBuilder(self.level, r_x_1 + 4 + self.s_x, p_z + one_len[0] + 1 + j,
                                                  self.mean_height, 0)
@@ -395,7 +397,7 @@ class Pioneer:
                                       self.material_dict["wood_ID"][0], self.material_dict["wood_ID"][1],
                                       self.material_dict["roof_ID"])
                         c.build()
-                        for j in range(0, one_len[1]-2):
+                        for j in range(0, one_len[1]-3):
                             if j % 10 == 0:
                                 L.LanternBuilder(self.level, r_x_2 + self.s_x - 2, p_z + one_len[0] + 1 + j,
                                                  self.mean_height, 0)
@@ -413,7 +415,7 @@ class Pioneer:
                                       self.material_dict["wood_ID"][0], self.material_dict["wood_ID"][1],
                                       self.material_dict["roof_ID"])
                         c.build()
-                        for j in range(0, one_len[1]-2):
+                        for j in range(0, one_len[1]-3):
                             if j % 10 == 0:
                                 L.LanternBuilder(self.level, r_x_2 - 6 + self.s_x, p_z + one_len[0] + 1 + j,
                                                  self.mean_height, 0)
@@ -427,8 +429,17 @@ class Pioneer:
                 one_len = (one_len[0] + 1, one_len[1] - 1)
                 if river == 0:
                     Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
-                           (self.x1 + self.height / 2 - 3, 1, one_len[0]-1),
-                           (self.x1 + self.height / 2 + 4, 4, one_len[0]),
+                           (self.x1 + self.height / 2 - 3, 1, self.z1),
+                           (self.x1 + self.height / 2 + 4, 4, one_len[0]+1),
+                           self.mean_height, (43, 5, 3, 0, 0), False)
+                else:
+                    Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                           (self.x1 + self.height / 2 - 7, 1, self.z1),
+                           (self.x1 + self.height / 2 - 3, 4, one_len[0] + 1),
+                           self.mean_height, (43, 5, 3, 0, 0), False)
+                    Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                           (self.x1 + self.height / 2 + 5, 1, self.z1),
+                           (self.x1 + self.height / 2 + 9, 4, one_len[0] + 1),
                            self.mean_height, (43, 5, 3, 0, 0), False)
                 T.ToriiBuilder(self.level, self.x1 + self.height / 2 + self.s_x + 1, self.mean_height+1,
                                one_len[0] + p_z - 1, 1)
@@ -437,7 +448,16 @@ class Pioneer:
                 if river == 0:
                     Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
                            (self.x1 + self.height / 2 - 3, 1, one_len[0] + one_len[1]),
-                           (self.x1 + self.height / 2 + 4, 4, one_len[0] + one_len[1]+1),
+                           (self.x1 + self.height / 2 + 4, 4, self.z2 + 1),
+                           self.mean_height, (43, 5, 3, 0, 0), False)
+                else:
+                    Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                           (self.x1 + self.height / 2 - 7, 1, one_len[0] + one_len[1]),
+                           (self.x1 + self.height / 2 - 3, 4, self.z2 + 1),
+                           self.mean_height, (43, 5, 3, 0, 0), False)
+                    Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                           (self.x1 + self.height / 2 + 5, 1, one_len[0] + one_len[1]),
+                           (self.x1 + self.height / 2 + 9, 4, self.z2 + 1),
                            self.mean_height, (43, 5, 3, 0, 0), False)
                 T.ToriiBuilder(self.level, self.x1 + self.height / 2 + self.s_x + 1, self.mean_height+1,
                                one_len[0] + one_len[1] + p_z, 1)
@@ -468,7 +488,7 @@ class Pioneer:
                               self.material_dict["wood_ID"][0], self.material_dict["wood_ID"][1],
                               self.material_dict["roof_ID"])
                 c.build()
-                for j in range(0, one_len[1]-2):
+                for j in range(0, one_len[1]-3):
                     if j % 10 == 0:
                         L.LanternBuilder(self.level, self.x1 + self.height / 2 + self.s_x - road_width/2 + 1, p_z + one_len[0] + 1 + j,
                                          self.mean_height, 0)
@@ -486,7 +506,7 @@ class Pioneer:
                               self.material_dict["wood_ID"][0], self.material_dict["wood_ID"][1],
                               self.material_dict["roof_ID"])
                 c.build()
-                for j in range(0, one_len[1]-2):
+                for j in range(0, one_len[1]-3):
                     if j % 10 == 0:
                         L.LanternBuilder(self.level, self.x1 + self.height / 2 + self.s_x + road_width/2 + 1 - 3, p_z + one_len[0] + 1 + j,
                                          self.mean_height, 0)
@@ -509,8 +529,9 @@ class Pioneer:
                     if z+j1 >= self.area_with_border.shape[1]:
                         over_border = True
                         break
+                    num = w/2
                     for i in range(w):
-                        if self.area_with_border[x + i, z + j1] == 5:
+                        if self.area_with_border[x + i, z + j1] == 5 or abs(self.height_for_bridge[x + i, z + j1] - self.mean_height) >= 3:
                             break
                         landfall = True
                     if landfall:
@@ -526,7 +547,7 @@ class Pioneer:
                         over_border = True
                         break
                     for i in range(w):
-                        if self.area_with_border[x + i, z - j2] == 5 or self.area_with_border[x + i, z - j2] not in (3, 13):
+                        if self.area_with_border[x + i, z - j2] == 5 or abs(self.height_for_bridge[x + i, z - j2] - self.mean_height)>=3:
                             break
                         landfall = True
                     if landfall:
@@ -534,7 +555,7 @@ class Pioneer:
                 if over_border:
                     continue
                 j = j1 + j2
-                if 5 <= j <= 40:
+                if 2 < j:
                     # print "j", j
                     # print "x, z", x, z
                     B.BridgeBuilder(self.level, x + self.s_x, self.mean_height+2, z + self.s_z - j2, w, j, 1)

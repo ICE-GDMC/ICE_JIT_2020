@@ -50,7 +50,7 @@ def Material_Checker(lv, h, s_x, s_z, sx, sz, ex, ez):
     if float((ex - sx) * (ez - sz)) > 0:
         v = float(sand_num) / float((ex - sx) * (ez - sz))
         if v >= 0.4:
-            print "desert rate above 0.4: ", v
+            # print "desert rate above 0.4: ", v
             roof_ID = (180, 182, 0, 179, 0)
             material_dict["fence_id"] = (24, 0, 189)
             material_dict["floor_id"] = (1, 6)

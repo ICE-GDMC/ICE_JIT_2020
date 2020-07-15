@@ -12,7 +12,7 @@ from MountainPath import *
 from Laying import *
 import BridgeBuilder as B
 
-displayName = "ICE's Settlement Generator"
+displayName = "ICE_JIT Generator"
 
 
 def perform(level, box, options):
@@ -32,8 +32,8 @@ def perform(level, box, options):
     start_z = box.minz
     end_x = box.maxx
     end_z = box.maxz
-    # start_x = 140
-    # start_z = 30
+    # start_x = -346
+    # start_z = -66
     # end_x = start_x + 256
     # end_z = start_z + 256
     print "========================================================================="
