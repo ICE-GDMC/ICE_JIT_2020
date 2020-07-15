@@ -16,7 +16,9 @@ from Laying import *
 
 class Pioneer:
     """
-    -1 = 已被别人占用(勘探后)土地
+    -1 = 已经勘探，未被占用土地
+    -2 = 已被别人占用建筑土地
+    -3 = 生活区
     0 = 不可用土地（原始）
     1 = 可用土地（原始）
     2 = 水
@@ -84,7 +86,7 @@ class Pioneer:
                     p_x = x + self.s_x
                     p_z = z + self.s_z
                     setBlock(self.level, p_x, self.height_map.getHeight(x, z), p_z, 26)
-                if self.getValueFromArea(x, z) == -1:
+                if self.getValueFromArea(x, z) <= -1:
                     x -= direction_l[i][0]
                     z -= direction_l[i][1]
                     self.done_flag = True
@@ -128,7 +130,7 @@ class Pioneer:
                 if self.area_with_border[x, z] == 0:
                     backup_land.append((x, z))
                     continue
-                elif self.area_with_border[x, z] == 2 or self.area_with_border[x, z] == -1 or \
+                elif self.area_with_border[x, z] == 2 or self.area_with_border[x, z] <= -1 or \
                         self.area_with_border[x, z] == 5:
                     continue
                 # print x, z
@@ -154,7 +156,10 @@ class Pioneer:
 
         for x in range(self.x1, self.x2 + 1):
             for z in range(self.z1, self.z2 + 1):
-                self.give_to_next_area_with_border[x, z] = -1
+                if self.area_with_border[x, z] == 3 or self.area_with_border[x, z] == 13:
+                    self.give_to_next_area_with_border[x, z] = -2
+                else:
+                    self.give_to_next_area_with_border[x, z] = -1
 
         return float(count_num) / float(self.width * self.height)
 
@@ -253,21 +258,22 @@ class Pioneer:
         #                    z + self.s_z, 1)
         self.paving()
 
-    def get_road_len(self, r_x, width, right_list):
+    def get_road_len(self, r_x, width, right_list, d=1, river_check=0):
         road_length = []
         road_continue_flag = False
-        river_flag = True
         road_start_len = (0, 0)
-        for z in range(self.z1, self.z2 + 1):
+        for z in range(self.z1, self.z2 + d):
+            river_flag = True
             flag = True
             for i in range(width):
-                if self.getValueFromArea(r_x + i, z) != 5:
+                v = self.getValueFromArea(r_x + i, z)
+                if v != 5:
                     river_flag = False
-                if self.getValueFromArea(r_x + i, z) not in right_list:
+                if v not in right_list:
                     flag = False
                     break
-            if river_flag:
-                self.bridge_pos.append((r_x, z))
+            if river_flag and river_check == 1:
+                self.bridge_pos.append((r_x, z, width))
             if flag:
                 if not road_continue_flag:
                     road_continue_flag = True
@@ -277,18 +283,29 @@ class Pioneer:
                     road_continue_flag = False
                     road_start_len = (road_start_len[0], z - road_start_len[0])
                     road_length.append(road_start_len)
+
         return road_length
 
     def paving(self):
         p_z = self.s_z
-        # print self.height / 2
+        river = 0
+        road_width = 12
+        field_flag = False
+        if self.material_dict["is_desert"]:
+            print "need river"
+            river = 1
+            road_width = 16
         for r_x in range(0, self.height / 2 - 23):
             if r_x % 30 == 0:
                 r_x_1 = self.x1 + r_x
                 r_x_2 = self.x2 - r_x
-                road_length = self.get_road_len(r_x_1 + 1, 6, [3])
+                road_length = self.get_road_len(r_x_1 + 1, 6, [3], river_check=1)
                 # road from bottom
                 for one_len in road_length:
+                    Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                           (r_x_1 + 1, 1, one_len[0]),
+                           (r_x_1 + 1 + 6, 20, one_len[0] + one_len[1]),
+                           self.mean_height, (43, 5, 3, 0, 0), False)
                     road = Road_Builder(self.level, r_x_1 + 1 + self.s_x, self.mean_height + 1, p_z + one_len[0],
                                         one_len[1], 1, 6, 0, 0)
                     road.build()
@@ -305,12 +322,16 @@ class Pioneer:
                         f = field(self.level, r_x_1 + 1 + self.s_x, self.mean_height, p_z + one_len[0] + 18, 10,
                                   10, 3, n)
                         f.build()
-
+                        field_flag = True
                 # under the road
                 if r_x_1 - self.x1 > 0:
                     road_length = self.get_road_len(r_x_1 - 8, 9, [3])
                     for one_len in road_length:
                         # print one_len
+                        Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                               (r_x_1 - 8, 1, one_len[0]+1),
+                               (r_x_1 - 8 + 9, 20, one_len[0] + 1 + one_len[1] - 2),
+                               self.mean_height, (43, 5, 3, 0, 0), False)
                         c = Cityspace(self.level, one_len[1]-2, r_x_1 - 8 + self.s_x, self.mean_height + 1,
                                       p_z + one_len[0]+1, 1,
                                       self.material_dict["tree_ID"][0], self.material_dict["tree_ID"][1],
@@ -327,6 +348,12 @@ class Pioneer:
                     # print one_len
                     if r_x_1+19 < self.x1 + self.height / 2 - 17:
                         # print r_x_1 + 7
+                        if field_flag:
+                            one_len = (one_len[0] + 27, one_len[1]-27)
+                        Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                               (r_x_1 + 7, 1, one_len[0] + 1),
+                               (r_x_1 + 7 + 9, 20, one_len[0] + 1 + one_len[1] - 2),
+                               self.mean_height, (43, 5, 3, 0, 0), False)
                         c = Cityspace(self.level, one_len[1] - 2, r_x_1 + 7 + self.s_x, self.mean_height + 1,
                                       p_z + one_len[0] + 1, 0,
                                       self.material_dict["tree_ID"][0], self.material_dict["tree_ID"][1],
@@ -340,9 +367,13 @@ class Pioneer:
 
 
                 # road from up
-                road_length = self.get_road_len(r_x_2-6, 6, [3])
+                road_length = self.get_road_len(r_x_2-6, 6, [3], river_check=1)
                 for one_len in road_length:
                     # print one_len
+                    Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                           (r_x_2 - 6, 1, one_len[0]),
+                           (r_x_2 - 6 + 6, 20, one_len[0] + one_len[1]),
+                           self.mean_height, (43, 5, 3, 0, 0), False)
                     road = Road_Builder(self.level, r_x_2 - 6 + self.s_x, self.mean_height + 1, p_z + one_len[0],
                                         one_len[1], 1, 6,
                                         0, 0)
@@ -351,6 +382,10 @@ class Pioneer:
                 road_length = self.get_road_len(r_x_2, 9, [3])
                 for one_len in road_length:
                     if r_x_2 + 11 < self.x2:
+                        Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                               (r_x_2, 1, one_len[0] + 1),
+                               (r_x_2 + 9, 20, one_len[0] + 1 + one_len[1] - 2),
+                               self.mean_height, (43, 5, 3, 0, 0), False)
                         c = Cityspace(self.level, one_len[1] - 2, r_x_2 + self.s_x, self.mean_height + 1,
                                       p_z + one_len[0] + 1,
                                       0,
@@ -366,6 +401,10 @@ class Pioneer:
                 road_length = self.get_road_len(r_x_2 - 15, 9, [3])
                 for one_len in road_length:
                     if r_x_2 - 18 > self.x1 + self.height / 2 + 17:
+                        Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                               (r_x_2 - 15, 1, one_len[0] + 1),
+                               (r_x_2 - 15 + 9, 20, one_len[0] + 1 + one_len[1] - 2),
+                               self.mean_height, (43, 5, 3, 0, 0), False)
                         c = Cityspace(self.level, one_len[1] - 2, r_x_2 - 15 + self.s_x, self.mean_height + 1,
                                       p_z + one_len[0] + 1, 1,
                                       self.material_dict["tree_ID"][0], self.material_dict["tree_ID"][1],
@@ -378,34 +417,38 @@ class Pioneer:
                                                  self.mean_height, 0)
 
         #中间大路及其两侧
-        river = 0
-        road_width = 11
-        if self.material_dict["is_desert"]:
-            print "need river"
-            river = 1
-            road_width = 16
         i = 0
-        road_length = self.get_road_len(self.x1 + self.height / 2 - 5, 6, [3, 9, 8])
-        print road_length
+        road_length = self.get_road_len(self.x1 + self.height / 2 - road_width/2 + 1, road_width, (3, 13, 2), 2, river_check=1)
+        # print "road_length", road_length
         for one_len in road_length:
             if i == 0:
-                T.ToriiBuilder(self.level, self.x1 + self.height / 2 + self.s_x + 1, self.mean_height,
-                               one_len[0]-1 + p_z, 1)
-            elif i == len(road_length)-1:
-                T.ToriiBuilder(self.level, self.x1 + self.height / 2 + self.s_x + 1, self.mean_height,
+                one_len = (one_len[0] + 1, one_len[1] - 1)
+                T.ToriiBuilder(self.level, self.x1 + self.height / 2 + self.s_x + 1, self.mean_height+1,
+                               one_len[0] + p_z - 1, 1)
+            if i == len(road_length)-1:
+                one_len = (one_len[0], one_len[1]-1)
+                T.ToriiBuilder(self.level, self.x1 + self.height / 2 + self.s_x + 1, self.mean_height+1,
                                one_len[0] + one_len[1] + p_z, 1)
-            Laying(self.level, self.height_map, (self.s_x, 0, self.s_z), (self.x1 + self.height / 2 - 5, 1, one_len[0]),
-                   (self.x1 + self.height / 2 - 5 + road_width, 20, one_len[0] + one_len[1]),
-                   self.mean_height-1, (43, 5, 3, 0), False)
-            road = Road_Builder(self.level, self.x1 + self.height / 2 + self.s_x - 5, self.mean_height + 1,
+            Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                   (self.x1 + self.height / 2 - road_width / 2 + 1, 1, one_len[0]),
+                   (self.x1 + self.height / 2 - road_width / 2 + 1 + road_width, 20, one_len[0] + one_len[1]),
+                   self.mean_height - 1, (43, 5, 3, 0, 0), False)
+            road = Road_Builder(self.level, self.x1 + self.height / 2 + self.s_x - road_width/2 + 1, self.mean_height + 1,
                                 p_z + one_len[0],
                                 one_len[1], 1, road_width, 0, river)
-            # if river == 1:
-                
             road.build()
+            if river == 1 and one_len[1] >= 6:
+                B.BridgeBuilder(self.level, self.x1 + self.height / 2 + self.s_x - road_width / 2 + 7,
+                                self.mean_height + 2, p_z + one_len[0] + one_len[1] / 2 - 2, 4, 3, 0)
             i += 1
+        road_length = self.get_road_len(self.x1 + self.height / 2 - road_width/2-8, 9, (3, 13, 2), 2)
+        for one_len in road_length:
             if self.x1 + self.height / 2 > 14:
-                c = Cityspace(self.level, one_len[1]-2, self.x1 + self.height / 2 + self.s_x - 14,
+                Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                       (self.x1 + self.height / 2 - road_width/2-8, 1, one_len[0] + 1),
+                       (self.x1 + self.height / 2 - road_width/2-8+9, 20, one_len[0] + 1 + one_len[1] - 2),
+                       self.mean_height, (43, 5, 3, 0, 0), False)
+                c = Cityspace(self.level, one_len[1]-2, self.x1 + self.height / 2 + self.s_x - road_width/2-8,
                               self.mean_height + 1,
                               p_z + one_len[0] + 1,
                               1,
@@ -415,11 +458,16 @@ class Pioneer:
                 c.build()
                 for j in range(0, one_len[1]-2):
                     if j % 10 == 0:
-                        L.LanternBuilder(self.level, self.x1 + self.height / 2 + self.s_x - 5, p_z + one_len[0] + 1 + j,
+                        L.LanternBuilder(self.level, self.x1 + self.height / 2 + self.s_x - road_width/2 + 1, p_z + one_len[0] + 1 + j,
                                          self.mean_height, 0)
-
+        road_length = self.get_road_len(self.x1 + self.height / 2 + road_width/2 + 1, 9, (3, 13, 2), 2)
+        for one_len in road_length:
             if self.x1 + self.height / 2 + 17 < self.x2:
-                c = Cityspace(self.level, one_len[1]-2, self.x1 + self.height / 2 + self.s_x + 6,
+                Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                       (self.x1 + self.height / 2 + road_width/2 + 1, 1, one_len[0] + 1),
+                       (self.x1 + self.height / 2 + road_width/2 + 1 + 9, 20, one_len[0] + 1 + one_len[1] - 2),
+                       self.mean_height, (43, 5, 3, 0, 0), False)
+                c = Cityspace(self.level, one_len[1]-2, self.x1 + self.height / 2 + self.s_x + road_width/2 + 1,
                               self.mean_height + 1, p_z + one_len[0] + 1,
                               0,
                               self.material_dict["tree_ID"][0], self.material_dict["tree_ID"][1],
@@ -428,24 +476,85 @@ class Pioneer:
                 c.build()
                 for j in range(0, one_len[1]-2):
                     if j % 10 == 0:
-                        L.LanternBuilder(self.level, self.x1 + self.height / 2 + self.s_x + 4, p_z + one_len[0] + 1 + j,
+                        L.LanternBuilder(self.level, self.x1 + self.height / 2 + self.s_x + road_width/2 + 1 - 3, p_z + one_len[0] + 1 + j,
                                          self.mean_height, 0)
 
     def build_bridge(self):
-        for one in self.bridge_pos:
-            builded = False
-            print "bridge_pos", one
-            for x in range(one[0], self.x2 + 1):
-                for z in range(one[1], self.z2 + 1):
-                    if self.area_with_border[x, z] != 5 and self.area_with_border[x, z] != -1 and z - one[1] >= 7:
-                        B.BridgeBuilder(self.level, one[0] + self.s_x, self.mean_height + 2, one[1] + self.s_z, 7,
-                                        z - one[1],
-                                        1)
-                        builded = True
-                    if builded:
+        print "bridge_pos", self.bridge_pos
+        while len(self.bridge_pos) > 0:
+            one_b = self.bridge_pos.pop(0)
+            # print one_b
+            if one_b[2] == -1:
+                print "-1", one_b
+            else:
+                # print one_b
+                landfall = False
+                over_border = False
+                j1 = 0
+
+                while not landfall:
+                    landfall = True
+                    for i in range(one_b[2]):
+                        if one_b[0] + i <= self.area_with_border.shape[0] and one_b[1] + j1 <= \
+                                self.area_with_border.shape[1]:
+                            if self.area_with_border[one_b[0] + i, one_b[1] + j1] == 5:
+                                a = (one_b[0], one_b[1] + j1, one_b[2])
+                                if a in self.bridge_pos:
+                                    self.bridge_pos.remove(a)
+                                landfall = False
+                                break
+                        else:
+                            over_border = True
+                            break
+                    if over_border:
                         break
-                if builded:
-                    break
+                    j1 += 1
+                j2 = 0
+                while not landfall:
+                    landfall = True
+                    for i in range(one_b[2]):
+                        if one_b[0] + i <= self.area_with_border.shape[0] and 0 <= one_b[1] - j2:
+                            if self.area_with_border[one_b[0] + i, one_b[1] - j2] == 5:
+                                a = (one_b[0], one_b[1] - j2, one_b[2])
+                                if a in self.bridge_pos:
+                                    self.bridge_pos.remove(a)
+                                landfall = False
+                                break
+                        else:
+                            over_border = True
+                            break
+                    if over_border:
+                        break
+                    j2 += 1
+                j = j1 + j2
+                if 5 <= j <= 50:
+                    B.BridgeBuilder(self.level, one_b[0] + self.s_x, self.mean_height + 2, one_b[1] + self.s_z - j2,
+                                    one_b[2], j, 1)
+
+
+    def secure_area(self, c_x, c_z, x_len, z_len):
+        for i in [1, -1]:
+            for j in range(1, x_len+1):
+                if self.getValueFromArea(c_x + j*i, c_z) <= -2:
+                    return False
+            for j in range(1, z_len+1):
+                if self.getValueFromArea(c_x, c_z + j*i) <= -2:
+                    return False
+        return True
+
+    def find_water(self, c_x, c_z, x_len, z_len):
+        for x in range(c_x-x_len, c_x+x_len):
+            for z in range(c_z-z_len, c_z+z_len):
+                if self.getValueFromArea(x, z) == 5:
+                    self.bridge_pos.append((x, z, -1))
+                    return True
+        return False
+
+    def define_living_area(self):
+        for x in range(self.x1, self.x2 + 1):
+            for z in range(self.z1, self.z2 + 1):
+                if self.area_with_border[x, z] == -2:
+                    self.give_to_next_area_with_border[x, z] = -3
         # east_road_length = self.height - 2
         # p_x = self.x1 + self.s_x
         # for r_z in range(0, self.width / 2 - 25):

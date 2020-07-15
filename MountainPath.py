@@ -10,7 +10,9 @@ class MountainPath:
     def __init__(self, level, real_start_pos, start_pos, end_pos, height_map, one_area, tori=0):
         self.level = level
         self.height_map = height_map
+        self.h = self.height_map.getHeight(start_pos[0], start_pos[1])
         self.tori = tori
+        self.direction = (0, 0)
         self.real_start_pos = real_start_pos
         self.pos = [[-1, 0], [-1, -1], [0, -1], [1, -1],
                     [1, 0],  [1, 1],   [0, 1],  [-1, 1]]  # search in the 4 directions of the cell S-W-N-E
@@ -30,10 +32,11 @@ class MountainPath:
             p_z = self.start_pos[1]
             n_x = self.pos[i][0] + p_x
             n_z = self.pos[i][1] + p_z
-            while 0<= n_x < sh[0] and 0<= n_z < sh[1]:
+            while 0 <= n_x < sh[0] and 0 <= n_z < sh[1]:
                 # print n_x, n_z
-                if self.one_area[n_x, n_z] == -1:
+                if self.one_area[n_x, n_z] <= -3:
                     self.end_pos = (n_x, n_z)
+                    self.direction = self.pos[i]
                     foundflag = True
                     break
                 n_x += self.pos[i][0]

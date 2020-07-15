@@ -31,6 +31,6 @@ class Laying:
                     setBlock(self.lv, p_x, self.surface, p_z, self.block_id[0], self.block_id[1])
 
                 for y in range(self.start_pos[1], self.end_pos[1]):
-                    setBlock(self.lv, p_x, y + self.surface, p_z, 0)
+                    setBlock(self.lv, p_x, y + self.surface, p_z, self.block_id[4])
 
 
