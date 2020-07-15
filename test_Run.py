@@ -10,8 +10,7 @@ from pagoda import *
 from time import *
 from MountainPath import *
 from Laying import *
-
-from matplotlib import pyplot as plt
+import BridgeBuilder as B
 
 displayName = "A Run"
 
@@ -33,8 +32,8 @@ def perform(level, box, options):
     start_z = box.minz
     end_x = box.maxx
     end_z = box.maxz
-    # start_x = -346
-    # start_z = -66
+    # start_x = 140
+    # start_z = 30
     # end_x = start_x + 256
     # end_z = start_z + 256
     print "========================================================================="
@@ -60,6 +59,7 @@ def perform(level, box, options):
                 setBlock(level, one_p[0] + start_x, height, one_p[1] + start_z, 41)
     small_area = []
     abandon_area = []
+    bos = []
     for c_i in range(len(area_borders_in_order)):
         g = G.GravityFinder(area_borders_in_order[c_i])
         gravity_x, gravity_z = g.get_gravity_point2()
@@ -75,7 +75,8 @@ def perform(level, box, options):
             area_with_border = p.give_to_next()
             p.levelling()
             p.define_living_area()
-            p.build_bridge()
+            for one in p.get_bridge_pos():
+                bos.append(one)
         elif p.width >= 17 and p.height >= 17 and p.real_measure >= 280:
             area_with_border = p.give_to_next()
             small_area.append(p)
@@ -185,7 +186,56 @@ def perform(level, box, options):
         shrine_count += 1
     print "shrine:", shrine_count
     print "pagoda:", pagoda_count
+    print "bridge_pos", bos
+    while len(bos) > 0:
+        one_b = bos.pop(0)
+        # print one_b
+        if one_b[2] == -1:
+            print "-1", one_b
+        else:
+            # print one_b
+            landfall = False
+            over_border = False
+            j1 = 0
+            while not landfall:
+                landfall = True
+                for i in range(one_b[2]):
+                    if one_b[0] + i < area_with_border.shape[0] and one_b[1] + j1 < \
+                            area_with_border.shape[1]:
 
+                        if area_with_border[one_b[0] + i, one_b[1] + j1] == 5:
+                            a = (one_b[0], one_b[1] + j1, one_b[2])
+                            if a in bos:
+                                bos.remove(a)
+                            landfall = False
+                            break
+                    else:
+                        over_border = True
+                        break
+                if over_border:
+                    break
+                j1 += 1
+            j2 = 0
+            while not landfall:
+                landfall = True
+                for i in range(one_b[2]):
+                    if one_b[0] + i < area_with_border.shape[0] and 0 <= one_b[1] - j2:
+                        if area_with_border[one_b[0] + i, one_b[1] - j2] == 5:
+                            a = (one_b[0], one_b[1] - j2, one_b[2])
+                            if a in bos:
+                                bos.remove(a)
+                            landfall = False
+                            break
+                    else:
+                        over_border = True
+                        break
+                if over_border:
+                    break
+                j2 += 1
+            j = j1 + j2
+            if 5 <= j <= 50:
+                B.BridgeBuilder(level, one_b[0] + start_x, h.getHeight(one_b[0], one_b[1] - j2)+2, one_b[1] + start_z - j2,
+                                one_b[2], j, 1)
     end_time = time()
     run_time = end_time - begin_time
     print "completed"

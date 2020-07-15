@@ -325,7 +325,7 @@ class Pioneer:
                         field_flag = True
                 # under the road
                 if r_x_1 - self.x1 > 0:
-                    road_length = self.get_road_len(r_x_1 - 8, 9, [3])
+                    road_length = self.get_road_len(r_x_1 - 8, 9, [3], river_check=1)
                     for one_len in road_length:
                         # print one_len
                         Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
@@ -343,13 +343,15 @@ class Pioneer:
                                 L.LanternBuilder(self.level, r_x_1 + self.s_x + 1, p_z + one_len[0] + 1 + j,
                                                  self.mean_height, 0)
                 # above the road
-                road_length = self.get_road_len(r_x_1 + 7, 9, [3])
+                road_length = self.get_road_len(r_x_1 + 7, 9, [3], river_check=1)
+                num_a = 0
                 for one_len in road_length:
                     # print one_len
                     if r_x_1+19 < self.x1 + self.height / 2 - 17:
                         # print r_x_1 + 7
-                        if field_flag:
+                        if field_flag and num_a == 0:
                             one_len = (one_len[0] + 27, one_len[1]-27)
+                        num_a += 1
                         Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
                                (r_x_1 + 7, 1, one_len[0] + 1),
                                (r_x_1 + 7 + 9, 20, one_len[0] + 1 + one_len[1] - 2),
@@ -423,10 +425,20 @@ class Pioneer:
         for one_len in road_length:
             if i == 0:
                 one_len = (one_len[0] + 1, one_len[1] - 1)
+                if river == 0:
+                    Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                           (self.x1 + self.height / 2 - 3, 1, one_len[0]-1),
+                           (self.x1 + self.height / 2 + 4, 4, one_len[0]),
+                           self.mean_height, (43, 5, 3, 0, 0), False)
                 T.ToriiBuilder(self.level, self.x1 + self.height / 2 + self.s_x + 1, self.mean_height+1,
                                one_len[0] + p_z - 1, 1)
             if i == len(road_length)-1:
                 one_len = (one_len[0], one_len[1]-1)
+                if river == 0:
+                    Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
+                           (self.x1 + self.height / 2 - 3, 1, one_len[0] + one_len[1]),
+                           (self.x1 + self.height / 2 + 4, 4, one_len[0] + one_len[1]+1),
+                           self.mean_height, (43, 5, 3, 0, 0), False)
                 T.ToriiBuilder(self.level, self.x1 + self.height / 2 + self.s_x + 1, self.mean_height+1,
                                one_len[0] + one_len[1] + p_z, 1)
             Laying(self.level, self.height_map, (self.s_x, 0, self.s_z),
@@ -479,58 +491,8 @@ class Pioneer:
                         L.LanternBuilder(self.level, self.x1 + self.height / 2 + self.s_x + road_width/2 + 1 - 3, p_z + one_len[0] + 1 + j,
                                          self.mean_height, 0)
 
-    def build_bridge(self):
-        print "bridge_pos", self.bridge_pos
-        while len(self.bridge_pos) > 0:
-            one_b = self.bridge_pos.pop(0)
-            # print one_b
-            if one_b[2] == -1:
-                print "-1", one_b
-            else:
-                # print one_b
-                landfall = False
-                over_border = False
-                j1 = 0
-
-                while not landfall:
-                    landfall = True
-                    for i in range(one_b[2]):
-                        if one_b[0] + i <= self.area_with_border.shape[0] and one_b[1] + j1 <= \
-                                self.area_with_border.shape[1]:
-                            if self.area_with_border[one_b[0] + i, one_b[1] + j1] == 5:
-                                a = (one_b[0], one_b[1] + j1, one_b[2])
-                                if a in self.bridge_pos:
-                                    self.bridge_pos.remove(a)
-                                landfall = False
-                                break
-                        else:
-                            over_border = True
-                            break
-                    if over_border:
-                        break
-                    j1 += 1
-                j2 = 0
-                while not landfall:
-                    landfall = True
-                    for i in range(one_b[2]):
-                        if one_b[0] + i <= self.area_with_border.shape[0] and 0 <= one_b[1] - j2:
-                            if self.area_with_border[one_b[0] + i, one_b[1] - j2] == 5:
-                                a = (one_b[0], one_b[1] - j2, one_b[2])
-                                if a in self.bridge_pos:
-                                    self.bridge_pos.remove(a)
-                                landfall = False
-                                break
-                        else:
-                            over_border = True
-                            break
-                    if over_border:
-                        break
-                    j2 += 1
-                j = j1 + j2
-                if 5 <= j <= 50:
-                    B.BridgeBuilder(self.level, one_b[0] + self.s_x, self.mean_height + 2, one_b[1] + self.s_z - j2,
-                                    one_b[2], j, 1)
-
+    def get_bridge_pos(self):
+        return self.bridge_pos
 
     def secure_area(self, c_x, c_z, x_len, z_len):
         for i in [1, -1]:
