@@ -1,5 +1,4 @@
 import random
-import utilityFunctions as utilityFunctions
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
 from house import *
