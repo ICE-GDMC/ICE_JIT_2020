@@ -32,8 +32,8 @@ def perform(level, box, options):
     start_z = box.minz
     end_x = box.maxx
     end_z = box.maxz
-    # start_x = 3
-    # start_z = -6
+    # start_x = 140
+    # start_z = 30
     # end_x = start_x + 256
     # end_z = start_z + 256
     print "========================================================================="
