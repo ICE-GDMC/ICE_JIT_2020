@@ -38,12 +38,12 @@ class Cityspace:
         r_ID = self.roof_ID
         sw = 10  #house width
         lw = 5 #little house width
-        hw = [0,0]
-        fw = [0,0]
-        sc = 0
-        lc = 0
-        hc = 0
-        hlc = 0
+        hw = [0,0] #house width
+        fw = [0,0] #field width
+        sc = 0 #store counter
+        lc = 0 #little house counter
+        hc = 0 #house counter
+        hlc = 0 
         fc = 0
         ice_f=0
         city = []
@@ -61,7 +61,7 @@ class Cityspace:
 
         for i in range(2):
             #house
-            if w >= sc*10+sum(fw)+sum(hw)+ice_f+sum(gap) + 17:
+            if w >= sc*10+lc*5+sum(fw)+sum(hw)+ice_f+sum(gap) + 17:
                 for j in range(int((w-sc*10-lc*5-sum(fw)-sum(hw)-ice_f-sum(gap)-1)/8)):
                     if random.random() < 0.4:
                         hc += 1
@@ -77,13 +77,7 @@ class Cityspace:
                 gap.append(random.randint(3,5))
 
             #field
-            """
-            if 9<= w-(sc*10+hw+sum(gap)):
-                ice_f += 9
-                city.append(3)
-                gap.append(random.randint(3,5))
-            """
-            if w> sc*10+sum(fw)+sum(hw)+ice_f+sum(gap)+2:
+            if w> sc*10+lc*5+sum(fw)+sum(hw)+ice_f+sum(gap)+2:
                 fw[i] = int(w-sc*10-lc*5-sum(hw)-sum(fw)-ice_f-sum(gap))
                 if i==0:
                     if fw[i] >= 3:
@@ -113,23 +107,11 @@ class Cityspace:
                 store = Store_Builder(lv,x,y,z,d,0,t_ID,t_data,w_ID,w_data,r_ID)
                 store.build()
                 z += sw+gap[i]
-                """
-                if city[i+1] == 2:
-                    z += sw+1
-                else:
-                    z += sw+3
-                """
             elif city[i] == 1 and hw[hlc]>0:
                 house = House_Builder(lv,x,y,z,d,hw[hlc],0,t_ID,t_data,w_ID,w_data,r_ID)
                 house.build()
                 z += hw[hlc]+gap[i]
                 hlc += 1
-                """
-                if city[i+1] == 2:
-                    z += hw+1
-                else:
-                    z += hw+3
-                """
             elif city[i] == 2: #and fw[fc]>0:
                 f = field(lv,x,y-1,z,9,fw[fc],0,0)
                 f.build()
@@ -152,12 +134,10 @@ class Cityspace:
                     f = field(lv,x,y,z,4,lw,4,0)
                     f.build()
                 z += lw+gap[i]
-            """
-            elif city[i] == 3:
-                f = field(lv,x,y-1,z,9,ice_f,random.randint(1,3))
-                f.build()
-                z += ice_f+gap[i]
-            """
+            
         print "---------------"
-
-
+        print "ito" 
+        if len(gap)>0:
+            gap.pop()
+        print w-sc*10-lc*5-sum(hw)-sum(fw)-ice_f-sum(gap)
+        print "---------------" 
