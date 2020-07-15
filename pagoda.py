@@ -1,4 +1,3 @@
-from numpy import *
 from pymclevel import alphaMaterials, MCSchematic, MCLevel, BoundingBox
 from mcplatform import *
 from functions import *
@@ -10,7 +9,6 @@ class Pagoda_builder:
         self.x = x
         self.y = y
         self.z = z
-        #self.pagoda_type = pagoda_type
         self.tree_ID = tree_ID
         self.tree_data = tree_data
         self.wood_ID = wood_ID
@@ -32,33 +30,6 @@ class Pagoda_builder:
         y_height = [0, 5, 9, 14, 19, 24]  #height 
 
         def wall1st(x,y,z,d):
-            """
-            if self.pagoda_type is 0:
-                for i in range(d):
-                    for j in range(5):
-                        if (i==0 or i==4 or i==d-5 or i==d-1):
-                            setBlock(lv, x, y+j, z+i, 17,1)
-                            setBlock(lv, x+d-1, y+j, z+i, 17,1)
-                            setBlock(lv, x+i, y+j, z, 17,1)
-                            setBlock(lv, x+i, y+j, z+d-1, 17,1)
-                        else:
-                            setBlock(lv, x, y+j, z+i, 155,0)
-                            setBlock(lv, x+d-1, y+j, z+i, 155,0)
-                            setBlock(lv, x+i, y+j, z, 155,0)
-                            setBlock(lv, x+i, y+j, z+d-1, 155,0)
-                        if j==6-1:
-                            setBlock(lv, x, y+j, z+i, 17,1)
-                            setBlock(lv, x+d-1, y+j, z+i, 17,1)
-                            setBlock(lv, x+i, y+j, z, 17,1)
-                            setBlock(lv, x+i, y+j, z+d-1, 17,1)
-                for i in range(5,10):
-                    for j in range(5):
-                        setBlock(lv, x, y+j, z+i, 0, 0)
-                        setBlock(lv, x+d-1, y+j, z+i, 0, 0)
-                        setBlock(lv, x+i, y+j, z, 0, 0)
-                        setBlock(lv, x+i, y+j, z+d-1, 0, 0)
-            elif self.pagoda_type is 1:
-            """
             for i in range(d):
                 for j in range(5):
                     if (i==0 or i==4 or i==d-5 or i==d-1):
@@ -84,31 +55,6 @@ class Pagoda_builder:
                     setBlock(lv, x+i, y+j, z+d-1, 0, 0)
 
         def wall2nd(x,y,z,d):
-            """
-            if self.pagoda_type is 0:
-                for i in range(d):
-                    for j in range(3):
-                        if (i==0 or i==3 or i==d-4 or i==d-1):
-                            setBlock(lv, x, y+j, z+i, 17,1)
-                            setBlock(lv, x+d-1, y+j, z+i, 17,1)
-                            setBlock(lv, x+i, y+j, z, 17,1)
-                            setBlock(lv, x+i, y+j, z+d-1, 17,1)
-                        else:
-                            setBlock(lv, x, y+j, z+i, 155,0)
-                            setBlock(lv, x+d-1, y+j, z+i, 155,0)
-                            setBlock(lv, x+i, y+j, z, 155,0)
-                            setBlock(lv, x+i, y+j, z+d-1, 155,0)
-                for i in range(d):
-                    setBlock(lv, x, y+4, z+i, 191, 0)
-                    setBlock(lv, x+d-1, y+4, z+i, 191, 0)
-                    setBlock(lv, x+i, y+4, z, 191, 0)
-                    setBlock(lv, x+i, y+4, z+d-1, 191, 0)
-                    setBlock(lv, x, y+3, z+i, 164, 6)
-                    setBlock(lv, x+d-1, y+3, z+i, 164, 7)
-                    setBlock(lv, x+i, y+3, z, 164, 4)
-                    setBlock(lv, x+i, y+3, z+d-1, 164, 5)
-            elif self.pagoda_type is 1:   
-            """ 
             for i in range(d):
                 for j in range(3):
                     if (i==0 or i==3 or i==d-4 or i==d-1):
@@ -132,22 +78,6 @@ class Pagoda_builder:
                 setBlock(lv, x+i, y+3, z+d-1, 164, 5)
 
         def wallend(x,y,z,d):
-            """
-            if self.pagoda_type is 0:
-                for i in range(d):
-                    for j in range(5):
-                        if (i==0 or i==2 or i==d-1):
-                            setBlock(lv, x, y+j, z+i, 17,1)
-                            setBlock(lv, x+d-1, y+j, z+i, 17,1)
-                            setBlock(lv, x+i, y+j, z, 17,1)
-                            setBlock(lv, x+i, y+j, z+d-1, 17,1)
-                        else:
-                            setBlock(lv, x, y+j, z+i, 155,0)
-                            setBlock(lv, x+d-1, y+j, z+i, 155,0)
-                            setBlock(lv, x+i, y+j, z, 155,0)
-                            setBlock(lv, x+i, y+j, z+d-1, 155,0)
-            elif self.pagoda_type is 1:    
-            """
             for i in range(d):
                 for j in range(5):
                     if (i==0 or i==2 or i==d-1):
@@ -162,31 +92,6 @@ class Pagoda_builder:
                         setBlock(lv, x+i, y+j, z+d-1, w_ID,w_data)
 
         def wall(x,y,z,d):
-            """
-            if self.pagoda_type is 0:
-                for i in range(d):
-                    for j in range(5):
-                        if (i==0 or i==3 or i==d-4 or i==d-1):
-                            setBlock(lv, x, y+j, z+i, 17,1)
-                            setBlock(lv, x+d-1, y+j, z+i, 17,1)
-                            setBlock(lv, x+i, y+j, z, 17,1)
-                            setBlock(lv, x+i, y+j, z+d-1, 17,1)
-                        else:
-                            setBlock(lv, x, y+j, z+i, 155,0)
-                            setBlock(lv, x+d-1, y+j, z+i, 155,0)
-                            setBlock(lv, x+i, y+j, z, 155,0)
-                            setBlock(lv, x+i, y+j, z+d-1, 155,0)
-                for i in range(d):
-                    setBlock(lv, x, y+5, z+i, 191, 0)
-                    setBlock(lv, x+d-1, y+5, z+i, 191, 0)
-                    setBlock(lv, x+i, y+5, z, 191, 0)
-                    setBlock(lv, x+i, y+5, z+d-1, 191, 0)
-                    setBlock(lv, x, y+4, z+i, 164, 6)
-                    setBlock(lv, x+d-1, y+4, z+i, 164, 7)
-                    setBlock(lv, x+i, y+4, z, 164, 4)
-                    setBlock(lv, x+i, y+4, z+d-1, 164, 5)
-            elif self.pagoda_type is 1: 
-            """
             for i in range(d):
                 for j in range(5):
                     if (i==0 or i==3 or i==d-4 or i==d-1):
