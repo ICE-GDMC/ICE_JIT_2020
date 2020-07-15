@@ -145,12 +145,12 @@ class Cityspace:
                 if d==0:
                     sh = Little_House_Builder(lv,x,y,z,d,0,t_ID,t_data,w_ID,w_data,r_ID)
                     sh.build()
-                    f = field(lv,x+5,y-1,z,4,lw,4,0)
+                    f = field(lv,x+5,y,z,4,lw,4,0)
                     f.build()
                 else:
                     sh = Little_House_Builder(lv,x+5,y,z,d,0,t_ID,t_data,w_ID,w_data,r_ID)
                     sh.build()
-                    f = field(lv,x,y-1,z,4,lw,4,0)
+                    f = field(lv,x,y,z,4,lw,4,0)
                     f.build()
                 z += lw+gap[i]
             """
