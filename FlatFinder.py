@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 from functions import *
 import numpy as np
-from matplotlib import pyplot as plt
 import MooreNeighborhood as M
 from time import *
 

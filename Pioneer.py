@@ -1,8 +1,5 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-from functions import *
-import numpy as np
-from time import *
 import ToriiBuilder as T
 import BridgeBuilder as B
 import LanternBuilder as L

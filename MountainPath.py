@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 from functions import *
 import ToriiBuilder as T
-import numpy as np
 
 
 class MountainPath:

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-from time import *
 
 
 def Material_Checker(lv, h, s_x, s_z, sx, sz, ex, ez):
