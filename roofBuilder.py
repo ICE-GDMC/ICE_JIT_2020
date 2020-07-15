@@ -94,7 +94,6 @@ class RoofBuilder:
                     setBlock(lv, x - 1 + i, s + 3, z + 4, r_ID[3], r_ID[4])  # Stone Brick Slab (Double)
                     if r_ID[0] == 109:
                         setBlock(lv, x - 1 + i, s + 4, z + 4, 139, 0)  # Cobblestone Wall
-
                     setBlock(lv, x - 1 + i, s + 2, z + w - 3, r_ID[0], 3)
                     setBlock(lv, x - 1 + i, s + 1, z + w - 2, r_ID[0], 3)
                     setBlock(lv, x - 1 + i, s, z + w - 1, r_ID[0], 3)
