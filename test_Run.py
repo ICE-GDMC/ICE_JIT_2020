@@ -33,10 +33,10 @@ def perform(level, box, options):
     start_z = box.minz
     end_x = box.maxx
     end_z = box.maxz
-    start_x = -346
-    start_z = -66
-    end_x = start_x + 256
-    end_z = start_z + 256
+    # start_x = -346
+    # start_z = -66
+    # end_x = start_x + 256
+    # end_z = start_z + 256
     print "========================================================================="
     print 'start_x = %d, start_z = %d' % (start_x, start_z)
     print 'width(x) = %d, depth(z) = %d' % (end_x - start_x, end_z - start_z)
