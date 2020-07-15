@@ -8,6 +8,7 @@ from road_builder import *
 from Cityscape import *
 from field_builder import *
 from Laying import *
+import numpy as np
 
 
 class Pioneer:
