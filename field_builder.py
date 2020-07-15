@@ -51,6 +51,11 @@ class field:
             setBlock(lv, x+1, y+1, z+s_z-2, 0, 0)
             setBlock(lv, x+s_x-2, y+1, z+1, 0, 0)
             setBlock(lv, x+s_x-2, y+1, z+s_z-2, 0, 0)
+            setBlock(lv, x, y+1, z+s_z/2, 0, 0)#air
+            setBlock(lv, x+s_x-1, y+1, z+s_z/2, 0, 0)#air
+            if s_z>9:
+                setBlock(lv, x+s_x/2, y, z+s_z/2, 9, 0)#water
+                setBlock(lv, x+s_x/2, y+1, z+s_z/2, 0, 0)#air
 
         elif self.field_type is 1:#I
             letter = [[0,0,0,0,0,0,0],[0,1,1,1,1,1,0],[0,0,0,1,0,0,0],[0,0,0,1,0,0,0],[0,0,0,1,0,0,0],[0,1,1,1,1,1,0],[0,0,0,0,0,0,0]]
@@ -80,6 +85,8 @@ class field:
             setBlock(lv, x+1, y+1, z+7, 0, 0)
             setBlock(lv, x+7, y+1, z+1, 0, 0)
             setBlock(lv, x+7, y+1, z+7, 0, 0)
+            setBlock(lv, x, y+1, z+s_z/2, 0, 0)#air
+            setBlock(lv, x+s_x-1, y+1, z+s_z/2, 0, 0)#air
         elif self.field_type is 2:#C
             letter = [[0,0,0,0,0,0,0],[0,0,1,1,1,0,0],[0,1,0,0,0,1,0],[0,1,0,0,0,0,0],[0,1,0,0,0,1,0],[0,0,1,1,1,0,0],[0,0,0,0,0,0,0]]
             for i in range(9):
@@ -108,6 +115,8 @@ class field:
             setBlock(lv, x+1, y+1, z+7, 0, 0)
             setBlock(lv, x+7, y+1, z+1, 0, 0)
             setBlock(lv, x+7, y+1, z+7, 0, 0)
+            setBlock(lv, x, y+1, z+s_z/2, 0, 0)#air
+            setBlock(lv, x+s_x-1, y+1, z+s_z/2, 0, 0)#air
         elif self.field_type is 3:#E
             letter = [[0,0,0,0,0,0,0],[0,1,1,1,1,1,0],[0,1,0,0,0,0,0],[0,1,1,1,1,1,0],[0,1,0,0,0,0,0],[0,1,1,1,1,1,0],[0,0,0,0,0,0,0]]
             for i in range(9):
@@ -136,6 +145,8 @@ class field:
             setBlock(lv, x+1, y+1, z+7, 0, 0)
             setBlock(lv, x+7, y+1, z+1, 0, 0)
             setBlock(lv, x+7, y+1, z+7, 0, 0)
+            setBlock(lv, x, y+1, z+s_z/2, 0, 0)#air
+            setBlock(lv, x+s_x-1, y+1, z+s_z/2, 0, 0)#air
     
         elif self.field_type is 4:#suger
             y-=1

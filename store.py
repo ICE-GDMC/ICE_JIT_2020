@@ -325,6 +325,14 @@ class Store_Builder:
             elif door==1:
                 wallX(x,y,z,0) #x,z,door
                 wallX(x+8,y,z,1) #x,z,door
+            setBlock(lv,x-1,y+2,z,50,2)
+            setBlock(lv,x-1,y+2,z+3,50,2)
+            setBlock(lv,x-1,y+2,z+6,50,2)
+            setBlock(lv,x-1,y+2,z+9,50,2)
+            setBlock(lv,x+9,y+2,z,50,1)
+            setBlock(lv,x+9,y+2,z+3,50,1)
+            setBlock(lv,x+9,y+2,z+6,50,1)
+            setBlock(lv,x+9,y+2,z+9,50,1)
         elif di==1:
             for i in range(w):
                 for j in range(6):
@@ -338,6 +346,14 @@ class Store_Builder:
             elif door==1:
                 wallX(x,y,z,0) #x,z,door
                 wallX(x,y,z+8,1) #x,z,door
+            setBlock(lv,x,y+2,z-1,50,4)
+            setBlock(lv,x+3,y+2,z-1,50,4)
+            setBlock(lv,x+6,y+2,z-1,50,4)
+            setBlock(lv,x+9,y+2,z-1,50,4)
+            setBlock(lv,x,y+2,z+9,50,3)
+            setBlock(lv,x+3,y+2,z+9,50,3)
+            setBlock(lv,x+6,y+2,z+9,50,3)
+            setBlock(lv,x+9,y+2,z+9,50,3)
         floor(x,y,z,door)
 
         roof = RoofBuilder(lv, x, z, d, y+6, di, 0, t_ID,t_data,w_ID,w_data,r_ID)
