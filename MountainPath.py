@@ -34,7 +34,7 @@ class MountainPath:
             n_z = self.pos[i][1] + p_z
             while 0 <= n_x < sh[0] and 0 <= n_z < sh[1]:
                 # print n_x, n_z
-                if self.one_area[n_x, n_z] <= -3:
+                if self.one_area[n_x, n_z] == -1:
                     self.end_pos = (n_x, n_z)
                     self.direction = self.pos[i]
                     foundflag = True
