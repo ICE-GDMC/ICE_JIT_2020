@@ -12,7 +12,7 @@ from MountainPath import *
 from Laying import *
 import BridgeBuilder as B
 
-displayName = "A Run"
+displayName = "ICE's Settlement Generator"
 
 
 def perform(level, box, options):
@@ -32,8 +32,8 @@ def perform(level, box, options):
     start_z = box.minz
     end_x = box.maxx
     end_z = box.maxz
-    # start_x = 140
-    # start_z = 30
+    # start_x = 3
+    # start_z = -6
     # end_x = start_x + 256
     # end_z = start_z + 256
     print "========================================================================="
@@ -75,8 +75,7 @@ def perform(level, box, options):
             area_with_border = p.give_to_next()
             p.levelling()
             p.define_living_area()
-            for one in p.get_bridge_pos():
-                bos.append(one)
+            p.build_bridge()
         elif p.width >= 17 and p.height >= 17 and p.real_measure >= 280:
             area_with_border = p.give_to_next()
             small_area.append(p)
@@ -115,15 +114,12 @@ def perform(level, box, options):
                                 one_area.material_dict["wood_ID"][1],
                                 one_area.material_dict["roof_ID"])
             ss.build()
-            t = 0
             if one_area.mean_height >= 70:
-                t = 1
-            m = MountainPath(level, (start_x, start_z), (c_x, c_z), (0, 0), h, one_area.area_with_border,
-                             t)
-            res = m.find_goal()
-            # print "m.find_goal()", res
-            if res != (0, 0):
-                m.scan_path()
+                m = MountainPath(level, (start_x, start_z), (c_x, c_z), (0, 0), h, one_area.area_with_border, 1)
+                res = m.find_goal()
+                # print "m.find_goal()", res
+                if res != (0, 0):
+                    m.scan_path()
             shrine_count += 1
             exchange_type_flag = False
         else:
@@ -140,15 +136,12 @@ def perform(level, box, options):
                                one_area.material_dict["wood_ID"][1],
                                one_area.material_dict["roof_ID"])
             p.build()
-            t = 0
             if one_area.mean_height >= 70:
-                t = 1
-            m = MountainPath(level, (start_x, start_z), (c_x, c_z), (0, 0), h, one_area.area_with_border,
-                             t)
-            res = m.find_goal()
-            # print "m.find_goal()", res
-            if res != (0, 0):
-                m.scan_path()
+                m = MountainPath(level, (start_x, start_z), (c_x, c_z), (0, 0), h, one_area.area_with_border, 0)
+                res = m.find_goal()
+                # print "m.find_goal()", res
+                if res != (0, 0):
+                    m.scan_path()
             pagoda_count += 1
             exchange_type_flag = True
     print "abandon area: ", len(abandon_area)
@@ -186,61 +179,6 @@ def perform(level, box, options):
         shrine_count += 1
     print "shrine:", shrine_count
     print "pagoda:", pagoda_count
-    print "bridge_pos", bos
-    while len(bos) > 0:
-        one_b = bos.pop(0)
-        # print one_b
-        if one_b[2] == -1:
-            print "-1", one_b
-        else:
-            # print one_b
-            landfall = False
-            over_border = False
-            j1 = 0
-            while not landfall:
-                landfall = True
-                for i in range(one_b[2]):
-                    if one_b[0] + i < area_with_border.shape[0] and one_b[1] + j1 < \
-                            area_with_border.shape[1]:
-
-                        if area_with_border[one_b[0] + i, one_b[1] + j1] == 5:
-                            a = (one_b[0], one_b[1] + j1, one_b[2])
-                            if a in bos:
-                                bos.remove(a)
-                            landfall = False
-                            break
-                    else:
-                        over_border = True
-                        break
-                if over_border:
-                    break
-                j1 += 1
-            if over_border:
-                continue
-            j2 = 0
-            over_border = False
-            while not landfall:
-                landfall = True
-                for i in range(one_b[2]):
-                    if one_b[0] + i < area_with_border.shape[0] and 0 <= one_b[1] - j2:
-                        if area_with_border[one_b[0] + i, one_b[1] - j2] == 5:
-                            a = (one_b[0], one_b[1] - j2, one_b[2])
-                            if a in bos:
-                                bos.remove(a)
-                            landfall = False
-                            break
-                    else:
-                        over_border = True
-                        break
-                if over_border:
-                    break
-                j2 += 1
-            if over_border:
-                continue
-            j = j1 + j2
-            if 5 <= j <= 50:
-                B.BridgeBuilder(level, one_b[0] + start_x, h.getHeight(one_b[0], one_b[1] - j2)+2, one_b[1] + start_z - j2,
-                                one_b[2], j, 1)
     end_time = time()
     run_time = end_time - begin_time
     print "completed"

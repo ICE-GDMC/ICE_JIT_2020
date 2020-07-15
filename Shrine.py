@@ -16,7 +16,6 @@ class Shrine_Builder:
         self.start_y = start_y
         self.start_z = start_z
         self.direction = direction
-        #self.wall_type = wall_type
         self.tree_ID = tree_ID
         self.tree_data = tree_data
         self.wood_ID = wood_ID
@@ -41,27 +40,6 @@ class Shrine_Builder:
 
         def wallX(x,y,z,s):
             if di==0:
-                """
-                if self.wall_type is 0:
-                    for j in range(1,16): #line_W
-                        if(j==1 or j==5 or j==11 or j==15):
-                            for k in range(1,13): #line_H
-                                setBlock(lv,x,y+k,z+j,17,1)#black
-                        else:
-                            for k in range(1,13): #line_H
-                                if k==5:
-                                    setBlock(lv,x,y+k,z+j,17,1)#black
-                                else:
-                                    setBlock(lv,x,y+k,z+j,96,s)
-                            for k in range(6,9): 
-                                setBlock(lv,x,y+k,z+j,12,0)#white
-                            for k in range(10,13):
-                                setBlock(lv,x,y+k,z+j,96,s)
-                            if(j==3 or j==8 or j==13):
-                                setBlock(lv,x,y+2,z+j,196,0)#door
-                                setBlock(lv,x,y+3,z+j,196,8)#door
-                if self.wall_type is 1:
-                """
                 for j in range(1,16): #line_W
                     if(j==1 or j==5 or j==11 or j==15):
                         for k in range(1,13): #line_H
@@ -80,27 +58,6 @@ class Shrine_Builder:
                             setBlock(lv,x,y+2,z+j,196,0)#door
                             setBlock(lv,x,y+3,z+j,196,8)#door
             if di==1:
-                """
-                if self.wall_type is 0:
-                    for j in range(1,16): #line_W
-                        if(j==1 or j==5 or j==11 or j==15):
-                            for k in range(1,13): #line_H
-                                setBlock(lv,x+j,y+k,z,17,1)#black
-                        else:
-                            for k in range(1,13): #line_H
-                                if k==5:
-                                    setBlock(lv,x+j,y+k,z,17,1)#black
-                                else:
-                                    setBlock(lv,x+j,y+k,z,96,s)
-                            for k in range(6,9): 
-                                setBlock(lv,x+j,y+k,z,12,0)#white
-                            for k in range(10,13):
-                                setBlock(lv,x+j,y+k,z,96,s)
-                            if(j==3 or j==8 or j==13):
-                                setBlock(lv,x+j,y+2,z,196,1)#door
-                                setBlock(lv,x+j,y+3,z,196,9)#door
-                if self.wall_type is 1:
-                """
                 for j in range(1,16): #line_W
                     if(j==1 or j==5 or j==11 or j==15):
                         for k in range(1,13): #line_H
@@ -121,26 +78,6 @@ class Shrine_Builder:
             
         def wallZ(x,y,z,s):
             if di==0:
-                """
-                if self.wall_type is 0:
-                    for j in range(0,8): #line_W
-                        setBlock(lv, x + j, y+1, z, 17, 1)#black
-                        setBlock(lv, x+j, y+13, z, 17, 1)#black
-                        if(j==0 or j==4 or j==8):
-                            for k in range(1,14): #line_H
-                                setBlock(lv, x + j, y + k, z, 17,1)#black
-                        else:
-                            for k in range(2,13): #line_H
-                                if k==5:
-                                    setBlock(lv, x + j, y + k, z, 17,1)#black
-                                else:
-                                    setBlock(lv,x+j,y+k,z,96,s)
-                            for k in range(6,9): 
-                                setBlock(lv,x+j,y+k,z,12,0)#white
-                            for k in range(10,13):
-                                setBlock(lv,x+j,y+k,z,96,s)     
-                if self.wall_type is 1:
-                """
                 for j in range(0,8): #line_W
                     setBlock(lv, x + j, y+1, z, t_ID,t_data)#black
                     setBlock(lv, x+j, y+13, z, t_ID,t_data)#black
@@ -158,26 +95,6 @@ class Shrine_Builder:
                         for k in range(10,13):
                             setBlock(lv,x+j,y+k,z,96,s)
             if di==1:
-                """
-                if self.wall_type is 0:
-                    for j in range(0,8): #line_W
-                        setBlock(lv, x, y+1, z+j, 17, 1)#black
-                        setBlock(lv, x, y+13, z+j, 17, 1)#black
-                        if(j==0 or j==4 or j==8):
-                            for k in range(1,13): #line_H
-                                setBlock(lv, x, y + k, z+j, 17,1)#black
-                        else:
-                            for k in range(2,13): #line_H
-                                if k==5:
-                                    setBlock(lv, x, y + k, z+j, 17,1)#black
-                                else:
-                                    setBlock(lv,x,y+k,z+j,96,s)
-                            for k in range(6,9): 
-                                setBlock(lv,x,y+k,z+j,12,0)#white
-                            for k in range(10,13):
-                                setBlock(lv,x,y+k,z+j,96,s)     
-                if self.wall_type is 1:
-                """
                 for j in range(0,8): #line_W
                     setBlock(lv, x, y+1, z+j, t_ID,t_data)#black
                     setBlock(lv, x, y+13, z+j, t_ID,t_data)#black
@@ -201,84 +118,84 @@ class Shrine_Builder:
                 for i in range(0, 4):
                     for j in range(x-4+i, x + 9 + 4-i):    # left
                         if i is 0:
-                            setBlock(lv, j, s-1, z - 4 + i, 44, 13)
+                            setBlock(lv, j, s-1, z - 4 + i, r_ID[1], r_ID[2]+8)
                         elif i is 1:
-                            setBlock(lv, j, s, z - 4 + i, 44, 5)
+                            setBlock(lv, j, s, z - 4 + i, r_ID[1], r_ID[2])
                         elif i is 2:
-                            setBlock(lv, j, s, z - 4 + i, 43, 5)
+                            setBlock(lv, j, s, z - 4 + i, r_ID[3], r_ID[4])
                         else:
-                            setBlock(lv, j, s, z - 4 + i, 44, 13)
+                            setBlock(lv, j, s, z - 4 + i, r_ID[1], r_ID[2]+8)
                 for i in range(0, 4):
                     for j in range(x-4+i, x + 9 + 4-i):  # right
                         if i is 0:
-                            setBlock(lv, j, s-1, z + d + 3 - i, 44, 13)
+                            setBlock(lv, j, s-1, z + d + 3 - i, r_ID[1], r_ID[2]+8)
                         elif i is 1:
-                            setBlock(lv, j, s, z + d + 3 - i, 44, 5)
+                            setBlock(lv, j, s, z + d + 3 - i, r_ID[1], r_ID[2])
                         elif i is 2:
-                            setBlock(lv, j, s, z + d + 3 - i, 43, 5)
+                            setBlock(lv, j, s, z + d + 3 - i, r_ID[3], r_ID[4])
                         else:
-                            setBlock(lv, j, s, z + d + 3 - i, 44, 13)
+                            setBlock(lv, j, s, z + d + 3 - i, r_ID[1], r_ID[2]+8)
                 for i in range(0, 4):
                     for j in range(z-4+i, z + d + 3 - i):  # under
                         if i is 0:
-                            setBlock(lv, x - 4 + i, s - 1, j, 44, 13)
+                            setBlock(lv, x - 4 + i, s - 1, j, r_ID[1], r_ID[2]+8)
                         elif i is 1:
-                            setBlock(lv, x - 4 + i, s, j, 44, 5)
+                            setBlock(lv, x - 4 + i, s, j, r_ID[1], r_ID[2])
                         elif i is 2:
-                            setBlock(lv, x - 4 + i, s, j, 43, 5)
+                            setBlock(lv, x - 4 + i, s, j, r_ID[3], r_ID[4])
                         else:
-                            setBlock(lv, x - 4 + i, s, j, 44, 13)
+                            setBlock(lv, x - 4 + i, s, j, r_ID[1], r_ID[2]+8)
                 for i in range(0, 4):
                     for j in range(z-4+i, z + d + 3 - i):  # under
                         if i is 0:
-                            setBlock(lv, x + d + 3 - i-6, s - 1, j, 44, 13)
+                            setBlock(lv, x + d + 3 - i-6, s - 1, j,r_ID[1], r_ID[2]+8)
                         elif i is 1:
-                            setBlock(lv, x + d + 3 - i-6, s, j, 44, 5)
+                            setBlock(lv, x + d + 3 - i-6, s, j, r_ID[1], r_ID[2])
                         elif i is 2:
-                            setBlock(lv, x + d + 3 - i-6, s, j, 43, 5)
+                            setBlock(lv, x + d + 3 - i-6, s, j, r_ID[3], r_ID[4])
                         else:
-                            setBlock(lv, x + d + 3 - i-6, s, j, 44, 13)
+                            setBlock(lv, x + d + 3 - i-6, s, j, r_ID[1], r_ID[2]+8)
             if di==1:  
                 for i in range(0, 4):
                     for j in range(z-4+i, z + 9 + 4-i):    # left
                         if i is 0:
-                            setBlock(lv, x - 4 + i, s-1, j, 44, 13)
+                            setBlock(lv, x - 4 + i, s-1, j, r_ID[1], r_ID[2]+8)
                         elif i is 1:
-                            setBlock(lv, x - 4 + i, s, j, 44, 5)
+                            setBlock(lv, x - 4 + i, s, j, r_ID[1], r_ID[2])
                         elif i is 2:
-                            setBlock(lv, x - 4 + i, s, j, 43, 5)
+                            setBlock(lv, x - 4 + i, s, j, r_ID[3], r_ID[4])
                         else:
-                            setBlock(lv, x - 4 + i, s, j, 44, 13)
+                            setBlock(lv, x - 4 + i, s, j, r_ID[1], r_ID[2]+8)
                 for i in range(0, 4):
                     for j in range(z-4+i, z + 9 + 4-i):  # right
                         if i is 0:
-                            setBlock(lv, x + d + 3 - i, s-1, j, 44, 13)
+                            setBlock(lv, x + d + 3 - i, s-1, j, r_ID[1], r_ID[2]+8)
                         elif i is 1:
-                            setBlock(lv, x + d + 3 - i, s, j, 44, 5)
+                            setBlock(lv, x + d + 3 - i, s, j, r_ID[1], r_ID[2])
                         elif i is 2:
-                            setBlock(lv, x + d + 3 - i, s, j, 43, 5)
+                            setBlock(lv, x + d + 3 - i, s, j, r_ID[3], r_ID[4])
                         else:
-                            setBlock(lv, x + d + 3 - i, s, j, 44, 13)
+                            setBlock(lv, x + d + 3 - i, s, j, r_ID[1], r_ID[2]+8)
                 for i in range(0, 4):
                     for j in range(x-4+i, x + d + 3 - i):  # under
                         if i is 0:
-                            setBlock(lv, j, s - 1, z - 4 + i, 44, 13)
+                            setBlock(lv, j, s - 1, z - 4 + i, r_ID[1], r_ID[2]+8)
                         elif i is 1:
-                            setBlock(lv, j, s, z - 4 + i, 44, 5)
+                            setBlock(lv, j, s, z - 4 + i, r_ID[1], r_ID[2])
                         elif i is 2:
-                            setBlock(lv, j, s, z - 4 + i, 43, 5)
+                            setBlock(lv, j, s, z - 4 + i, r_ID[3], r_ID[4])
                         else:
-                            setBlock(lv, j, s, z - 4 + i, 44, 13)
+                            setBlock(lv, j, s, z - 4 + i, r_ID[1], r_ID[2]+8)
                 for i in range(0, 4):
                     for j in range(x-4+i, x + d + 3 - i):  # under
                         if i is 0:
-                            setBlock(lv, j, s - 1, z + d + 3 - i-6, 44, 13)
+                            setBlock(lv, j, s - 1, z + d + 3 - i-6, r_ID[1], r_ID[2]+8)
                         elif i is 1:
-                            setBlock(lv, j, s, z + d + 3 - i-6, 44, 5)
+                            setBlock(lv, j, s, z + d + 3 - i-6, r_ID[1], r_ID[2])
                         elif i is 2:
-                            setBlock(lv, j, s, z + d + 3 - i-6, 43, 5)
+                            setBlock(lv, j, s, z + d + 3 - i-6, r_ID[3], r_ID[4])
                         else:
-                            setBlock(lv, j, s, z + d + 3 - i-6, 44, 13)
+                            setBlock(lv, j, s, z + d + 3 - i-6, r_ID[1], r_ID[2]+8)
 
         def floor(x,y,z,t_ID,t_data):
             if di==0:
@@ -374,9 +291,4 @@ class Shrine_Builder:
             r = RoofBuilder(lv, x+1, z+4, d, y+13, di, 0, t_ID,t_data,w_ID,w_data,r_ID)
             r.build()
             roof(x+1,y+8,z+4,1)
-        """
-        if self.wall_type is 0:
-            floor(x,y,z,17,1)
-        elif self.wall_type is 1:
-        """
         floor(x,y,z,t_ID,t_data)

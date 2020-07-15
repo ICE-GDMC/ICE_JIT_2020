@@ -4,7 +4,7 @@ from functions import *
 
 
 class BridgeBuilder:
-    """BridgeBuilder weight x length"""
+    """BridgeBuilder weight x length, 0x, 1z"""
 
     def __init__(self, level, start_x, start_y, start_z, weight, length, direction=0):
         self.level = level
@@ -25,7 +25,7 @@ class BridgeBuilder:
         le = self.length
         if self.direction is 0:
             for i in range(le + 1):
-                if i % 5 is 0:
+                if i % 5 == 0 or i == le:
                     j = s
                     while get_block(lv, x + i, j, z) == (0, 0) or \
                             get_block(lv, x + i, j, z) == (8, 0) or \
