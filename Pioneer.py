@@ -526,7 +526,7 @@ class Pioneer:
                         over_border = True
                         break
                     for i in range(w):
-                        if self.area_with_border[x + i, z - j2] == 5:
+                        if self.area_with_border[x + i, z - j2] == 5 or self.area_with_border[x + i, z - j2] not in (3, 13):
                             break
                         landfall = True
                     if landfall:
