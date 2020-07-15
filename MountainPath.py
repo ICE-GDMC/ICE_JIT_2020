@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 from functions import *
 import ToriiBuilder as T
-from matplotlib import pyplot as plt
 import numpy as np
 
 
