@@ -273,7 +273,7 @@ class Pioneer:
                     flag = False
                     break
             if river_flag and river_check == 1:
-                self.bridge_pos.append((r_x, z, width))
+                self.bridge_pos.append((r_x, z, 6))
             if flag:
                 if not road_continue_flag:
                     road_continue_flag = True
@@ -491,8 +491,57 @@ class Pioneer:
                         L.LanternBuilder(self.level, self.x1 + self.height / 2 + self.s_x + road_width/2 + 1 - 3, p_z + one_len[0] + 1 + j,
                                          self.mean_height, 0)
 
-    def get_bridge_pos(self):
-        return self.bridge_pos
+    def build_bridge(self):
+        # print "bridge_pos", self.bridge_pos
+        while len(self.bridge_pos) > 0:
+            one_b = self.bridge_pos.pop(0)
+            if one_b[2] == -1:
+                print "-1", one_b
+            else:
+                x = one_b[0]
+                z = one_b[1]
+                w = one_b[2]
+                over_border = False
+                landfall = False
+                j1 = 0
+                while True:
+                    j1 += 1
+                    if z+j1 >= self.area_with_border.shape[1]:
+                        over_border = True
+                        break
+                    for i in range(w):
+                        if self.area_with_border[x+i, z+j1] == 5:
+                            break
+                        landfall = True
+                    if landfall:
+                        break
+                if over_border:
+                    continue
+                over_border = False
+                landfall = False
+                j2 = 0
+                while True:
+                    j2 += 1
+                    if z - j2 <= 0:
+                        over_border = True
+                        break
+                    for i in range(w):
+                        if self.area_with_border[x + i, z - j2] == 5:
+                            break
+                        landfall = True
+                    if landfall:
+                        break
+                if over_border:
+                    continue
+                j = j1 + j2
+                if 5 <= j <= 40:
+                    # print "j", j
+                    # print "x, z", x, z
+                    B.BridgeBuilder(self.level, x + self.s_x, self.mean_height+2, z + self.s_z - j2, w, j, 1)
+                    for o in range(z - j2, z + j1+1):
+                        a = (x, o, w)
+                        if a in self.bridge_pos:
+                            self.bridge_pos.remove(a)
 
     def secure_area(self, c_x, c_z, x_len, z_len):
         for i in [1, -1]:
