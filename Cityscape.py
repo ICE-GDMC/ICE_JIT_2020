@@ -133,10 +133,3 @@ class Cityspace:
                     f = field(lv,x,y,z,4,lw,4,0)
                     f.build()
                 z += lw+gap[i]
-            
-        print "---------------"
-        print "ito" 
-        if len(gap)>0:
-            gap.pop()
-        print w-sc*10-lc*5-sum(hw)-sum(fw)-ice_f-sum(gap)
-        print "---------------" 
