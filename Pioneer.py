@@ -510,8 +510,7 @@ class Pioneer:
                         over_border = True
                         break
                     for i in range(w):
-                        if self.area_with_border[x + i, z + j1] == 5 or self.height_map.getHeight(x + i,
-                                                                                                  z + j1) != self.mean_height:
+                        if self.area_with_border[x + i, z + j1] == 5:
                             break
                         landfall = True
                     if landfall:
@@ -527,8 +526,7 @@ class Pioneer:
                         over_border = True
                         break
                     for i in range(w):
-                        if self.area_with_border[x + i, z - j2] == 5 or \
-                                self.height_map.getHeight(x + i, z - j2) != self.mean_height:
+                        if self.area_with_border[x + i, z - j2] == 5:
                             break
                         landfall = True
                     if landfall:

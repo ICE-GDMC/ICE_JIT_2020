@@ -32,10 +32,10 @@ def perform(level, box, options):
     start_z = box.minz
     end_x = box.maxx
     end_z = box.maxz
-    start_x = 140
-    start_z = 30
-    end_x = start_x + 256
-    end_z = start_z + 256
+    # start_x = 3
+    # start_z = -6
+    # end_x = start_x + 256
+    # end_z = start_z + 256
     print "========================================================================="
     print 'start_x = %d, start_z = %d' % (start_x, start_z)
     print 'width(x) = %d, depth(z) = %d' % (end_x - start_x, end_z - start_z)
@@ -114,15 +114,12 @@ def perform(level, box, options):
                                 one_area.material_dict["wood_ID"][1],
                                 one_area.material_dict["roof_ID"])
             ss.build()
-            t = 0
             if one_area.mean_height >= 70:
-                t = 1
-            m = MountainPath(level, (start_x, start_z), (c_x, c_z), (0, 0), h, one_area.area_with_border,
-                             t)
-            res = m.find_goal()
-            # print "m.find_goal()", res
-            if res != (0, 0):
-                m.scan_path()
+                m = MountainPath(level, (start_x, start_z), (c_x, c_z), (0, 0), h, one_area.area_with_border, 1)
+                res = m.find_goal()
+                # print "m.find_goal()", res
+                if res != (0, 0):
+                    m.scan_path()
             shrine_count += 1
             exchange_type_flag = False
         else:
@@ -139,15 +136,12 @@ def perform(level, box, options):
                                one_area.material_dict["wood_ID"][1],
                                one_area.material_dict["roof_ID"])
             p.build()
-            t = 0
             if one_area.mean_height >= 70:
-                t = 1
-            m = MountainPath(level, (start_x, start_z), (c_x, c_z), (0, 0), h, one_area.area_with_border,
-                             t)
-            res = m.find_goal()
-            # print "m.find_goal()", res
-            if res != (0, 0):
-                m.scan_path()
+                m = MountainPath(level, (start_x, start_z), (c_x, c_z), (0, 0), h, one_area.area_with_border, 0)
+                res = m.find_goal()
+                # print "m.find_goal()", res
+                if res != (0, 0):
+                    m.scan_path()
             pagoda_count += 1
             exchange_type_flag = True
     print "abandon area: ", len(abandon_area)
