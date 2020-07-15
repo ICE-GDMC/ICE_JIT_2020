@@ -215,7 +215,10 @@ def perform(level, box, options):
                 if over_border:
                     break
                 j1 += 1
+            if over_border:
+                continue
             j2 = 0
+            over_border = False
             while not landfall:
                 landfall = True
                 for i in range(one_b[2]):
@@ -232,6 +235,8 @@ def perform(level, box, options):
                 if over_border:
                     break
                 j2 += 1
+            if over_border:
+                continue
             j = j1 + j2
             if 5 <= j <= 50:
                 B.BridgeBuilder(level, one_b[0] + start_x, h.getHeight(one_b[0], one_b[1] - j2)+2, one_b[1] + start_z - j2,
