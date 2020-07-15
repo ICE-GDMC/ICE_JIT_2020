@@ -265,21 +265,3 @@ class RoofBuilder:
                     setBlock(lv, x - 1 + i, s, z, r_ID[0], 2)
                     setBlock(lv, x - 1 + i, s - 1, z - 1, r_ID[0], 2)
                     setBlock(lv, x - 1 + i, s - 1, z + lw, r_ID[0], 3)  # Stone Brick Stairs
-# def perform(level, box, options):
-#     (width, height, depth) = getBoxSize(box)
-#     surface = box.miny
-#     start_x = box.minx
-#     start_z = box.minz
-#     print 'width(x) = %d, depth(z) = %d' % (width, depth)
-#     print 'start_x = %d, start_z = %d' % (start_x, start_z)
-#     print 'surface = %d' % surface
-#
-#     roof_builder = RoofBuilder(level, start_x, start_z, depth, box.maxy, 0, 1)
-#     roof_builder.run()
-#
-#     for i in range(box.minx, box.maxx):
-#         for j in range(box.minz, box.maxz):
-#             id = level.blockAt(i, surface, j)
-#             data = level.blockDataAt(i, surface, j)
-#             print "id = %d   data=%d " % (id, data)
-#             setBlock(level, box.minx-1, surface, j, id, data)

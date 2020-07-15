@@ -5,7 +5,6 @@ from house import *
 from little_house import *
 from store import *
 from field_builder import *
-from MaterialChecker import *
 
 
 class Cityspace:
